@@ -1,2 +1,2 @@
 # cheapack
-Cheap packer to warcraft3 map
+Собиратор карт для варкрафт
