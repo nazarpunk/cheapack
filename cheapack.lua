@@ -1,7 +1,15 @@
---ver 1.0
+--ver 1.0.1
 
 local customCodeTag = '--CUSTOM_CODE'
 local cheapack      = {}
+
+local function fileExists(name)
+	local f = io.open(name, 'r')
+	if f ~= nil then
+		io.close(f)
+		return true
+	else return false end
+end
 
 local function fileGetContent(path)
 	local file    = assert(io.open(path, 'rb'))
@@ -57,17 +65,24 @@ end
 ---@param src table list build files from root
 ---@param run string run after build: 'editor'|'game'
 function cheapack.build(game, root, map, src, run)
-	local path = {}
+	print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[36mStart!\27[0m')
+	local pathlist = {}
 	if type(src) == 'string' then src = { src } end
 	for i = 1, #src do
 		local suffix = src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
-		for dir in io.popen([[dir "]] .. root .. '\\' .. src[i] .. suffix .. [[" /s /b /o:gn]]):lines() do
-			table.insert(path, dir)
+		local path   = root .. '\\' .. src[i]
+		if not fileExists(path) then
+			print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError: File not exist.\27[0m')
+			print(path)
+			return
+		end
+		for dir in io.popen([[dir "]] .. path .. suffix .. [[" /s /b /o:gn]]):lines() do
+			table.insert(pathlist, dir)
 		end
 	end
 	local code = customCodeTag
-	for i = 1, #path do
-		code = code .. '\r\n' .. fileGetContent(path[i])
+	for i = 1, #pathlist do
+		code = code .. '\r\n' .. fileGetContent(pathlist[i])
 	end
 	code          = code .. '\r\n' .. customCodeTag
 	
@@ -94,12 +109,13 @@ function cheapack.build(game, root, map, src, run)
 	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code):gsub('[\r\n|\r]+', '\n')
 	luaFile:write(luaContentNew):close()
 	
+	print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[36mFinish!\27[0m\n')
+	
 	if run == 'editor' then
 		os.execute('start  "" "' .. game .. '\\' .. 'World Editor.exe" -loadfile "' .. root .. '\\' .. map .. '"')
 	elseif run == 'game' then
 		os.execute('start  "" "' .. game .. '\\' .. 'Warcraft III.exe" -loadfile "' .. root .. '\\' .. map .. '"')
 	end
-
 end
 
 return cheapack
