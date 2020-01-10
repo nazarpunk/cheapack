@@ -106,7 +106,7 @@ function cheapack.build(game, root, map, src, run)
 	local luaPath          = root .. '\\' .. map .. '\\war3map.lua'
 	local luaContent       = fileGetContent(luaPath)
 	local luaFile          = io.open(luaPath, 'w+')
-	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code):gsub('[\r\n|\r]+', '\n')
+	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code):gsub('[\r\n|\r|\n]+', '\n')
 	luaFile:write(luaContentNew):close()
 	
 	print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[36mFinish!\27[0m')
