@@ -72,8 +72,8 @@ function cheapack.build(game, root, map, src, run)
 		local suffix = src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
 		local path   = root .. '\\' .. src[i]
 		if not fileExists(path) then
-			print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError: File not exist.\27[0m')
-			print(path)
+			print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError!')
+			print('File not exist: ' .. path .. '\27[0m')
 			return
 		end
 		for dir in io.popen([[dir "]] .. path .. suffix .. [[" /s /b /o:gn]]):lines() do
