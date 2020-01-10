@@ -73,7 +73,7 @@ function cheapack.build(game, root, map, src, run)
 	local wctPath = root .. '\\' .. map .. '\\war3map.wct'
 	local wct     = parseWct(wctPath)
 	local wctFile = assert(io.open(wctPath, 'wb'))
-	wct[4]        = code:len()
+	wct[4]        = code:len() + 1
 	wct[5]        = code
 	for i = 1, #wct do
 		local data = wct[i]
