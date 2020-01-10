@@ -1,0 +1,1 @@
+powershell -Command "Invoke-WebRequest https://raw.githubusercontent.com/nazarpunk/cheapack/master/cheapack.lua -OutFile cheapack.lua"
