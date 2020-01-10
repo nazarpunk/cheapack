@@ -73,7 +73,7 @@ function cheapack.build(game, root, map, src, run)
 		local path   = root .. '\\' .. src[i]
 		if not fileExists(path) then
 			print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError!')
-			print('File not exist: ' .. path .. '\27[0m')
+			print('File not exist: s' .. path .. '\27[0m')
 			return
 		end
 		for dir in io.popen([[dir "]] .. path .. suffix .. [[" /s /b /o:gn]]):lines() do
