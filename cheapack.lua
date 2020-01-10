@@ -1,4 +1,4 @@
---ver 1.0.1
+--ver 1.0.2
 
 local customCodeTag = '--CUSTOM_CODE'
 local cheapack      = {}
@@ -109,12 +109,16 @@ function cheapack.build(game, root, map, src, run)
 	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code):gsub('[\r\n|\r]+', '\n')
 	luaFile:write(luaContentNew):close()
 	
-	print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[36mFinish!\27[0m\n')
+	print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[36mFinish!\27[0m')
 	
 	if run == 'editor' then
-		os.execute('start  "" "' .. game .. '\\' .. 'World Editor.exe" -loadfile "' .. root .. '\\' .. map .. '"')
+		local exe = 'World Editor.exe'
+		os.execute('start  "" "' .. game .. '\\' .. exe .. '" -loadfile "' .. root .. '\\' .. map .. '"')
+		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[33mRun: ' .. exe .. '\27[0m')
 	elseif run == 'game' then
-		os.execute('start  "" "' .. game .. '\\' .. 'Warcraft III.exe" -loadfile "' .. root .. '\\' .. map .. '"')
+		local exe = 'Warcraft III.exe'
+		os.execute('start  "" "' .. game .. '\\' .. exe .. '" -loadfile "' .. root .. '\\' .. map .. '"')
+		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[33mRun:' .. exe .. '\27[0m')
 	end
 end
 
