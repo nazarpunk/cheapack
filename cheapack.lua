@@ -1,3 +1,5 @@
+--ver 1.0
+
 local customCodeTag = '--CUSTOM_CODE'
 local cheapack      = {}
 
