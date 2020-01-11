@@ -1,4 +1,4 @@
---ver 1.0.6
+--ver 1.0.7
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -71,7 +71,7 @@ local function checkProcess(processname)
 	if output:find(processname) == nil then
 		return false
 	else
-		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError! ' .. processname .. ' is running.')
+		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError! ' .. processname .. ' is running.\27[0m')
 		return true
 	end
 end
