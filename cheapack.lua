@@ -1,14 +1,16 @@
---ver 1.0.3
+--ver 1.0.4
 
 local customCodeTag = '--CUSTOM_CODE'
 local cheapack      = {}
 
-local function fileExists(name)
-	local f = io.open(name, 'r')
-	if f ~= nil then
-		io.close(f)
-		return true
-	else return false end
+local function exists(file)
+	local ok, err, code = os.rename(file, file)
+	if not ok then
+		if code == 13 then
+			return true
+		end
+	end
+	return ok, err
 end
 
 local function fileGetContent(path)
@@ -71,7 +73,7 @@ function cheapack.build(game, root, map, src, run)
 	for i = 1, #src do
 		local suffix = src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
 		local path   = root .. '\\' .. src[i]
-		if not fileExists(path) then
+		if not exists(path) then
 			print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError!')
 			print('File not exist: s' .. path .. '\27[0m')
 			return
