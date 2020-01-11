@@ -145,7 +145,7 @@ function cheapack.build(game, root, map, src, run, isReforged)
 	elseif run == 'game' then
 		local param = isReforged and ' -launch' or ''
 		os.execute('start  "" "' .. game .. '\\' .. gameExe .. '"' .. param .. ' -loadfile "' .. root .. '\\' .. map .. '"')
-		log('\27[33mRun:' .. gameExe .. '\27[0m')
+		log('\27[33mRun: ' .. gameExe .. '\27[0m')
 	end
 end
 
