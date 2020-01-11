@@ -1,4 +1,4 @@
---ver 1.0.12
+--ver 1.0.13
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -75,7 +75,7 @@ local function checkProcess(processname)
 	if output:find(processname) == nil then
 		return false
 	else
-		log('\27[31mError! \' .. processname .. \' is running.\27[0m')
+		log('\27[31mError! ' .. processname .. ' is running.\27[0m')
 		return true
 	end
 end
