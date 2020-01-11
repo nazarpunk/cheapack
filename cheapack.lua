@@ -1,4 +1,4 @@
---ver 1.0.7
+--ver 1.0.8
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -64,7 +64,7 @@ local function parseWct(path)
 end
 
 local function checkProcess(processname)
-	local filedata = io.popen("tasklist /NH /FO CSV /FI \"IMAGENAME eq " .. processname .. "\"")
+	local filedata = io.popen('tasklist /NH /FO CSV /FI "IMAGENAME eq ' .. processname .. '"')
 	local output   = filedata:read()
 	filedata:close()
 	
