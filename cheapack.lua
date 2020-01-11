@@ -1,4 +1,4 @@
---ver 1.0.11
+--ver 1.0.12
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -19,8 +19,8 @@ local function fileExists(file)
 	return ok, err
 end
 
-local function fileGetContent(path)
-	local file    = assert(io.open(path, 'rb'))
+local function fileGetContent(path, mode)
+	local file    = assert(io.open(path, mode))
 	local content = file:read '*a'
 	file:close()
 	return content
@@ -109,7 +109,7 @@ function cheapack.build(game, root, map, src, run, isReforged)
 	end
 	local code = customCodeTag
 	for i = 1, #pathlist do
-		code = code .. '\r\n' .. fileGetContent(pathlist[i])
+		code = code .. '\r\n' .. fileGetContent(pathlist[i], 'rb')
 	end
 	code          = code .. '\r\n' .. customCodeTag
 	
@@ -131,7 +131,7 @@ function cheapack.build(game, root, map, src, run, isReforged)
 	
 	-- replace war3map.lua
 	local luaPath          = root .. '\\' .. map .. '\\war3map.lua'
-	local luaContent       = fileGetContent(luaPath)
+	local luaContent       = fileGetContent(luaPath, 'r')
 	local luaFile          = io.open(luaPath, 'w+')
 	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code)
 	luaFile:write(luaContentNew):close()
