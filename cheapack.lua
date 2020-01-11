@@ -1,4 +1,4 @@
---ver 1.0.9
+--ver 1.0.10
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -139,11 +139,11 @@ function cheapack.build(game, root, map, src, run, isReforged)
 	log('\27[36mFinish!\27[0m')
 	
 	if run == 'editor' then
-		local param = isReforged and '-launch -uid w3_beta' or ''
+		local param = isReforged and ' -launch -uid w3_beta' or ''
 		os.execute('start  "" "' .. game .. '\\' .. editorExe .. '"' .. param .. ' -loadfile "' .. root .. '\\' .. map .. '"')
 		log('\27[33mRun: ' .. editorExe .. '\27[0m')
 	elseif run == 'game' then
-		local param = isReforged and '-launch' or ''
+		local param = isReforged and ' -launch' or ''
 		os.execute('start  "" "' .. game .. '\\' .. gameExe .. '"' .. param .. ' -loadfile "' .. root .. '\\' .. map .. '"')
 		log('\27[33mRun:' .. gameExe .. '\27[0m')
 	end
