@@ -1,4 +1,4 @@
---ver 1.0.10
+--ver 1.0.11
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
