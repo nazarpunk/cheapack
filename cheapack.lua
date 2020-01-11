@@ -1,9 +1,11 @@
---ver 1.0.4
+--ver 1.0.6
 
 local customCodeTag = '--CUSTOM_CODE'
+local editorExe     = 'World Editor.exe'
+local gameExe       = 'Warcraft III.exe'
 local cheapack      = {}
 
-local function exists(file)
+local function fileExists(file)
 	local ok, err, code = os.rename(file, file)
 	if not ok then
 		if code == 13 then
@@ -61,6 +63,19 @@ local function parseWct(path)
 	return out
 end
 
+local function checkProcess(processname)
+	local filedata = io.popen("tasklist /NH /FO CSV /FI \"IMAGENAME eq " .. processname .. "\"")
+	local output   = filedata:read()
+	filedata:close()
+	
+	if output:find(processname) == nil then
+		return false
+	else
+		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError! ' .. processname .. ' is running.')
+		return true
+	end
+end
+
 ---@param game string path to game folder, example [[D:\Games\Warcraft III\x86_64]]
 ---@param root string path to project folder, example [[C:\Users\username\IdeaProjects\Death-League]]
 ---@param map string path to map from root, example [[map.w3x]]
@@ -68,12 +83,16 @@ end
 ---@param run string run after build: 'editor'|'game'
 function cheapack.build(game, root, map, src, run)
 	print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[36mStart!\27[0m')
+	
+	if checkProcess(editorExe) then return end
+	if checkProcess(gameExe) then return end
+	
 	local pathlist = {}
 	if type(src) == 'string' then src = { src } end
 	for i = 1, #src do
 		local suffix = src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
 		local path   = root .. '\\' .. src[i]
-		if not exists(path) then
+		if not fileExists(path) then
 			print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError!')
 			print('File not exist: s' .. path .. '\27[0m')
 			return
@@ -114,13 +133,11 @@ function cheapack.build(game, root, map, src, run)
 	print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[36mFinish!\27[0m')
 	
 	if run == 'editor' then
-		local exe = 'World Editor.exe'
-		os.execute('start  "" "' .. game .. '\\' .. exe .. '" -loadfile "' .. root .. '\\' .. map .. '"')
-		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[33mRun: ' .. exe .. '\27[0m')
+		os.execute('start  "" "' .. game .. '\\' .. editorExe .. '" -loadfile "' .. root .. '\\' .. map .. '"')
+		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[33mRun: ' .. editorExe .. '\27[0m')
 	elseif run == 'game' then
-		local exe = 'Warcraft III.exe'
-		os.execute('start  "" "' .. game .. '\\' .. exe .. '" -loadfile "' .. root .. '\\' .. map .. '"')
-		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[33mRun:' .. exe .. '\27[0m')
+		os.execute('start  "" "' .. game .. '\\' .. gameExe .. '" -loadfile "' .. root .. '\\' .. map .. '"')
+		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[33mRun:' .. gameExe .. '\27[0m')
 	end
 end
 
