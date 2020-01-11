@@ -1,9 +1,13 @@
---ver 1.0.8
+--ver 1.0.9
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
 local gameExe       = 'Warcraft III.exe'
 local cheapack      = {}
+
+local function log(str)
+	print('[\27[32m' .. os.date('%c') .. '\27[0m] ' .. str)
+end
 
 local function fileExists(file)
 	local ok, err, code = os.rename(file, file)
@@ -27,7 +31,7 @@ local function tableInsertReadStr(t, file)
 	while true do
 		local v = file:read(1)
 		if v == nil then return nil end
-		if string.byte(v) == 0 then
+		if v:byte() == 0 then
 			table.insert(t, out)
 			return out
 		end
@@ -37,7 +41,7 @@ end
 
 local function tableInsertReadInt(t, f)
 	local bytes = f:read(4)
-	if bytes == nil or string.len(bytes) < 4 then return nil end
+	if bytes == nil or bytes:len() < 4 then return nil end
 	local v = ('<I4'):unpack(bytes)
 	table.insert(t, v)
 	return v
@@ -71,7 +75,7 @@ local function checkProcess(processname)
 	if output:find(processname) == nil then
 		return false
 	else
-		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError! ' .. processname .. ' is running.\27[0m')
+		log('\27[31mError! \' .. processname .. \' is running.\27[0m')
 		return true
 	end
 end
@@ -81,8 +85,11 @@ end
 ---@param map string path to map from root, example [[map.w3x]]
 ---@param src table list build files from root
 ---@param run string run after build: 'editor'|'game'
-function cheapack.build(game, root, map, src, run)
-	print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[36mStart!\27[0m')
+---@param isReforged boolean
+function cheapack.build(game, root, map, src, run, isReforged)
+	isReforged = isReforged or false
+	
+	log('\27[36mStart!\27[0m')
 	
 	if checkProcess(editorExe) then return end
 	if checkProcess(gameExe) then return end
@@ -93,8 +100,7 @@ function cheapack.build(game, root, map, src, run)
 		local suffix = src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
 		local path   = root .. '\\' .. src[i]
 		if not fileExists(path) then
-			print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[31mError!')
-			print('File not exist: s' .. path .. '\27[0m')
+			log('\27[31mError!\nFile not exist: s' .. path .. '\27[0m')
 			return
 		end
 		for dir in io.popen([[dir "]] .. path .. suffix .. [[" /s /b /o:gn]]):lines() do
@@ -130,14 +136,16 @@ function cheapack.build(game, root, map, src, run)
 	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code)
 	luaFile:write(luaContentNew):close()
 	
-	print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[36mFinish!\27[0m')
+	log('\27[36mFinish!\27[0m')
 	
 	if run == 'editor' then
-		os.execute('start  "" "' .. game .. '\\' .. editorExe .. '" -loadfile "' .. root .. '\\' .. map .. '"')
-		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[33mRun: ' .. editorExe .. '\27[0m')
+		local param = isReforged and '-launch -uid w3_beta' or ''
+		os.execute('start  "" "' .. game .. '\\' .. editorExe .. '"' .. param .. ' -loadfile "' .. root .. '\\' .. map .. '"')
+		log('\27[33mRun: ' .. editorExe .. '\27[0m')
 	elseif run == 'game' then
-		os.execute('start  "" "' .. game .. '\\' .. gameExe .. '" -loadfile "' .. root .. '\\' .. map .. '"')
-		print('[\27[32m' .. os.date('%c') .. '\27[0m] \27[33mRun:' .. gameExe .. '\27[0m')
+		local param = isReforged and '-launch' or ''
+		os.execute('start  "" "' .. game .. '\\' .. gameExe .. '"' .. param .. ' -loadfile "' .. root .. '\\' .. map .. '"')
+		log('\27[33mRun:' .. gameExe .. '\27[0m')
 	end
 end
 
