@@ -1,4 +1,4 @@
---ver 1.0.13
+--ver 1.0.14
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -109,7 +109,9 @@ function cheapack.build(game, root, map, src, run, isReforged)
 	end
 	local code = customCodeTag
 	for i = 1, #pathlist do
-		code = code .. '\r\n' .. fileGetContent(pathlist[i], 'rb')
+		local path = pathlist[i]
+		print('\27[36m' .. i .. '\27[0m ' .. path:sub(root:len() + 2))
+		code = code .. '\r\n' .. fileGetContent(path, 'rb')
 	end
 	code          = code .. '\r\n' .. customCodeTag
 	
@@ -133,7 +135,7 @@ function cheapack.build(game, root, map, src, run, isReforged)
 	local luaPath          = root .. '\\' .. map .. '\\war3map.lua'
 	local luaContent       = fileGetContent(luaPath, 'r')
 	local luaFile          = io.open(luaPath, 'w+')
-	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code)
+	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code):gsub('[\r|\n]+', '\n')
 	luaFile:write(luaContentNew):close()
 	
 	log('\27[36mFinish!\27[0m')
