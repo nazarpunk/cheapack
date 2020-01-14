@@ -1,8 +1,7 @@
-# cheapack
 ![GitHub](https://img.shields.io/github/license/nazarpunk/cheapack?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/nazarpunk/cheapack?style=flat-square)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/nazarpunk/cheapack?style=flat-square)
-
+# cheapack
 Собиратор карт для [Warcraft III](https://playwarcraft3.com/ru-ru/). Подробная инструкция находится [здесь](https://xgm.guru/p/wc3/cheapack). 
 
 ## Описание
