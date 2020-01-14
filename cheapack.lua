@@ -1,9 +1,8 @@
---ver 1.0.14
+local cheapack      = { _version = '1.0.15' }
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
 local gameExe       = 'Warcraft III.exe'
-local cheapack      = {}
 
 local function log(str)
 	print('[\27[32m' .. os.date('%c') .. '\27[0m] ' .. str)
