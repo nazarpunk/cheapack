@@ -4,7 +4,7 @@
 # cheapack
 Собиратор карт для [Warcraft III](https://playwarcraft3.com/ru-ru/). Подробная инструкция находится [здесь](https://xgm.guru/p/wc3/cheapack). 
 
-### Структура проэкта
+#### Структура проекта
 ```
 C:\Users\username\IdeaProjects\MyMapProject
 ├── map.w3x
@@ -37,7 +37,7 @@ C:\Users\username\IdeaProjects\MyMapProject
 └── build.lua
 ```
 
-Содержимое `build.lua`
+#### `build.lua`
 ```lua
 local pack     = require 'cheapack'
 
