@@ -79,6 +79,10 @@ local function checkProcess(processname)
 	end
 end
 
+local function getRunDir()
+	return debug.getinfo(3, 'S').source:sub(2):match('(.*/)')
+end
+
 ---@param game string path to game folder, example [[D:\Games\Warcraft III\x86_64]]
 ---@param root string path to project folder, example [[C:\Users\username\IdeaProjects\Death-League]]
 ---@param map string path to map from root, example [[map.w3x]]
@@ -87,6 +91,8 @@ end
 ---@param isReforged boolean
 function cheapack.build(game, root, map, src, run, isReforged)
 	isReforged = isReforged or false
+	
+	print('dir', getRunDir())
 	
 	log('\27[36mStart!\27[0m')
 	

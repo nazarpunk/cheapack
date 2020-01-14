@@ -4,10 +4,7 @@
 # cheapack
 Собиратор карт для [Warcraft III](https://playwarcraft3.com/ru-ru/). Подробная инструкция находится [здесь](https://xgm.guru/p/wc3/cheapack). 
 
-## Описание
- 
-## Пример использования
-Структура проэкта
+### Структура проэкта
 ```
 C:\Users\username\IdeaProjects\MyMapProject
 ├── map.w3x
