@@ -5,24 +5,55 @@
 Собиратор карт для [Warcraft III](https://playwarcraft3.com/ru-ru/). Подробная инструкция находится [здесь](https://xgm.guru/p/wc3/cheapack). 
 
 ## Описание
-Собирает код из указанных `.lua` файлов и запихивает его в `war3map.wct` для совместимости и обновляет его в `war3map.lua`. 
-
+ 
 ## Пример использования
+Структура проэкта
+```
+C:\Users\username\IdeaProjects\MyMapProject
+├── map.w3x
+|   ├── war3map.doo
+|   ├── war3map.imp
+|   ├── war3map.lua
+|   ├── war3map.mmp
+|   ├── war3map.shd
+|   ├── war3map.w3a
+|   ├── war3map.w3c
+|   ├── war3map.w3e
+|   ├── war3map.w3i
+|   ├── war3map.w3r
+|   ├── war3map.wct
+|   ├── war3map.wpm
+|   ├── war3map.wtg
+|   ├── war3map.wts
+|   ├── war3mapMap.blp
+|   └── war3mapUnits.doo
+├── src
+|   ├── ability
+|   |   ├── ability_1.lua
+|   |   ├── ability_2.lua
+|   |   └── ability_3.lua
+|   ├── lib
+|   |   ├── lib_1.lua
+|   |   ├── lib_2.lua
+|   |   └── lib_3.lua
+|   └── init.lua
+└── build.lua
+```
+
+Содержимое `build.lua`
 ```lua
 local pack     = require 'cheapack'
 
 pack.build(
-		[[D:\Games\Warcraft III\x86_64]], -- путь к папке с игрой
-        [[C:\Users\nazarpunk\IdeaProjects\Death-League]], -- путь к папке с проэктом
-		'map.w3x', -- название карты
-		{ -- путь к файлам для сборки
-			'src\\lib', 
-			'src\\global',
-			'src\\ability',
-			'src\\hero',
-			'src\\init.lua'
-		},
-		'editor', -- открыть карту в редакторе 'editor' или в игре 'game'
+        'D:\\Games\\Warcraft III\\x86_64', -- путь к папке игры
+        'C:\\Users\\username\\IdeaProjects\\MyMapProject', -- путь к папке проэкта
+        'map.w3x', -- путь к папке с картой относительно проэкта
+        { -- порядок сборки файлов
+            'src\\lib', 
+            'src\\ability',
+            'src\\init.lua'
+        },
+        'editor', -- открыть карту в редакторе 'editor' или в игре 'game'
         true -- карта для Reforged. По умолчанию false
 )
 ```
