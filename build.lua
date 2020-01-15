@@ -1,4 +1,4 @@
-local version       = '1.1.0'
+local version       = '1.1.2'
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -11,6 +11,11 @@ end
 
 local function log(str)
 	print('[' .. color.white .. os.date('%c') .. color.reset .. '] ' .. str)
+	return false
+end
+
+local function help(str)
+	return 'https://github.com/nazarpunk/cheapack#' .. str
 end
 
 local function isFileExists(file)
@@ -67,16 +72,11 @@ local function parseWct(path)
 	return out
 end
 
-local function checkProcess(processname)
+local function isProcessRun(processname)
 	local filedata = io.popen('tasklist /NH /FO CSV /FI "IMAGENAME eq ' .. processname .. '"')
 	local output   = filedata:read()
 	filedata:close()
-	if output:find(processname) == nil then
-		return false
-	else
-		log(color.red .. 'Ошибка!\nЗапущен ' .. processname .. color.reset)
-		return true
-	end
+	return output:find(processname) ~= nil
 end
 
 local function getProjectDir()
@@ -91,18 +91,22 @@ local function getGameDir()
 	end
 end
 
-print('https://github.com/nazarpunk/cheapack#cheapack ' .. color.blue .. version .. color.reset)
+print(help('cheapack') .. ' ' .. color.blue .. version .. color.reset)
 
 return function(param)
 	-- check process
-	if checkProcess(editorExe) then return end
-	if checkProcess(gameExe) then return end
+	if isProcessRun(editorExe) then
+		return log(color.red .. 'Ошибка! Редактор открыт\n' .. color.yellow .. editorExe .. color.reset)
+	end
+	if isProcessRun(gameExe) then
+		return log(color.red .. 'Ошибка! Игра запущена\n' .. color.yellow .. gameExe .. color.reset)
+	end
 	
-	-- param: fix
-	if param == nil then param = {} end
+	-- param
+	param = param or {}
 	if type(param) ~= 'table' then param = { param } end
-	
-	-- param: reforged
+	param.map      = param.map or 'map.w3x'
+	param.src      = param.src or 'src'
 	param.reforged = not not param.reforged
 	
 	-- param: project
@@ -110,6 +114,24 @@ return function(param)
 		param.project = getProjectDir()
 		log(color.cyan .. 'Определяем папку проекта' .. color.yellow .. '\n' .. param.project .. color.reset)
 	end
+	if not isFileExists(param.project) then
+		return log(color.red .. 'Ошибка! Папка с проектом не найдена\n' .. color.yellow .. param.project .. color.reset .. '\n' .. help('project'))
+	end
+	
+	-- param: map
+	local mapFolderPath = param.project .. '\\' .. param.map
+	if not isFileExists(mapFolderPath) then
+		return log(color.red .. 'Ошибка! Папка с картой не найдена\n' .. color.yellow .. mapFolderPath .. color.reset .. '\n' .. help('map'))
+	end
+	
+	local noFileError    = color.red .. 'Ошибка! Файл не найден\n' .. color.yellow
+	-- war3map.wct
+	local war3mapWctPath = param.project .. '\\' .. param.map .. '\\war3map.wct'
+	if not isFileExists(war3mapWctPath) then return log(noFileError .. war3mapWctPath .. color.reset) end
+	
+	-- war3map.lua
+	local war3mapLuaPath = param.project .. '\\' .. param.map .. '\\war3map.lua'
+	if not isFileExists(war3mapWctPath) then return log(noFileError .. war3mapLuaPath .. color.reset) end
 	
 	-- param: src
 	log(color.cyan .. 'Начинаем сборку' .. color.reset)
@@ -118,10 +140,7 @@ return function(param)
 	for i = 1, #param.src do
 		local suffix = param.src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
 		local path   = param.project .. '\\' .. param.src[i]
-		if not isFileExists(path) then
-			log(color.red .. 'Ошибка! Файл не найден\n' .. color.yellow .. path .. color.reset)
-			return
-		end
+		if not isFileExists(path) then return log(noFileError .. path .. color.reset) end
 		for dir in io.popen([[dir "]] .. path .. suffix .. [[" /s /b /o:gn]]):lines() do
 			table.insert(pathlist, dir)
 		end
@@ -134,9 +153,8 @@ return function(param)
 	code          = code .. '\r\n' .. customCodeTag
 	
 	-- patch war3map.wct
-	local wctPath = param.project .. '\\' .. param.map .. '\\war3map.wct'
-	local wct     = parseWct(wctPath)
-	local wctFile = assert(io.open(wctPath, 'wb'))
+	local wct     = parseWct(war3mapWctPath)
+	local wctFile = assert(io.open(war3mapWctPath, 'wb'))
 	wct[4]        = code:len() + 1
 	wct[5]        = code
 	for i = 1, #wct do
@@ -150,21 +168,24 @@ return function(param)
 	wctFile:close()
 	
 	-- replace war3map.lua
-	local luaPath          = param.project .. '\\' .. param.map .. '\\war3map.lua'
-	local luaContent       = fileGetContent(luaPath, 'rb')
-	local luaFile          = io.open(luaPath, 'w+')
-	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code):gsub('\r+', '\n'):gsub('\n+', '\n')
+	local luaContent       = fileGetContent(war3mapLuaPath, 'rb')
+	local luaFile          = io.open(war3mapLuaPath, 'wb')
+	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code)
 	luaFile:write(luaContentNew):close()
 	
-	log(color.cyan .. 'Сборка успешна' .. color.reset)
+	log(color.cyan .. 'Сборка успешно завершена' .. color.reset)
 	
-	if param.run == 'editor' then
-		local p = param.reforged and ' -launch' or ''
-		os.execute('start  "" "' .. param.game .. '\\' .. editorExe .. '"' .. p .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"')
-		log('\27[33mRun: ' .. editorExe .. '\27[0m')
-	elseif param.run == 'game' then
-		local p = param.reforged and ' -launch' or ''
-		os.execute('start  "" "' .. param.game .. '\\' .. gameExe .. '"' .. p .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"')
-		log('\27[33mRun: ' .. gameExe .. '\27[0m')
+	-- run
+	if param.run == 'editor' or param.run == 'game' then
+		local launch, execute = param.reforged and ' -launch' or ''
+		if param.run == 'editor' then
+			log(color.cyan .. 'Запускаем редактор')
+			execute = 'start  "" "' .. param.game .. '\\' .. editorExe .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
+		elseif param.run == 'game' then
+			log(color.cyan .. 'Запускаем игру')
+			execute = 'start  "" "' .. param.game .. '\\' .. gameExe .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
+		end
+		print(color.yellow .. execute .. color.reset)
+		os.execute(execute)
 	end
 end
