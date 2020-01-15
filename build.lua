@@ -71,53 +71,55 @@ local function checkProcess(processname)
 	local filedata = io.popen('tasklist /NH /FO CSV /FI "IMAGENAME eq ' .. processname .. '"')
 	local output   = filedata:read()
 	filedata:close()
-	
 	if output:find(processname) == nil then
 		return false
 	else
-		log('\27[31mError! ' .. processname .. ' is running.\27[0m')
+		log(color.red .. 'Ошибка!\nЗапущен ' .. processname .. color.reset)
 		return true
 	end
 end
 
 local function getProjectDir()
-	return debug.getinfo(3, 'S').source:sub(2):match('(.*/)')
+	return debug.getinfo(3, 'S').source:sub(2):match('(.*/)'):gsub('%/$', ''):gsub('/', '\\')
 end
 
-print('https://github.com/nazarpunk/cheapack#cheapack ' .. color.blue .. version .. color.reset)
-
-return function(param)
-	-- fix param
-	if param == nil then param = {} end
-	if type(param) ~= 'table' then param = { param } end
-	
-	for k, v in pairs(param) do
-		--print(k, v)
-	end
-	
+local function getGameDir()
 	local reg  = require 'registry'
 	local keys = reg.getkey([[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III]])
 	for _, v in pairs(keys.values) do
 		print(v.name, v.value)
 	end
-	
-	if true == true then return end
-	isReforged = isReforged or false
-	
-	--print('dir', getRunDir())
-	
-	log(color.cyan .. 'Начинаем сборку' .. color.reset)
-	
+end
+
+print('https://github.com/nazarpunk/cheapack#cheapack ' .. color.blue .. version .. color.reset)
+
+return function(param)
+	-- check process
 	if checkProcess(editorExe) then return end
 	if checkProcess(gameExe) then return end
 	
+	-- param: fix
+	if param == nil then param = {} end
+	if type(param) ~= 'table' then param = { param } end
+	
+	-- param: reforged
+	param.reforged = not not param.reforged
+	
+	-- param: project
+	if param.project == nil then
+		param.project = getProjectDir()
+		log(color.cyan .. 'Определяем папку проекта' .. color.yellow .. '\n' .. param.project .. color.reset)
+	end
+	
+	-- param: src
+	log(color.cyan .. 'Начинаем сборку' .. color.reset)
 	local pathlist = {}
-	if type(src) == 'string' then src = { src } end
-	for i = 1, #src do
-		local suffix = src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
-		local path   = root .. '\\' .. src[i]
+	if type(param.src) == 'string' then param.src = { param.src } end
+	for i = 1, #param.src do
+		local suffix = param.src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
+		local path   = param.project .. '\\' .. param.src[i]
 		if not isFileExists(path) then
-			log('\27[31mError!\nFile not exist: s' .. path .. '\27[0m')
+			log(color.red .. 'Ошибка! Файл не найден\n' .. color.yellow .. path .. color.reset)
 			return
 		end
 		for dir in io.popen([[dir "]] .. path .. suffix .. [[" /s /b /o:gn]]):lines() do
@@ -126,14 +128,13 @@ return function(param)
 	end
 	local code = customCodeTag
 	for i = 1, #pathlist do
-		local path = pathlist[i]
-		print(color.yellow .. i .. color.reset .. ' ' .. path:sub(root:len() + 2))
-		code = code .. '\r\n' .. fileGetContent(path, 'rb')
+		print(color.yellow .. pathlist[i] .. color.reset)
+		code = code .. '\r\n' .. fileGetContent(pathlist[i], 'rb')
 	end
 	code          = code .. '\r\n' .. customCodeTag
 	
 	-- patch war3map.wct
-	local wctPath = root .. '\\' .. map .. '\\war3map.wct'
+	local wctPath = param.project .. '\\' .. param.map .. '\\war3map.wct'
 	local wct     = parseWct(wctPath)
 	local wctFile = assert(io.open(wctPath, 'wb'))
 	wct[4]        = code:len() + 1
@@ -149,21 +150,21 @@ return function(param)
 	wctFile:close()
 	
 	-- replace war3map.lua
-	local luaPath          = root .. '\\' .. map .. '\\war3map.lua'
-	local luaContent       = fileGetContent(luaPath, 'r')
+	local luaPath          = param.project .. '\\' .. param.map .. '\\war3map.lua'
+	local luaContent       = fileGetContent(luaPath, 'rb')
 	local luaFile          = io.open(luaPath, 'w+')
-	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code):gsub('[\r|\n]+', '\n')
+	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code):gsub('\r+', '\n'):gsub('\n+', '\n')
 	luaFile:write(luaContentNew):close()
 	
 	log(color.cyan .. 'Сборка успешна' .. color.reset)
 	
-	if run == 'editor' then
-		local param = isReforged and ' -launch' or ''
-		os.execute('start  "" "' .. game .. '\\' .. editorExe .. '"' .. param .. ' -loadfile "' .. root .. '\\' .. map .. '"')
+	if param.run == 'editor' then
+		local p = param.reforged and ' -launch' or ''
+		os.execute('start  "" "' .. param.game .. '\\' .. editorExe .. '"' .. p .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"')
 		log('\27[33mRun: ' .. editorExe .. '\27[0m')
-	elseif run == 'game' then
-		local param = isReforged and ' -launch' or ''
-		os.execute('start  "" "' .. game .. '\\' .. gameExe .. '"' .. param .. ' -loadfile "' .. root .. '\\' .. map .. '"')
+	elseif param.run == 'game' then
+		local p = param.reforged and ' -launch' or ''
+		os.execute('start  "" "' .. param.game .. '\\' .. gameExe .. '"' .. p .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"')
 		log('\27[33mRun: ' .. gameExe .. '\27[0m')
 	end
 end
