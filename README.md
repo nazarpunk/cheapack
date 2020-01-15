@@ -48,6 +48,7 @@ C:\Users\username\IdeaProjects\MyMapProject
 ```lua
 require 'build' {}
 ```
+### Параметры сборки
 
 #### `game`
 ```lua

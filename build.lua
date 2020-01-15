@@ -1,21 +1,22 @@
-local cheapack      = { _version = '1.0.15' }
+local version       = '1.1.0'
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
 local gameExe       = 'Warcraft III.exe'
+local color         = { black = '\27[30m', red = '\27[31m', green = '\27[32m', yellow = '\27[33m', blue = '\27[34m', magenta = '\27[35m', cyan = '\27[36m', white = '\27[37m', reset = '\27[0m' }
 
-local function log(str)
-	print('[\27[32m' .. os.date('%c') .. '\27[0m] ' .. str)
+for k, v in pairs(color) do
+	--print(v .. k)
 end
 
-local function fileExists(file)
-	local ok, err, code = os.rename(file, file)
-	if not ok then
-		if code == 13 then
-			return true
-		end
-	end
-	return ok, err
+local function log(str)
+	print('[' .. color.white .. os.date('%c') .. color.reset .. '] ' .. str)
+end
+
+local function isFileExists(file)
+	local ok, _, code = os.rename(file, file)
+	if not ok and code == 13 then return true end
+	return ok
 end
 
 local function fileGetContent(path, mode)
@@ -79,22 +80,33 @@ local function checkProcess(processname)
 	end
 end
 
-local function getRunDir()
+local function getProjectDir()
 	return debug.getinfo(3, 'S').source:sub(2):match('(.*/)')
 end
 
----@param game string path to game folder, example [[D:\Games\Warcraft III\x86_64]]
----@param root string path to project folder, example [[C:\Users\username\IdeaProjects\Death-League]]
----@param map string path to map from root, example [[map.w3x]]
----@param src table list build files from root
----@param run string run after build: 'editor'|'game'
----@param isReforged boolean
-function cheapack.build(game, root, map, src, run, isReforged)
+print('https://github.com/nazarpunk/cheapack#cheapack ' .. color.blue .. version .. color.reset)
+
+return function(param)
+	-- fix param
+	if param == nil then param = {} end
+	if type(param) ~= 'table' then param = { param } end
+	
+	for k, v in pairs(param) do
+		--print(k, v)
+	end
+	
+	local reg  = require 'registry'
+	local keys = reg.getkey([[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III]])
+	for _, v in pairs(keys.values) do
+		print(v.name, v.value)
+	end
+	
+	if true == true then return end
 	isReforged = isReforged or false
 	
-	print('dir', getRunDir())
+	--print('dir', getRunDir())
 	
-	log('\27[36mStart!\27[0m')
+	log(color.cyan .. 'Начинаем сборку' .. color.reset)
 	
 	if checkProcess(editorExe) then return end
 	if checkProcess(gameExe) then return end
@@ -104,7 +116,7 @@ function cheapack.build(game, root, map, src, run, isReforged)
 	for i = 1, #src do
 		local suffix = src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
 		local path   = root .. '\\' .. src[i]
-		if not fileExists(path) then
+		if not isFileExists(path) then
 			log('\27[31mError!\nFile not exist: s' .. path .. '\27[0m')
 			return
 		end
@@ -115,7 +127,7 @@ function cheapack.build(game, root, map, src, run, isReforged)
 	local code = customCodeTag
 	for i = 1, #pathlist do
 		local path = pathlist[i]
-		print('\27[36m' .. i .. '\27[0m ' .. path:sub(root:len() + 2))
+		print(color.yellow .. i .. color.reset .. ' ' .. path:sub(root:len() + 2))
 		code = code .. '\r\n' .. fileGetContent(path, 'rb')
 	end
 	code          = code .. '\r\n' .. customCodeTag
@@ -143,10 +155,10 @@ function cheapack.build(game, root, map, src, run, isReforged)
 	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code):gsub('[\r|\n]+', '\n')
 	luaFile:write(luaContentNew):close()
 	
-	log('\27[36mFinish!\27[0m')
+	log(color.cyan .. 'Сборка успешна' .. color.reset)
 	
 	if run == 'editor' then
-		local param = isReforged and ' -launch -uid w3_beta' or ''
+		local param = isReforged and ' -launch' or ''
 		os.execute('start  "" "' .. game .. '\\' .. editorExe .. '"' .. param .. ' -loadfile "' .. root .. '\\' .. map .. '"')
 		log('\27[33mRun: ' .. editorExe .. '\27[0m')
 	elseif run == 'game' then
@@ -155,5 +167,3 @@ function cheapack.build(game, root, map, src, run, isReforged)
 		log('\27[33mRun: ' .. gameExe .. '\27[0m')
 	end
 end
-
-return cheapack
