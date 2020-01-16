@@ -197,10 +197,20 @@ return function(param)
 		log(color.yellow .. 'war3map.lua' .. color.reset .. ' не был изменён. Откройте и сохраните карту в редакторе!')
 	end
 	luaFile:write(luaContentNew):close()
-	
 	log(color.cyan .. 'Сборка успешно завершена' .. color.reset)
 	
-	-- run
+	-- param: export
+	if param.export ~= nil then
+		local json         = require 'json'
+		local exportFolder = param.project .. '\\' .. param.export
+		if not isFileExists(exportFolder) then
+			os.execute('mkdir ' .. exportFolder)
+		end
+		wctFile = io.open(exportFolder .. '\\war3map.wct.json', 'wb')
+		wctFile:write(json.encode(parseWct(war3mapWctPath))):close()
+	end
+	
+	-- param: run
 	if param.run == 'editor' or param.run == 'game' then
 		-- param: game
 		local launch, execute = param.reforged and ' -launch' or ''

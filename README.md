@@ -70,6 +70,10 @@ require 'build' {
 Путь к игре. По умолчанию ищется в реестре.
 
 ``HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III``
+- InstallPath
+- InstallSource
+- InstallLocation
+
 #### `project`
 ```lua
 require 'build' {
