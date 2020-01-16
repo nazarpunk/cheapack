@@ -1,4 +1,4 @@
-local version       = '1.1.4'
+local version       = '1.1.5'
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -166,7 +166,7 @@ return function(param)
 			print(color.yellow .. path .. color.reset)
 		else
 			pathlistDublicateLen = pathlistDublicateLen + 1
-			print(color.red .. path .. color.reset)
+			print(color.red .. path .. color.white .. ' [игнорирован]' .. color.reset)
 		end
 	end
 	code = code .. '\r\n' .. customCodeTag
