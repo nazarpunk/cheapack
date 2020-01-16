@@ -1,4 +1,4 @@
-local version       = '1.1.5'
+local version       = '1.1.6'
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -213,6 +213,7 @@ return function(param)
 	end
 	
 	-- param: run
+	param.run = param.run or os.getenv('run') or nil
 	if param.run == 'editor' or param.run == 'game' then
 		-- param: game
 		local launch, execute = param.reforged and ' -launch' or ''
@@ -220,6 +221,11 @@ return function(param)
 			log(color.cyan .. 'Запускаем редактор')
 			execute = 'start  "" "' .. param.game .. '\\' .. editorExe .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
 		elseif param.run == 'game' then
+			if param.game == nil then
+				print 'Путь к игре не указан'
+				return false
+			end
+			
 			log(color.cyan .. 'Запускаем игру')
 			execute = 'start  "" "' .. param.game .. '\\' .. gameExe .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
 		end
