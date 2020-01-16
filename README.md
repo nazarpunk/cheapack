@@ -48,6 +48,17 @@ C:\Users\username\IdeaProjects\MyMapProject
 ```lua
 require 'build' {}
 ```
+### Параметры по умолчанию
+```lua
+require 'build' {
+    game = nil,
+    project = nil,
+    map = 'map.w3x',
+    src = 'src',
+    run = nil,
+    reforged = false
+}
+```
 ### Параметры сборки
 
 #### `game`

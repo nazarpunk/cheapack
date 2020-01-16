@@ -1,4 +1,4 @@
-local version       = '1.1.2'
+local version       = '1.1.4'
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -190,9 +190,12 @@ return function(param)
 	wctFile:close()
 	
 	-- replace war3map.lua
-	local luaContent       = fileGetContent(war3mapLuaPath, 'rb')
-	local luaFile          = io.open(war3mapLuaPath, 'wb')
-	local luaContentNew, _ = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code)
+	local luaContent           = fileGetContent(war3mapLuaPath, 'rb')
+	local luaFile              = io.open(war3mapLuaPath, 'wb')
+	local luaContentNew, count = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code)
+	if (count == 0) then
+		log(color.yellow .. 'war3map.lua' .. color.reset .. ' не был изменён. Откройте и сохраните карту в редакторе!')
+	end
 	luaFile:write(luaContentNew):close()
 	
 	log(color.cyan .. 'Сборка успешно завершена' .. color.reset)
@@ -200,7 +203,6 @@ return function(param)
 	-- run
 	if param.run == 'editor' or param.run == 'game' then
 		-- param: game
-		
 		local launch, execute = param.reforged and ' -launch' or ''
 		if param.run == 'editor' then
 			log(color.cyan .. 'Запускаем редактор')
