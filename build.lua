@@ -95,6 +95,8 @@ end
 local function getGameDir()
 	local reg  = require 'registry'
 	local keys = reg.getkey([[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III]])
+	--HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III
+	--HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III Beta
 	--InstallPath InstallSource InstallLocation
 	for _, v in pairs(keys.values) do
 		print(v.name, v.value)
