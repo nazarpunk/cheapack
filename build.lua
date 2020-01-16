@@ -171,7 +171,7 @@ return function(param)
 	end
 	code = code .. '\r\n' .. customCodeTag
 	if pathlistDublicateLen > 0 then
-		log(color.red .. pathlistDublicateLen .. color.reset .. ' ' .. declension(pathlistDublicateLen, 'файл', 'файла', 'файлов') .. ' используются повторно')
+		log('Обнаружено ' .. color.red .. pathlistDublicateLen .. color.reset .. ' ' .. declension(pathlistDublicateLen, 'повторное включение', 'повторных включений', 'повторных включений'))
 	end
 	
 	-- patch war3map.wct
