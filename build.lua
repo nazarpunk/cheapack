@@ -18,6 +18,15 @@ local function help(str)
 	return 'https://github.com/nazarpunk/cheapack#' .. str
 end
 
+local function declension (num, d1, d4, d5)
+	num = math.abs(num) % 100
+	if num >= 11 and num <= 19 then return d5 end
+	num = num % 10
+	if num == 1 then return d1 end
+	if num > 1 and num <= 4 then return d4 end
+	return d5
+end
+
 local function isFileExists(file)
 	local ok, _, code = os.rename(file, file)
 	if not ok and code == 13 then return true end
@@ -86,6 +95,7 @@ end
 local function getGameDir()
 	local reg  = require 'registry'
 	local keys = reg.getkey([[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III]])
+	--InstallPath InstallSource InstallLocation
 	for _, v in pairs(keys.values) do
 		print(v.name, v.value)
 	end
@@ -112,7 +122,7 @@ return function(param)
 	-- param: project
 	if param.project == nil then
 		param.project = getProjectDir()
-		log(color.cyan .. 'Определяем папку проекта' .. color.yellow .. '\n' .. param.project .. color.reset)
+		log(color.cyan .. 'Определяем папку проекта' .. color.yellow .. '\n' .. param.project .. color.reset .. '\n' .. help('project'))
 	end
 	if not isFileExists(param.project) then
 		return log(color.red .. 'Ошибка! Папка с проектом не найдена\n' .. color.yellow .. param.project .. color.reset .. '\n' .. help('project'))
@@ -145,12 +155,24 @@ return function(param)
 			table.insert(pathlist, dir)
 		end
 	end
-	local code = customCodeTag
+	local code                 = customCodeTag
+	local pathlistDublicate    = {}
+	local pathlistDublicateLen = 0
 	for i = 1, #pathlist do
-		print(color.yellow .. pathlist[i] .. color.reset)
-		code = code .. '\r\n' .. fileGetContent(pathlist[i], 'rb')
+		local path = pathlist[i]
+		if pathlistDublicate[path] == nil then
+			pathlistDublicate[path] = true
+			code                    = code .. '\r\n' .. fileGetContent(path, 'rb')
+			print(color.yellow .. path .. color.reset)
+		else
+			pathlistDublicateLen = pathlistDublicateLen + 1
+			print(color.red .. path .. color.reset)
+		end
 	end
-	code          = code .. '\r\n' .. customCodeTag
+	code = code .. '\r\n' .. customCodeTag
+	if pathlistDublicateLen > 0 then
+		log(color.red .. pathlistDublicateLen .. color.reset .. ' ' .. declension(pathlistDublicateLen, 'файл', 'файла', 'файлов') .. ' используются повторно')
+	end
 	
 	-- patch war3map.wct
 	local wct     = parseWct(war3mapWctPath)
@@ -177,6 +199,8 @@ return function(param)
 	
 	-- run
 	if param.run == 'editor' or param.run == 'game' then
+		-- param: game
+		
 		local launch, execute = param.reforged and ' -launch' or ''
 		if param.run == 'editor' then
 			log(color.cyan .. 'Запускаем редактор')
