@@ -1,4 +1,4 @@
-local version       = '1.1.6'
+local version       = '1.1.7'
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -90,17 +90,6 @@ end
 
 local function getProjectDir()
 	return debug.getinfo(3, 'S').source:sub(2):match('(.*/)'):gsub('%/$', ''):gsub('/', '\\')
-end
-
-local function getGameDir()
-	local reg  = require 'registry'
-	local keys = reg.getkey([[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III]])
-	--HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III
-	--HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III Beta
-	--InstallPath InstallSource InstallLocation
-	for _, v in pairs(keys.values) do
-		print(v.name, v.value)
-	end
 end
 
 print(help('cheapack') .. ' ' .. color.blue .. version .. color.reset)
@@ -215,21 +204,35 @@ return function(param)
 	-- param: run
 	param.run = param.run or os.getenv('run') or nil
 	if param.run == 'editor' or param.run == 'game' then
+		
 		-- param: game
-		local launch, execute = param.reforged and ' -launch' or ''
-		if param.run == 'editor' then
-			log(color.cyan .. 'Запускаем редактор')
-			execute = 'start  "" "' .. param.game .. '\\' .. editorExe .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
-		elseif param.run == 'game' then
-			if param.game == nil then
-				print 'Путь к игре не указан'
-				return false
+		if param.game == nil then
+			local registry = require 'registry'
+			local key      = [[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III]]
+			if param.reforged then key = key .. ' Beta' end
+			local keys = registry.getkey(key)
+			for _, v in pairs(keys.values) do
+				if v.name == 'InstallPath' or v.name == 'InstallSource' or v.name == 'InstallLocation' then
+					param.game = v.value .. '\\x86_64'
+				end
 			end
-			
-			log(color.cyan .. 'Запускаем игру')
-			execute = 'start  "" "' .. param.game .. '\\' .. gameExe .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
 		end
-		print(color.yellow .. execute .. color.reset)
-		os.execute(execute)
+		
+		local launch, execute, file = param.reforged and ' -launch' or ''
+		if param.run == 'editor' then
+			file = param.game .. '\\' .. editorExe
+			log(color.cyan .. 'Запускаем редактор' .. color.reset)
+			execute = 'start  "" "' .. file .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
+		elseif param.run == 'game' then
+			file = param.game .. '\\' .. gameExe
+			log(color.cyan .. 'Запускаем игру' .. color.reset)
+			execute = 'start  "" "' .. file .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
+		end
+		if isFileExists(file) then
+			print(color.yellow .. file .. color.reset)
+			os.execute(execute)
+		else
+			log(noFileError .. file .. color.reset)
+		end
 	end
 end
