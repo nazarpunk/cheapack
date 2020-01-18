@@ -1,4 +1,4 @@
-local version       = '1.1.7'
+local version       = '1.1.8'
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -213,21 +213,22 @@ return function(param)
 			local keys = registry.getkey(key)
 			for _, v in pairs(keys.values) do
 				if v.name == 'InstallPath' or v.name == 'InstallSource' or v.name == 'InstallLocation' then
-					param.game = v.value .. '\\x86_64'
+					param.game = v.value
 				end
 			end
+			local sub  = os.getenv('ProgramFiles(x86)') == nil and 'x86' or 'x86_64'
+			param.game = param.game .. '\\' .. sub
 		end
 		
-		local launch, execute, file = param.reforged and ' -launch' or ''
+		local launch, file = param.reforged and ' -launch' or ''
 		if param.run == 'editor' then
 			file = param.game .. '\\' .. editorExe
 			log(color.cyan .. 'Запускаем редактор' .. color.reset)
-			execute = 'start  "" "' .. file .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
 		elseif param.run == 'game' then
 			file = param.game .. '\\' .. gameExe
 			log(color.cyan .. 'Запускаем игру' .. color.reset)
-			execute = 'start  "" "' .. file .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
 		end
+		local execute = 'start  "" "' .. file .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
 		if isFileExists(file) then
 			print(color.yellow .. file .. color.reset)
 			os.execute(execute)
