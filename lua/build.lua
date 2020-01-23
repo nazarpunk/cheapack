@@ -1,13 +1,9 @@
-local version       = '1.1.8'
+local version       = '1.1.9'
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
 local gameExe       = 'Warcraft III.exe'
 local color         = { black = '\27[30m', red = '\27[31m', green = '\27[32m', yellow = '\27[33m', blue = '\27[34m', magenta = '\27[35m', cyan = '\27[36m', white = '\27[37m', reset = '\27[0m' }
-
-for k, v in pairs(color) do
-	--print(v .. k)
-end
 
 local function log(str)
 	print('[' .. color.white .. os.date('%c') .. color.reset .. '] ' .. str)
@@ -211,6 +207,11 @@ return function(param)
 			local key      = [[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III]]
 			if param.reforged then key = key .. ' Beta' end
 			local keys = registry.getkey(key)
+			if keys == nil then
+				log(color.red .. 'Ключ реестра не содержит пути к игре\n' .. color.white .. key .. color.reset)
+				return false
+			end
+			print(keys)
 			for _, v in pairs(keys.values) do
 				if v.name == 'InstallPath' or v.name == 'InstallSource' or v.name == 'InstallLocation' then
 					param.game = v.value
