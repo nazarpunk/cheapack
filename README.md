@@ -2,6 +2,9 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/nazarpunk/cheapack?style=flat-square)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/nazarpunk/cheapack?style=flat-square)
 ![Discord](https://img.shields.io/discord/543458159818440705?label=XGM%20-%20discord&style=flat-square)
+<p align="center">
+  <img src="https://bnetcmsus-a.akamaihd.net/cms/template_resource/DXDAN5KT326U1541005861696.png" alt=""/>
+</p>
 # cheapack
 Собиратор карт для [Warcraft III](https://playwarcraft3.com/ru-ru/).
 
