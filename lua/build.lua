@@ -1,4 +1,4 @@
-local version       = '1.1.9'
+local version       = '1.1.10'
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -181,7 +181,7 @@ return function(param)
 	local luaFile              = io.open(war3mapLuaPath, 'wb')
 	local luaContentNew, count = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code)
 	if (count == 0) then
-		log(color.yellow .. 'war3map.lua' .. color.reset .. ' не был изменён. Откройте и сохраните карту в редакторе!')
+		log(color.yellow .. 'war3map.lua' .. color.reset .. ' не был изменён.\n' .. color.red .. 'Откройте и сохраните карту в редакторе!' .. color.reset)
 	end
 	luaFile:write(luaContentNew):close()
 	log(color.cyan .. 'Сборка успешно завершена' .. color.reset)
@@ -205,23 +205,20 @@ return function(param)
 		if param.game == nil then
 			local registry = require 'registry'
 			local key      = [[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III]]
-			if param.reforged then key = key .. ' Beta' end
-			local keys = registry.getkey(key)
+			local keys     = registry.getkey(key)
 			if keys == nil then
 				log(color.red .. 'Ключ реестра не содержит пути к игре\n' .. color.white .. key .. color.reset)
 				return false
 			end
-			print(keys)
 			for _, v in pairs(keys.values) do
 				if v.name == 'InstallPath' or v.name == 'InstallSource' or v.name == 'InstallLocation' then
 					param.game = v.value
 				end
 			end
-			local sub  = os.getenv('ProgramFiles(x86)') == nil and 'x86' or 'x86_64'
-			param.game = param.game .. '\\' .. sub
+			param.game = param.game .. '\\x86_64'
 		end
 		
-		local launch, file = param.reforged and ' -launch' or ''
+		local file
 		if param.run == 'editor' then
 			file = param.game .. '\\' .. editorExe
 			log(color.cyan .. 'Запускаем редактор' .. color.reset)
@@ -229,7 +226,7 @@ return function(param)
 			file = param.game .. '\\' .. gameExe
 			log(color.cyan .. 'Запускаем игру' .. color.reset)
 		end
-		local execute = 'start  "" "' .. file .. '"' .. launch .. ' -loadfile "' .. param.project .. '\\' .. param.map .. '"'
+		local execute = 'start  "" "' .. file .. '" -launch  -loadfile "' .. param.project .. '\\' .. param.map .. '"'
 		if isFileExists(file) then
 			print(color.yellow .. file .. color.reset)
 			os.execute(execute)

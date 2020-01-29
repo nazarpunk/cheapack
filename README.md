@@ -60,8 +60,7 @@ require 'build' {
     project = nil,
     map = 'map.w3x',
     src = 'src',
-    run = nil,
-    reforged = false
+    run = nil
 }
 ```
 ### Параметры сборки
@@ -122,14 +121,6 @@ require 'build' {
 }
 ```
 После сборки открывает карту в редакторе `editor` или в игре `game`. По умолчанию не делает ничего.
-#### `reforged`
-```lua
-require 'build' {
-    reforged = true 
-}
-``` 
-Собирает карту для Reforged. По умолчанию `false`.
-
 
 ### Примечания
 - Устанавливайте файлам `.lua` режим переноса строки `CRLF`. 
