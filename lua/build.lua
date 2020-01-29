@@ -1,4 +1,4 @@
-local version       = '1.1.10'
+local version       = '2.0.0'
 
 local customCodeTag = '--CUSTOM_CODE'
 local editorExe     = 'World Editor.exe'
@@ -226,7 +226,7 @@ return function(param)
 			file = param.game .. '\\' .. gameExe
 			log(color.cyan .. 'Запускаем игру' .. color.reset)
 		end
-		local execute = 'start  "" "' .. file .. '" -launch  -loadfile "' .. param.project .. '\\' .. param.map .. '"'
+		local execute = 'start  "" "' .. file .. '" -launch -loadfile "' .. param.project .. '\\' .. param.map .. '"'
 		if isFileExists(file) then
 			print(color.yellow .. file .. color.reset)
 			os.execute(execute)
