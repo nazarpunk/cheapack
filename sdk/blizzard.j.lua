@@ -598,7 +598,6 @@ bj_lastInstObjFuncSuccessful      = true    ---@type boolean
 -- ===========================================================================
 
 ---@param msg string
----@return nil
 function BJDebugMsg(msg)
 	local i = 0
 	while true do
@@ -920,7 +919,6 @@ end
 -- 
 
 ---@param trig trigger
----@return nil
 function ConditionalTriggerExecute(trig)
 	if TriggerEvaluate(trig) then
 		TriggerExecute(trig)
@@ -963,7 +961,6 @@ end
 -- ===========================================================================
 --  Debug - Display the contents of the trigger queue (as either null or "x"
 --  for each entry).
----@return nil
 function QueuedTriggerCheck()
 	local s = "TrigQueue Check "
 	local i
@@ -1079,7 +1076,6 @@ end
 -- 
 
 ---@param trig trigger
----@return nil
 function QueuedTriggerRemoveBJ(trig)
 	local index
 	local trigIndex
@@ -1104,7 +1100,6 @@ end
 --  Denotes the end of a queued trigger. Be sure to call this only once per
 --  queued trigger, lest you step on the toes of other queued triggers.
 -- 
----@return nil
 function QueuedTriggerDoneBJ()
 	local index
 	
@@ -1123,7 +1118,6 @@ end
 -- ===========================================================================
 --  Empty the trigger queue.
 -- 
----@return nil
 function QueuedTriggerClearBJ()
 	PauseTimer(bj_queuedExecTimeoutTimer)
 	bj_queuedExecTotal = 0
@@ -1131,7 +1125,6 @@ end
 -- ===========================================================================
 --  Remove all but the currently executing trigger from the trigger queue.
 -- 
----@return nil
 function QueuedTriggerClearInactiveBJ()
 	bj_queuedExecTotal = IMinBJ(bj_queuedExecTotal, 1)
 end
@@ -1160,7 +1153,6 @@ end
 -- ===========================================================================
 
 ---@param newIndex integer
----@return nil
 function SetForLoopIndexA(newIndex)
 	bj_forLoopAIndex = newIndex
 end
@@ -1172,7 +1164,6 @@ end
 -- ===========================================================================
 
 ---@param newIndex integer
----@return nil
 function SetForLoopIndexB(newIndex)
 	bj_forLoopBIndex = newIndex
 end
@@ -1181,7 +1172,6 @@ end
 --  and polling until the timer expires.
 
 ---@param duration real
----@return nil
 function PolledWait(duration)
 	local t
 	local timeRemaining
@@ -1226,7 +1216,6 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
----@return nil
 function DoNothing()
 end
 -- ===========================================================================
@@ -1236,7 +1225,6 @@ end
 -- 
 
 ---@param commentString string
----@return nil
 function CommentString(commentString)
 end
 -- ===========================================================================
@@ -1299,14 +1287,12 @@ end
 -- ===========================================================================
 
 ---@param whatTime real
----@return nil
 function SetTimeOfDay(whatTime)
 	SetFloatGameState(GAME_STATE_TIME_OF_DAY, whatTime)
 end
 -- ===========================================================================
 
 ---@param scalePercent real
----@return nil
 function SetTimeOfDayScalePercentBJ(scalePercent)
 	SetTimeOfDayScale(scalePercent * 0.01)
 end
@@ -1318,7 +1304,6 @@ end
 -- ===========================================================================
 
 ---@param soundName string
----@return nil
 function PlaySound(soundName)
 	local soundHandle = CreateSound(soundName, false, false, true, 12700, 12700, "")
 	StartSound(soundHandle)
@@ -1381,7 +1366,6 @@ end
 ---@param whichSetup camerasetup
 ---@param whichPlayer player
 ---@param duration real
----@return nil
 function CameraSetupApplyForPlayer(doPan, whichSetup, whichPlayer, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1397,7 +1381,6 @@ end
 ---@param easeInDuration real
 ---@param easeOutDuration real
 ---@param smoothFactor real
----@return nil
 function CameraSetupApplyForPlayerSmooth(doPan, whichSetup, whichPlayer, forcedDuration, easeInDuration, easeOutDuration, smoothFactor)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1418,7 +1401,6 @@ end
 ---@param whichField camerafield
 ---@param value real
 ---@param duration real
----@return nil
 function SetCameraFieldForPlayer(whichPlayer, whichField, value, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1432,7 +1414,6 @@ end
 ---@param xoffset real
 ---@param yoffset real
 ---@param inheritOrientation boolean
----@return nil
 function SetCameraTargetControllerNoZForPlayer(whichPlayer, whichUnit, xoffset, yoffset, inheritOrientation)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1444,7 +1425,6 @@ end
 ---@param whichPlayer player
 ---@param x real
 ---@param y real
----@return nil
 function SetCameraPositionForPlayer(whichPlayer, x, y)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1455,7 +1435,6 @@ end
 
 ---@param whichPlayer player
 ---@param loc location
----@return nil
 function SetCameraPositionLocForPlayer(whichPlayer, loc)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1468,7 +1447,6 @@ end
 ---@param loc location
 ---@param whichPlayer player
 ---@param duration real
----@return nil
 function RotateCameraAroundLocBJ(degrees, loc, whichPlayer, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1480,7 +1458,6 @@ end
 ---@param whichPlayer player
 ---@param x real
 ---@param y real
----@return nil
 function PanCameraToForPlayer(whichPlayer, x, y)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1491,7 +1468,6 @@ end
 
 ---@param whichPlayer player
 ---@param loc location
----@return nil
 function PanCameraToLocForPlayer(whichPlayer, loc)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1504,7 +1480,6 @@ end
 ---@param x real
 ---@param y real
 ---@param duration real
----@return nil
 function PanCameraToTimedForPlayer(whichPlayer, x, y, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1516,7 +1491,6 @@ end
 ---@param whichPlayer player
 ---@param loc location
 ---@param duration real
----@return nil
 function PanCameraToTimedLocForPlayer(whichPlayer, loc, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1529,7 +1503,6 @@ end
 ---@param loc location
 ---@param zOffset real
 ---@param duration real
----@return nil
 function PanCameraToTimedLocWithZForPlayer(whichPlayer, loc, zOffset, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1541,7 +1514,6 @@ end
 ---@param whichPlayer player
 ---@param loc location
 ---@param duration real
----@return nil
 function SmartCameraPanBJ(whichPlayer, loc, duration)
 	local dist
 	local cameraLoc = GetCameraTargetPositionLoc()
@@ -1565,7 +1537,6 @@ end
 
 ---@param whichPlayer player
 ---@param cameraModelFile string
----@return nil
 function SetCinematicCameraForPlayer(whichPlayer, cameraModelFile)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1576,7 +1547,6 @@ end
 
 ---@param whichPlayer player
 ---@param duration real
----@return nil
 function ResetToGameCameraForPlayer(whichPlayer, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1588,7 +1558,6 @@ end
 ---@param whichPlayer player
 ---@param magnitude real
 ---@param velocity real
----@return nil
 function CameraSetSourceNoiseForPlayer(whichPlayer, magnitude, velocity)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1600,7 +1569,6 @@ end
 ---@param whichPlayer player
 ---@param magnitude real
 ---@param velocity real
----@return nil
 function CameraSetTargetNoiseForPlayer(whichPlayer, magnitude, velocity)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1611,7 +1579,6 @@ end
 
 ---@param whichPlayer player
 ---@param magnitude real
----@return nil
 function CameraSetEQNoiseForPlayer(whichPlayer, magnitude)
 	local richter = magnitude
 	if (richter > 5.0) then
@@ -1629,7 +1596,6 @@ end
 -- ===========================================================================
 
 ---@param whichPlayer player
----@return nil
 function CameraClearNoiseForPlayer(whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1668,7 +1634,6 @@ end
 -- ===========================================================================
 
 ---@param r rect
----@return nil
 function SetCameraBoundsToRect(r)
 	local minX = GetRectMinX(r)
 	local minY = GetRectMinY(r)
@@ -1680,7 +1645,6 @@ end
 
 ---@param whichPlayer player
 ---@param r rect
----@return nil
 function SetCameraBoundsToRectForPlayerBJ(whichPlayer, r)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1694,7 +1658,6 @@ end
 ---@param dxEast real
 ---@param dyNorth real
 ---@param dySouth real
----@return nil
 function AdjustCameraBoundsBJ(adjustMethod, dxWest, dxEast, dyNorth, dySouth)
 	local minX  = 0
 	local minY  = 0
@@ -1738,7 +1701,6 @@ end
 ---@param dxEast real
 ---@param dyNorth real
 ---@param dySouth real
----@return nil
 function AdjustCameraBoundsForPlayerBJ(adjustMethod, whichPlayer, dxWest, dxEast, dyNorth, dySouth)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1750,7 +1712,6 @@ end
 ---@param whichPlayer player
 ---@param x real
 ---@param y real
----@return nil
 function SetCameraQuickPositionForPlayer(whichPlayer, x, y)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1761,7 +1722,6 @@ end
 
 ---@param whichPlayer player
 ---@param loc location
----@return nil
 function SetCameraQuickPositionLocForPlayer(whichPlayer, loc)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1771,14 +1731,12 @@ end
 -- ===========================================================================
 
 ---@param loc location
----@return nil
 function SetCameraQuickPositionLoc(loc)
 	SetCameraQuickPosition(GetLocationX(loc), GetLocationY(loc))
 end
 -- ===========================================================================
 
 ---@param whichPlayer player
----@return nil
 function StopCameraForPlayerBJ(whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1791,7 +1749,6 @@ end
 ---@param whichUnit unit
 ---@param xoffset real
 ---@param yoffset real
----@return nil
 function SetCameraOrientControllerForPlayerBJ(whichPlayer, whichUnit, xoffset, yoffset)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1801,12 +1758,10 @@ end
 -- ===========================================================================
 
 ---@param factor real
----@return nil
 function CameraSetSmoothingFactorBJ(factor)
 	CameraSetSmoothingFactor(factor)
 end
 -- ===========================================================================
----@return nil
 function CameraResetSmoothingFactorBJ()
 	CameraSetSmoothingFactor(0)
 end
@@ -1819,7 +1774,6 @@ end
 
 ---@param toForce force
 ---@param message string
----@return nil
 function DisplayTextToForce(toForce, message)
 	if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1831,7 +1785,6 @@ end
 ---@param toForce force
 ---@param duration real
 ---@param message string
----@return nil
 function DisplayTimedTextToForce(toForce, duration, message)
 	if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1841,7 +1794,6 @@ end
 -- ===========================================================================
 
 ---@param toForce force
----@return nil
 function ClearTextMessagesBJ(toForce)
 	if (IsPlayerInForce(GetLocalPlayer(), toForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -1914,7 +1866,6 @@ end
 
 ---@param trig trigger
 ---@param whichEvent playerunitevent
----@return nil
 function TriggerRegisterAnyUnitEventBJ(trig, whichEvent)
 	local index
 	
@@ -2199,7 +2150,6 @@ function TriggerRegisterGameSavedEventBJ(trig)
 	return TriggerRegisterGameEvent(trig, EVENT_GAME_SAVE)
 end
 -- ===========================================================================
----@return nil
 function RegisterDestDeathInRegionEnum()
 	bj_destInRegionDiesCount = bj_destInRegionDiesCount + 1
 	if (bj_destInRegionDiesCount <= bj_MAX_DEST_IN_REGION_EVENTS) then
@@ -2210,7 +2160,6 @@ end
 
 ---@param trig trigger
 ---@param r rect
----@return nil
 function TriggerRegisterDestDeathInRegionEvent(trig, r)
 	bj_destInRegionDiesTrig  = trig
 	bj_destInRegionDiesCount = 0
@@ -2238,7 +2187,6 @@ end
 -- ===========================================================================
 
 ---@param whichWeatherEffect weathereffect
----@return nil
 function RemoveWeatherEffectBJ(whichWeatherEffect)
 	RemoveWeatherEffect(whichWeatherEffect)
 end
@@ -2325,7 +2273,6 @@ end
 
 ---@param deformation terraindeformation
 ---@param duration real
----@return nil
 function TerrainDeformationStopBJ(deformation, duration)
 	TerrainDeformStop(deformation, R2I(duration * 1000))
 end
@@ -2449,7 +2396,6 @@ end
 ---@param variation integer
 ---@param area integer
 ---@param shape integer
----@return nil
 function SetTerrainTypeBJ(where, terrainType, variation, area, shape)
 	SetTerrainType(GetLocationX(where), GetLocationY(where), terrainType, variation, area, shape)
 end
@@ -2466,7 +2412,6 @@ end
 ---@param where location
 ---@param t pathingtype
 ---@param flag boolean
----@return nil
 function SetTerrainPathableBJ(where, t, flag)
 	SetTerrainPathable(GetLocationX(where), GetLocationY(where), t, flag)
 end
@@ -2476,7 +2421,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function SetWaterBaseColorBJ(red, green, blue, transparency)
 	SetWaterBaseColor(PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -2546,29 +2490,24 @@ function GetLastCreatedFogModifier()
 	return bj_lastCreatedFogModifier
 end
 -- ===========================================================================
----@return nil
 function FogEnableOn()
 	FogEnable(true)
 end
 -- ===========================================================================
----@return nil
 function FogEnableOff()
 	FogEnable(false)
 end
 -- ===========================================================================
----@return nil
 function FogMaskEnableOn()
 	FogMaskEnable(true)
 end
 -- ===========================================================================
----@return nil
 function FogMaskEnableOff()
 	FogMaskEnable(false)
 end
 -- ===========================================================================
 
 ---@param flag boolean
----@return nil
 function UseTimeOfDayBJ(flag)
 	SuspendTimeOfDay(not flag)
 end
@@ -2581,12 +2520,10 @@ end
 ---@param red real
 ---@param green real
 ---@param blue real
----@return nil
 function SetTerrainFogExBJ(style, zstart, zend, density, red, green, blue)
 	SetTerrainFogEx(style, zstart, zend, density, red * 0.01, green * 0.01, blue * 0.01)
 end
 -- ===========================================================================
----@return nil
 function ResetTerrainFogBJ()
 	ResetTerrainFog()
 end
@@ -2596,7 +2533,6 @@ end
 ---@param doodadID integer
 ---@param radius real
 ---@param center location
----@return nil
 function SetDoodadAnimationBJ(animName, doodadID, radius, center)
 	SetDoodadAnimation(GetLocationX(center), GetLocationY(center), radius, doodadID, false, animName, false)
 end
@@ -2605,7 +2541,6 @@ end
 ---@param animName string
 ---@param doodadID integer
 ---@param r rect
----@return nil
 function SetDoodadAnimationRectBJ(animName, doodadID, r)
 	SetDoodadAnimationRect(r, doodadID, animName, false)
 end
@@ -2614,7 +2549,6 @@ end
 ---@param add boolean
 ---@param animProperties string
 ---@param whichUnit unit
----@return nil
 function AddUnitAnimationPropertiesBJ(add, animProperties, whichUnit)
 	AddUnitAnimationProperties(whichUnit, animProperties, add)
 end
@@ -2634,7 +2568,6 @@ end
 
 ---@param flag boolean
 ---@param whichImage image
----@return nil
 function ShowImageBJ(flag, whichImage)
 	ShowImage(whichImage, flag)
 end
@@ -2643,7 +2576,6 @@ end
 ---@param whichImage image
 ---@param where location
 ---@param zOffset real
----@return nil
 function SetImagePositionBJ(whichImage, where, zOffset)
 	SetImagePosition(whichImage, GetLocationX(where), GetLocationY(where), zOffset)
 end
@@ -2654,7 +2586,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param alpha real
----@return nil
 function SetImageColorBJ(whichImage, red, green, blue, alpha)
 	SetImageColor(whichImage, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - alpha))
 end
@@ -2682,7 +2613,6 @@ end
 
 ---@param flag boolean
 ---@param whichSplat ubersplat
----@return nil
 function ShowUbersplatBJ(flag, whichSplat)
 	ShowUbersplat(whichSplat, flag)
 end
@@ -2740,7 +2670,6 @@ end
 
 ---@param whichUnit unit
 ---@param style integer
----@return nil
 function CampaignMinimapIconUnitBJ(whichUnit, style)
 	local red
 	local green
@@ -2808,7 +2737,6 @@ end
 
 ---@param where location
 ---@param style integer
----@return nil
 function CampaignMinimapIconLocBJ(where, style)
 	local red
 	local green
@@ -2879,7 +2807,6 @@ end
 -- ===========================================================================
 
 ---@param soundHandle sound
----@return nil
 function PlaySoundBJ(soundHandle)
 	bj_lastPlayedSound = soundHandle
 	if (soundHandle ~= nil) then
@@ -2890,7 +2817,6 @@ end
 
 ---@param soundHandle sound
 ---@param fadeOut boolean
----@return nil
 function StopSoundBJ(soundHandle, fadeOut)
 	StopSound(soundHandle, false, fadeOut)
 end
@@ -2898,7 +2824,6 @@ end
 
 ---@param soundHandle sound
 ---@param volumePercent real
----@return nil
 function SetSoundVolumeBJ(soundHandle, volumePercent)
 	SetSoundVolume(soundHandle, PercentToInt(volumePercent, 127))
 end
@@ -2906,7 +2831,6 @@ end
 
 ---@param newOffset real
 ---@param soundHandle sound
----@return nil
 function SetSoundOffsetBJ(newOffset, soundHandle)
 	SetSoundPlayPosition(soundHandle, R2I(newOffset * 1000))
 end
@@ -2914,7 +2838,6 @@ end
 
 ---@param soundHandle sound
 ---@param cutoff real
----@return nil
 function SetSoundDistanceCutoffBJ(soundHandle, cutoff)
 	SetSoundDistanceCutoff(soundHandle, cutoff)
 end
@@ -2922,7 +2845,6 @@ end
 
 ---@param soundHandle sound
 ---@param pitch real
----@return nil
 function SetSoundPitchBJ(soundHandle, pitch)
 	SetSoundPitch(soundHandle, pitch)
 end
@@ -2931,7 +2853,6 @@ end
 ---@param soundHandle sound
 ---@param loc location
 ---@param z real
----@return nil
 function SetSoundPositionLocBJ(soundHandle, loc, z)
 	SetSoundPosition(soundHandle, GetLocationX(loc), GetLocationY(loc), z)
 end
@@ -2939,7 +2860,6 @@ end
 
 ---@param soundHandle sound
 ---@param whichUnit unit
----@return nil
 function AttachSoundToUnitBJ(soundHandle, whichUnit)
 	AttachSoundToUnit(soundHandle, whichUnit)
 end
@@ -2949,14 +2869,12 @@ end
 ---@param inside real
 ---@param outside real
 ---@param outsideVolumePercent real
----@return nil
 function SetSoundConeAnglesBJ(soundHandle, inside, outside, outsideVolumePercent)
 	SetSoundConeAngles(soundHandle, inside, outside, PercentToInt(outsideVolumePercent, 127))
 end
 -- ===========================================================================
 
 ---@param soundHandle sound
----@return nil
 function KillSoundWhenDoneBJ(soundHandle)
 	KillSoundWhenDone(soundHandle)
 end
@@ -2966,7 +2884,6 @@ end
 ---@param volumePercent real
 ---@param loc location
 ---@param z real
----@return nil
 function PlaySoundAtPointBJ(soundHandle, volumePercent, loc, z)
 	SetSoundPositionLocBJ(soundHandle, loc, z)
 	SetSoundVolumeBJ(soundHandle, volumePercent)
@@ -2977,7 +2894,6 @@ end
 ---@param soundHandle sound
 ---@param volumePercent real
 ---@param whichUnit unit
----@return nil
 function PlaySoundOnUnitBJ(soundHandle, volumePercent, whichUnit)
 	AttachSoundToUnitBJ(soundHandle, whichUnit)
 	SetSoundVolumeBJ(soundHandle, volumePercent)
@@ -2988,7 +2904,6 @@ end
 ---@param soundHandle sound
 ---@param volumePercent real
 ---@param startingOffset real
----@return nil
 function PlaySoundFromOffsetBJ(soundHandle, volumePercent, startingOffset)
 	SetSoundVolumeBJ(soundHandle, volumePercent)
 	PlaySoundBJ(soundHandle)
@@ -2997,7 +2912,6 @@ end
 -- ===========================================================================
 
 ---@param musicFileName string
----@return nil
 function PlayMusicBJ(musicFileName)
 	bj_lastPlayedMusic = musicFileName
 	PlayMusic(musicFileName)
@@ -3007,7 +2921,6 @@ end
 ---@param musicFileName string
 ---@param startingOffset real
 ---@param fadeInTime real
----@return nil
 function PlayMusicExBJ(musicFileName, startingOffset, fadeInTime)
 	bj_lastPlayedMusic = musicFileName
 	PlayMusicEx(musicFileName, R2I(startingOffset * 1000), R2I(fadeInTime * 1000))
@@ -3015,14 +2928,12 @@ end
 -- ===========================================================================
 
 ---@param newOffset real
----@return nil
 function SetMusicOffsetBJ(newOffset)
 	SetMusicPlayPosition(R2I(newOffset * 1000))
 end
 -- ===========================================================================
 
 ---@param musicName string
----@return nil
 function PlayThematicMusicBJ(musicName)
 	PlayThematicMusic(musicName)
 end
@@ -3030,38 +2941,32 @@ end
 
 ---@param musicName string
 ---@param startingOffset real
----@return nil
 function PlayThematicMusicExBJ(musicName, startingOffset)
 	PlayThematicMusicEx(musicName, R2I(startingOffset * 1000))
 end
 -- ===========================================================================
 
 ---@param newOffset real
----@return nil
 function SetThematicMusicOffsetBJ(newOffset)
 	SetThematicMusicPlayPosition(R2I(newOffset * 1000))
 end
 -- ===========================================================================
----@return nil
 function EndThematicMusicBJ()
 	EndThematicMusic()
 end
 -- ===========================================================================
 
 ---@param fadeOut boolean
----@return nil
 function StopMusicBJ(fadeOut)
 	StopMusic(fadeOut)
 end
 -- ===========================================================================
----@return nil
 function ResumeMusicBJ()
 	ResumeMusic()
 end
 -- ===========================================================================
 
 ---@param volumePercent real
----@return nil
 function SetMusicVolumeBJ(volumePercent)
 	SetMusicVolume(PercentToInt(volumePercent, 127))
 end
@@ -3097,12 +3002,10 @@ end
 
 ---@param vgroup volumegroup
 ---@param percent real
----@return nil
 function VolumeGroupSetVolumeBJ(vgroup, percent)
 	VolumeGroupSetVolume(vgroup, percent * 0.01)
 end
 -- ===========================================================================
----@return nil
 function SetCineModeVolumeGroupsImmediateBJ()
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITMOVEMENT, bj_CINEMODE_VOLUME_UNITMOVEMENT)
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITSOUNDS, bj_CINEMODE_VOLUME_UNITSOUNDS)
@@ -3114,7 +3017,6 @@ function SetCineModeVolumeGroupsImmediateBJ()
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_FIRE, bj_CINEMODE_VOLUME_FIRE)
 end
 -- ===========================================================================
----@return nil
 function SetCineModeVolumeGroupsBJ()
 	--  Delay the request if it occurs at map init.
 	if bj_gameStarted then
@@ -3124,7 +3026,6 @@ function SetCineModeVolumeGroupsBJ()
 	end
 end
 -- ===========================================================================
----@return nil
 function SetSpeechVolumeGroupsImmediateBJ()
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITMOVEMENT, bj_SPEECH_VOLUME_UNITMOVEMENT)
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_UNITSOUNDS, bj_SPEECH_VOLUME_UNITSOUNDS)
@@ -3136,7 +3037,6 @@ function SetSpeechVolumeGroupsImmediateBJ()
 	VolumeGroupSetVolume(SOUND_VOLUMEGROUP_FIRE, bj_SPEECH_VOLUME_FIRE)
 end
 -- ===========================================================================
----@return nil
 function SetSpeechVolumeGroupsBJ()
 	--  Delay the request if it occurs at map init.
 	if bj_gameStarted then
@@ -3146,12 +3046,10 @@ function SetSpeechVolumeGroupsBJ()
 	end
 end
 -- ===========================================================================
----@return nil
 function VolumeGroupResetImmediateBJ()
 	VolumeGroupReset()
 end
 -- ===========================================================================
----@return nil
 function VolumeGroupResetBJ()
 	--  Delay the request if it occurs at map init.
 	if bj_gameStarted then
@@ -3171,7 +3069,6 @@ end
 
 ---@param soundHandle sound
 ---@param offset real
----@return nil
 function WaitForSoundBJ(soundHandle, offset)
 	TriggerWaitForSound(soundHandle, offset)
 end
@@ -3179,19 +3076,16 @@ end
 
 ---@param musicName string
 ---@param index integer
----@return nil
 function SetMapMusicIndexedBJ(musicName, index)
 	SetMapMusic(musicName, false, index)
 end
 -- ===========================================================================
 
 ---@param musicName string
----@return nil
 function SetMapMusicRandomBJ(musicName)
 	SetMapMusic(musicName, true, 0)
 end
 -- ===========================================================================
----@return nil
 function ClearMapMusicBJ()
 	ClearMapMusic()
 end
@@ -3200,7 +3094,6 @@ end
 ---@param add boolean
 ---@param soundHandle sound
 ---@param r rect
----@return nil
 function SetStackedSoundBJ(add, soundHandle, r)
 	local width  = GetRectMaxX(r) - GetRectMinX(r)
 	local height = GetRectMaxY(r) - GetRectMinY(r)
@@ -3216,7 +3109,6 @@ end
 
 ---@param whichPlayer player
 ---@param soundHandle sound
----@return nil
 function StartSoundForPlayerBJ(whichPlayer, soundHandle)
 	if (whichPlayer == GetLocalPlayer()) then
 		StartSound(soundHandle)
@@ -3227,7 +3119,6 @@ end
 ---@param whichPlayer player
 ---@param vgroup volumegroup
 ---@param scale real
----@return nil
 function VolumeGroupSetVolumeForPlayerBJ(whichPlayer, vgroup, scale)
 	if (GetLocalPlayer() == whichPlayer) then
 		VolumeGroupSetVolume(vgroup, scale)
@@ -3236,7 +3127,6 @@ end
 -- ===========================================================================
 
 ---@param flag boolean
----@return nil
 function EnableDawnDusk(flag)
 	bj_useDawnDuskSounds = flag
 end
@@ -3253,7 +3143,6 @@ end
 -- ===========================================================================
 
 ---@param inLabel string
----@return nil
 function SetAmbientDaySound(inLabel)
 	local ToD
 	
@@ -3274,7 +3163,6 @@ end
 -- ===========================================================================
 
 ---@param inLabel string
----@return nil
 function SetAmbientNightSound(inLabel)
 	local ToD
 	
@@ -3337,7 +3225,6 @@ end
 -- ===========================================================================
 
 ---@param whichEffect effect
----@return nil
 function DestroyEffectBJ(whichEffect)
 	DestroyEffect(whichEffect)
 end
@@ -3441,7 +3328,6 @@ end
 
 ---@param whichWidget widget
 ---@param life real
----@return nil
 function SetItemLifeBJ(whichWidget, life)
 	SetWidgetLife(whichWidget, life)
 end
@@ -3450,7 +3336,6 @@ end
 ---@param xpToAdd integer
 ---@param whichHero unit
 ---@param showEyeCandy boolean
----@return nil
 function AddHeroXPSwapped(xpToAdd, whichHero, showEyeCandy)
 	AddHeroXP(whichHero, xpToAdd, showEyeCandy)
 end
@@ -3459,7 +3344,6 @@ end
 ---@param whichHero unit
 ---@param newLevel integer
 ---@param showEyeCandy boolean
----@return nil
 function SetHeroLevelBJ(whichHero, newLevel, showEyeCandy)
 	local oldLevel = GetHeroLevel(whichHero)
 	
@@ -3545,7 +3429,6 @@ end
 
 ---@param whichItem item
 ---@param whichHero unit
----@return nil
 function UnitRemoveItemSwapped(whichItem, whichHero)
 	bj_lastRemovedItem = whichItem
 	UnitRemoveItem(whichHero, whichItem)
@@ -3584,7 +3467,6 @@ end
 
 ---@param whichItem item
 ---@param loc location
----@return nil
 function SetItemPositionLoc(whichItem, loc)
 	SetItemPosition(whichItem, GetLocationX(loc), GetLocationY(loc))
 end
@@ -3597,7 +3479,6 @@ end
 
 ---@param flag boolean
 ---@param whichHero unit
----@return nil
 function SuspendHeroXPBJ(flag, whichHero)
 	SuspendHeroXP(whichHero, not flag)
 end
@@ -3605,7 +3486,6 @@ end
 
 ---@param whichPlayer player
 ---@param handicapPercent real
----@return nil
 function SetPlayerHandicapDamageBJ(whichPlayer, handicapPercent)
 	SetPlayerHandicapDamage(whichPlayer, handicapPercent * 0.01)
 end
@@ -3620,7 +3500,6 @@ end
 
 ---@param whichPlayer player
 ---@param handicapPercent real
----@return nil
 function SetPlayerHandicapReviveTimeBJ(whichPlayer, handicapPercent)
 	SetPlayerHandicapReviveTime(whichPlayer, handicapPercent * 0.01)
 end
@@ -3635,7 +3514,6 @@ end
 
 ---@param whichPlayer player
 ---@param handicapPercent real
----@return nil
 function SetPlayerHandicapXPBJ(whichPlayer, handicapPercent)
 	SetPlayerHandicapXP(whichPlayer, handicapPercent * 0.01)
 end
@@ -3650,7 +3528,6 @@ end
 
 ---@param whichPlayer player
 ---@param handicapPercent real
----@return nil
 function SetPlayerHandicapBJ(whichPlayer, handicapPercent)
 	SetPlayerHandicap(whichPlayer, handicapPercent * 0.01)
 end
@@ -3684,7 +3561,6 @@ end
 ---@param whichHero unit
 ---@param whichStat integer
 ---@param value integer
----@return nil
 function SetHeroStat(whichHero, whichStat, value)
 	--  Ignore requests for negative hero stats.
 	if (value <= 0) then
@@ -3707,7 +3583,6 @@ end
 ---@param whichHero unit
 ---@param modifyMethod integer
 ---@param value integer
----@return nil
 function ModifyHeroStat(whichStat, whichHero, modifyMethod, value)
 	if (modifyMethod == bj_MODIFYMETHOD_ADD) then
 		SetHeroStat(whichHero, whichStat, GetHeroStatBJ(whichStat, whichHero, false) + value)
@@ -3880,7 +3755,6 @@ end
 
 ---@param whichItem item
 ---@param flag boolean
----@return nil
 function SetItemInvulnerableBJ(whichItem, flag)
 	SetItemInvulnerable(whichItem, flag)
 end
@@ -3888,7 +3762,6 @@ end
 
 ---@param whichItem item
 ---@param flag boolean
----@return nil
 function SetItemDropOnDeathBJ(whichItem, flag)
 	SetItemDropOnDeath(whichItem, flag)
 end
@@ -3896,7 +3769,6 @@ end
 
 ---@param whichItem item
 ---@param flag boolean
----@return nil
 function SetItemDroppableBJ(whichItem, flag)
 	SetItemDroppable(whichItem, flag)
 end
@@ -3905,7 +3777,6 @@ end
 ---@param whichItem item
 ---@param whichPlayer player
 ---@param changeColor boolean
----@return nil
 function SetItemPlayerBJ(whichItem, whichPlayer, changeColor)
 	SetItemPlayer(whichItem, whichPlayer, changeColor)
 end
@@ -3913,7 +3784,6 @@ end
 
 ---@param show boolean
 ---@param whichItem item
----@return nil
 function SetItemVisibleBJ(show, whichItem)
 	SetItemVisible(whichItem, show)
 end
@@ -3955,14 +3825,12 @@ end
 
 ---@param r rect
 ---@param actionFunc code
----@return nil
 function EnumItemsInRectBJ(r, actionFunc)
 	EnumItemsInRect(r, nil, actionFunc)
 end
 -- ===========================================================================
 --  See GroupPickRandomUnitEnum for the details of this algorithm.
 -- 
----@return nil
 function RandomItemInRectBJEnum()
 	bj_itemRandomConsidered = bj_itemRandomConsidered + 1
 	if (GetRandomInt(1, bj_itemRandomConsidered) == 1) then
@@ -4170,7 +4038,6 @@ function CreateNUnitsAtLocFacingLocBJ(count, unitId, whichPlayer, loc, lookAt)
 	return CreateNUnitsAtLoc(count, unitId, whichPlayer, loc, AngleBetweenPoints(loc, lookAt))
 end
 -- ===========================================================================
----@return nil
 function GetLastCreatedGroupEnum()
 	GroupAddUnit(bj_groupLastCreatedDest, GetEnumUnit())
 end
@@ -4195,12 +4062,10 @@ end
 
 ---@param suspend boolean
 ---@param whichUnit unit
----@return nil
 function UnitSuspendDecayBJ(suspend, whichUnit)
 	UnitSuspendDecay(whichUnit, suspend)
 end
 -- ===========================================================================
----@return nil
 function DelayedSuspendDecayStopAnimEnum()
 	local enumUnit = GetEnumUnit()
 	
@@ -4209,7 +4074,6 @@ function DelayedSuspendDecayStopAnimEnum()
 	end
 end
 -- ===========================================================================
----@return nil
 function DelayedSuspendDecayBoneEnum()
 	local enumUnit = GetEnumUnit()
 	
@@ -4223,7 +4087,6 @@ end
 --  initial corpse fades away, so we reset it now.  It's best not to show
 --  off corpses thus created until after this grace period has passed.
 -- 
----@return nil
 function DelayedSuspendDecayFleshEnum()
 	local enumUnit = GetEnumUnit()
 	
@@ -4237,7 +4100,6 @@ end
 --  Waits a short period of time to ensure that the corpse is decaying, and
 --  then suspend the animation and corpse decay.
 -- 
----@return nil
 function DelayedSuspendDecay()
 	local boneGroup
 	local fleshGroup
@@ -4264,7 +4126,6 @@ function DelayedSuspendDecay()
 	DestroyGroup(fleshGroup)
 end
 -- ===========================================================================
----@return nil
 function DelayedSuspendDecayCreate()
 	bj_delayedSuspendDecayTrig = CreateTrigger()
 	TriggerRegisterTimerExpireEvent(bj_delayedSuspendDecayTrig, bj_delayedSuspendDecayTimer)
@@ -4339,20 +4200,17 @@ end
 -- ===========================================================================
 
 ---@param whichUnit unit
----@return nil
 function SelectUnitSingle(whichUnit)
 	ClearSelection()
 	SelectUnit(whichUnit, true)
 end
 -- ===========================================================================
----@return nil
 function SelectGroupBJEnum()
 	SelectUnit(GetEnumUnit(), true)
 end
 -- ===========================================================================
 
 ---@param g group
----@return nil
 function SelectGroupBJ(g)
 	ClearSelection()
 	ForGroup(g, SelectGroupBJEnum)
@@ -4360,21 +4218,18 @@ end
 -- ===========================================================================
 
 ---@param whichUnit unit
----@return nil
 function SelectUnitAdd(whichUnit)
 	SelectUnit(whichUnit, true)
 end
 -- ===========================================================================
 
 ---@param whichUnit unit
----@return nil
 function SelectUnitRemove(whichUnit)
 	SelectUnit(whichUnit, false)
 end
 -- ===========================================================================
 
 ---@param whichPlayer player
----@return nil
 function ClearSelectionForPlayer(whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4385,7 +4240,6 @@ end
 
 ---@param whichUnit unit
 ---@param whichPlayer player
----@return nil
 function SelectUnitForPlayerSingle(whichUnit, whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4397,7 +4251,6 @@ end
 
 ---@param g group
 ---@param whichPlayer player
----@return nil
 function SelectGroupForPlayerBJ(g, whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4409,7 +4262,6 @@ end
 
 ---@param whichUnit unit
 ---@param whichPlayer player
----@return nil
 function SelectUnitAddForPlayer(whichUnit, whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4420,7 +4272,6 @@ end
 
 ---@param whichUnit unit
 ---@param whichPlayer player
----@return nil
 function SelectUnitRemoveForPlayer(whichUnit, whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -4431,7 +4282,6 @@ end
 
 ---@param whichUnit unit
 ---@param newValue real
----@return nil
 function SetUnitLifeBJ(whichUnit, newValue)
 	SetUnitState(whichUnit, UNIT_STATE_LIFE, RMaxBJ(0, newValue))
 end
@@ -4439,7 +4289,6 @@ end
 
 ---@param whichUnit unit
 ---@param newValue real
----@return nil
 function SetUnitManaBJ(whichUnit, newValue)
 	SetUnitState(whichUnit, UNIT_STATE_MANA, RMaxBJ(0, newValue))
 end
@@ -4447,7 +4296,6 @@ end
 
 ---@param whichUnit unit
 ---@param percent real
----@return nil
 function SetUnitLifePercentBJ(whichUnit, percent)
 	SetUnitState(whichUnit, UNIT_STATE_LIFE, GetUnitState(whichUnit, UNIT_STATE_MAX_LIFE) * RMaxBJ(0, percent) * 0.01)
 end
@@ -4455,7 +4303,6 @@ end
 
 ---@param whichUnit unit
 ---@param percent real
----@return nil
 function SetUnitManaPercentBJ(whichUnit, percent)
 	SetUnitState(whichUnit, UNIT_STATE_MANA, GetUnitState(whichUnit, UNIT_STATE_MAX_MANA) * RMaxBJ(0, percent) * 0.01)
 end
@@ -4474,7 +4321,6 @@ function IsUnitAliveBJ(whichUnit)
 	return not IsUnitDeadBJ(whichUnit)
 end
 -- ===========================================================================
----@return nil
 function IsUnitGroupDeadBJEnum()
 	if not IsUnitDeadBJ(GetEnumUnit()) then
 		bj_isUnitGroupDeadResult = false
@@ -4502,7 +4348,6 @@ function IsUnitGroupDeadBJ(g)
 	return bj_isUnitGroupDeadResult
 end
 -- ===========================================================================
----@return nil
 function IsUnitGroupEmptyBJEnum()
 	bj_isUnitGroupEmptyResult = false
 end
@@ -4528,7 +4373,6 @@ function IsUnitGroupEmptyBJ(g)
 	return bj_isUnitGroupEmptyResult
 end
 -- ===========================================================================
----@return nil
 function IsUnitGroupInRectBJEnum()
 	if not RectContainsUnit(bj_isUnitGroupInRectRect, GetEnumUnit()) then
 		bj_isUnitGroupInRectResult = false
@@ -4557,14 +4401,12 @@ end
 -- ===========================================================================
 
 ---@param whichUnit unit
----@return nil
 function ShowUnitHide(whichUnit)
 	ShowUnit(whichUnit, false)
 end
 -- ===========================================================================
 
 ---@param whichUnit unit
----@return nil
 function ShowUnitShow(whichUnit)
 	--  Prevent dead heroes from being unhidden.
 	if (IsUnitType(whichUnit, UNIT_TYPE_HERO) and IsUnitDeadBJ(whichUnit)) then
@@ -4648,7 +4490,6 @@ end
 ---@param whichUnit unit
 ---@param newHeight real
 ---@param rate real
----@return nil
 function SetUnitFlyHeightBJ(whichUnit, newHeight, rate)
 	SetUnitFlyHeight(whichUnit, newHeight, rate)
 end
@@ -4656,7 +4497,6 @@ end
 
 ---@param whichUnit unit
 ---@param turnSpeed real
----@return nil
 function SetUnitTurnSpeedBJ(whichUnit, turnSpeed)
 	SetUnitTurnSpeed(whichUnit, turnSpeed)
 end
@@ -4664,7 +4504,6 @@ end
 
 ---@param whichUnit unit
 ---@param propWindow real
----@return nil
 function SetUnitPropWindowBJ(whichUnit, propWindow)
 	local angle = propWindow
 	if (angle <= 0) then
@@ -4694,7 +4533,6 @@ end
 
 ---@param whichUnit unit
 ---@param blendTime real
----@return nil
 function SetUnitBlendTimeBJ(whichUnit, blendTime)
 	SetUnitBlendTime(whichUnit, blendTime)
 end
@@ -4702,7 +4540,6 @@ end
 
 ---@param whichUnit unit
 ---@param acquireRange real
----@return nil
 function SetUnitAcquireRangeBJ(whichUnit, acquireRange)
 	SetUnitAcquireRange(whichUnit, acquireRange)
 end
@@ -4710,7 +4547,6 @@ end
 
 ---@param whichUnit unit
 ---@param canSleep boolean
----@return nil
 function UnitSetCanSleepBJ(whichUnit, canSleep)
 	UnitAddSleep(whichUnit, canSleep)
 end
@@ -4724,7 +4560,6 @@ end
 -- ===========================================================================
 
 ---@param whichUnit unit
----@return nil
 function UnitWakeUpBJ(whichUnit)
 	UnitWakeUp(whichUnit)
 end
@@ -4736,14 +4571,12 @@ function UnitIsSleepingBJ(whichUnit)
 	return UnitIsSleeping(whichUnit)
 end
 -- ===========================================================================
----@return nil
 function WakePlayerUnitsEnum()
 	UnitWakeUp(GetEnumUnit())
 end
 -- ===========================================================================
 
 ---@param whichPlayer player
----@return nil
 function WakePlayerUnits(whichPlayer)
 	local g = CreateGroup()
 	GroupEnumUnitsOfPlayer(g, whichPlayer, nil)
@@ -4753,7 +4586,6 @@ end
 -- ===========================================================================
 
 ---@param enable boolean
----@return nil
 function EnableCreepSleepBJ(enable)
 	SetPlayerState(Player(PLAYER_NEUTRAL_AGGRESSIVE), PLAYER_STATE_NO_CREEP_SLEEP, IntegerTertiaryOp(enable, 0, 1))
 	
@@ -4778,7 +4610,6 @@ function DoesUnitGenerateAlarms(whichUnit)
 	return not UnitIgnoreAlarmToggled(whichUnit)
 end
 -- ===========================================================================
----@return nil
 function PauseAllUnitsBJEnum()
 	PauseUnit(GetEnumUnit(), bj_pauseAllUnitsFlag)
 end
@@ -4786,7 +4617,6 @@ end
 --  Pause all units 
 
 ---@param pause boolean
----@return nil
 function PauseAllUnitsBJ(pause)
 	local index
 	local indexPlayer
@@ -4817,7 +4647,6 @@ end
 
 ---@param pause boolean
 ---@param whichUnit unit
----@return nil
 function PauseUnitBJ(pause, whichUnit)
 	PauseUnit(whichUnit, pause)
 end
@@ -4832,7 +4661,6 @@ end
 
 ---@param flag boolean
 ---@param whichUnit unit
----@return nil
 function UnitPauseTimedLifeBJ(flag, whichUnit)
 	UnitPauseTimedLife(whichUnit, flag)
 end
@@ -4841,7 +4669,6 @@ end
 ---@param duration real
 ---@param buffId integer
 ---@param whichUnit unit
----@return nil
 function UnitApplyTimedLifeBJ(duration, buffId, whichUnit)
 	UnitApplyTimedLife(whichUnit, buffId, duration)
 end
@@ -4850,7 +4677,6 @@ end
 ---@param share boolean
 ---@param whichUnit unit
 ---@param whichPlayer player
----@return nil
 function UnitShareVisionBJ(share, whichUnit, whichPlayer)
 	UnitShareVision(whichUnit, whichPlayer, share)
 end
@@ -4858,7 +4684,6 @@ end
 
 ---@param buffType integer
 ---@param whichUnit unit
----@return nil
 function UnitRemoveBuffsBJ(buffType, whichUnit)
 	if (buffType == bj_REMOVEBUFFS_POSITIVE) then
 		UnitRemoveBuffs(whichUnit, true, false)
@@ -4879,7 +4704,6 @@ end
 ---@param whichUnit unit
 ---@param bTLife boolean
 ---@param bAura boolean
----@return nil
 function UnitRemoveBuffsExBJ(polarity, resist, whichUnit, bTLife, bAura)
 	local bPos   = (polarity == bj_BUFF_POLARITY_EITHER) or (polarity == bj_BUFF_POLARITY_POSITIVE)
 	local bNeg   = (polarity == bj_BUFF_POLARITY_EITHER) or (polarity == bj_BUFF_POLARITY_NEGATIVE)
@@ -4949,14 +4773,12 @@ end
 
 ---@param whichUnit unit
 ---@param exploded boolean
----@return nil
 function SetUnitExplodedBJ(whichUnit, exploded)
 	SetUnitExploded(whichUnit, exploded)
 end
 -- ===========================================================================
 
 ---@param whichUnit unit
----@return nil
 function ExplodeUnitBJ(whichUnit)
 	SetUnitExploded(whichUnit, true)
 	KillUnit(whichUnit)
@@ -5100,7 +4922,6 @@ end
 ---@param whichUnit unit
 ---@param loc location
 ---@param facing real
----@return nil
 function SetUnitPositionLocFacingBJ(whichUnit, loc, facing)
 	SetUnitPositionLoc(whichUnit, loc)
 	SetUnitFacing(whichUnit, facing)
@@ -5110,7 +4931,6 @@ end
 ---@param whichUnit unit
 ---@param loc location
 ---@param lookAt location
----@return nil
 function SetUnitPositionLocFacingLocBJ(whichUnit, loc, lookAt)
 	SetUnitPositionLoc(whichUnit, loc)
 	SetUnitFacing(whichUnit, AngleBetweenPoints(loc, lookAt))
@@ -5121,7 +4941,6 @@ end
 ---@param whichUnit unit
 ---@param currentStock integer
 ---@param stockMax integer
----@return nil
 function AddItemToStockBJ(itemId, whichUnit, currentStock, stockMax)
 	AddItemToStock(whichUnit, itemId, currentStock, stockMax)
 end
@@ -5131,7 +4950,6 @@ end
 ---@param whichUnit unit
 ---@param currentStock integer
 ---@param stockMax integer
----@return nil
 function AddUnitToStockBJ(unitId, whichUnit, currentStock, stockMax)
 	AddUnitToStock(whichUnit, unitId, currentStock, stockMax)
 end
@@ -5139,7 +4957,6 @@ end
 
 ---@param itemId integer
 ---@param whichUnit unit
----@return nil
 function RemoveItemFromStockBJ(itemId, whichUnit)
 	RemoveItemFromStock(whichUnit, itemId)
 end
@@ -5147,7 +4964,6 @@ end
 
 ---@param unitId integer
 ---@param whichUnit unit
----@return nil
 function RemoveUnitFromStockBJ(unitId, whichUnit)
 	RemoveUnitFromStock(whichUnit, unitId)
 end
@@ -5155,7 +4971,6 @@ end
 
 ---@param enable boolean
 ---@param whichUnit unit
----@return nil
 function SetUnitUseFoodBJ(enable, whichUnit)
 	SetUnitUseFood(whichUnit, enable)
 end
@@ -5221,7 +5036,6 @@ end
 
 ---@param flag boolean
 ---@param d destructable
----@return nil
 function ShowDestructableBJ(flag, d)
 	ShowDestructable(d, flag)
 end
@@ -5229,7 +5043,6 @@ end
 
 ---@param d destructable
 ---@param flag boolean
----@return nil
 function SetDestructableInvulnerableBJ(d, flag)
 	SetDestructableInvulnerable(d, flag)
 end
@@ -5251,7 +5064,6 @@ end
 
 ---@param r rect
 ---@param actionFunc code
----@return nil
 function EnumDestructablesInRectAll(r, actionFunc)
 	EnumDestructablesInRect(r, nil, actionFunc)
 end
@@ -5282,7 +5094,6 @@ end
 -- ===========================================================================
 --  See GroupPickRandomUnitEnum for the details of this algorithm.
 -- 
----@return nil
 function RandomDestructableInRectBJEnum()
 	bj_destRandomConsidered = bj_destRandomConsidered + 1
 	if (GetRandomInt(1, bj_destRandomConsidered) == 1) then
@@ -5320,7 +5131,6 @@ end
 ---@param radius real
 ---@param loc location
 ---@param actionFunc code
----@return nil
 function EnumDestructablesInCircleBJ(radius, loc, actionFunc)
 	local r
 	
@@ -5336,7 +5146,6 @@ end
 
 ---@param d destructable
 ---@param percent real
----@return nil
 function SetDestructableLifePercentBJ(d, percent)
 	SetDestructableLife(d, GetDestructableMaxLife(d) * percent * 0.01)
 end
@@ -5344,7 +5153,6 @@ end
 
 ---@param d destructable
 ---@param max real
----@return nil
 function SetDestructableMaxLifeBJ(d, max)
 	SetDestructableMaxLife(d, max)
 end
@@ -5352,7 +5160,6 @@ end
 
 ---@param gateOperation integer
 ---@param d destructable
----@return nil
 function ModifyGateBJ(gateOperation, d)
 	if (gateOperation == bj_GATEOPERATION_CLOSE) then
 		if (GetDestructableLife(d) <= 0) then
@@ -5397,7 +5204,6 @@ end
 
 ---@param d destructable
 ---@param newHeight integer
----@return nil
 function ChangeElevatorHeight(d, newHeight)
 	local oldHeight
 	
@@ -5452,14 +5258,12 @@ end
 --  Grab the unit and throw his own coords in his face, forcing him to push
 --  and shove until he finds a spot where noone will bother him.
 -- 
----@return nil
 function NudgeUnitsInRectEnum()
 	local nudgee = GetEnumUnit()
 	
 	SetUnitPosition(nudgee, GetUnitX(nudgee), GetUnitY(nudgee))
 end
 -- ===========================================================================
----@return nil
 function NudgeItemsInRectEnum()
 	local nudgee = GetEnumItem()
 	
@@ -5472,7 +5276,6 @@ end
 -- 
 
 ---@param nudgeArea rect
----@return nil
 function NudgeObjectsInRect(nudgeArea)
 	local g
 	
@@ -5484,7 +5287,6 @@ function NudgeObjectsInRect(nudgeArea)
 	EnumItemsInRect(nudgeArea, nil, NudgeItemsInRectEnum)
 end
 -- ===========================================================================
----@return nil
 function NearbyElevatorExistsEnum()
 	local d     = GetEnumDestructable()
 	local dType = GetDestructableTypeId(d)
@@ -5511,7 +5313,6 @@ function NearbyElevatorExists(x, y)
 	return bj_elevatorNeighbor ~= nil
 end
 -- ===========================================================================
----@return nil
 function FindElevatorWallBlockerEnum()
 	bj_elevatorWallBlocker = GetEnumDestructable()
 end
@@ -5525,7 +5326,6 @@ end
 ---@param y real
 ---@param facing real
 ---@param open boolean
----@return nil
 function ChangeElevatorWallBlocker(x, y, facing, open)
 	local blocker          = nil
 	local findThreshold    = 32
@@ -5580,7 +5380,6 @@ end
 ---@param open boolean
 ---@param walls integer
 ---@param d destructable
----@return nil
 function ChangeElevatorWalls(open, walls, d)
 	local x              = GetDestructableX(d)
 	local y              = GetDestructableY(d)
@@ -5620,7 +5419,6 @@ end
 
 ---@param activate boolean
 ---@param waygate unit
----@return nil
 function WaygateActivateBJ(activate, waygate)
 	WaygateActivate(waygate, activate)
 end
@@ -5635,7 +5433,6 @@ end
 
 ---@param waygate unit
 ---@param loc location
----@return nil
 function WaygateSetDestinationLocBJ(waygate, loc)
 	WaygateSetDestination(waygate, GetLocationX(loc), GetLocationY(loc))
 end
@@ -5650,7 +5447,6 @@ end
 
 ---@param flag boolean
 ---@param whichUnit unit
----@return nil
 function UnitSetUsesAltIconBJ(flag, whichUnit)
 	UnitSetUsesAltIcon(whichUnit, flag)
 end
@@ -5663,7 +5459,6 @@ end
 
 ---@param whichPlayer player
 ---@param key string
----@return nil
 function ForceUIKeyBJ(whichPlayer, key)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -5673,7 +5468,6 @@ end
 -- ===========================================================================
 
 ---@param whichPlayer player
----@return nil
 function ForceUICancelBJ(whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -5689,7 +5483,6 @@ end
 
 ---@param whichGroup group
 ---@param callback code
----@return nil
 function ForGroupBJ(whichGroup, callback)
 	--  If the user wants the group destroyed, remember that fact and clear
 	--  the flag, in case it is used again in the callback.
@@ -5707,7 +5500,6 @@ end
 
 ---@param whichUnit unit
 ---@param whichGroup group
----@return nil
 function GroupAddUnitSimple(whichUnit, whichGroup)
 	GroupAddUnit(whichGroup, whichUnit)
 end
@@ -5715,12 +5507,10 @@ end
 
 ---@param whichUnit unit
 ---@param whichGroup group
----@return nil
 function GroupRemoveUnitSimple(whichUnit, whichGroup)
 	GroupRemoveUnit(whichGroup, whichUnit)
 end
 -- ===========================================================================
----@return nil
 function GroupAddGroupEnum()
 	GroupAddUnit(bj_groupAddGroupDest, GetEnumUnit())
 end
@@ -5728,7 +5518,6 @@ end
 
 ---@param sourceGroup group
 ---@param destGroup group
----@return nil
 function GroupAddGroup(sourceGroup, destGroup)
 	--  If the user wants the group destroyed, remember that fact and clear
 	--  the flag, in case it is used again in the callback.
@@ -5744,7 +5533,6 @@ function GroupAddGroup(sourceGroup, destGroup)
 	end
 end
 -- ===========================================================================
----@return nil
 function GroupRemoveGroupEnum()
 	GroupRemoveUnit(bj_groupRemoveGroupDest, GetEnumUnit())
 end
@@ -5752,7 +5540,6 @@ end
 
 ---@param sourceGroup group
 ---@param destGroup group
----@return nil
 function GroupRemoveGroup(sourceGroup, destGroup)
 	--  If the user wants the group destroyed, remember that fact and clear
 	--  the flag, in case it is used again in the callback.
@@ -5771,7 +5558,6 @@ end
 
 ---@param whichPlayer player
 ---@param whichForce force
----@return nil
 function ForceAddPlayerSimple(whichPlayer, whichForce)
 	ForceAddPlayer(whichForce, whichPlayer)
 end
@@ -5779,7 +5565,6 @@ end
 
 ---@param whichPlayer player
 ---@param whichForce force
----@return nil
 function ForceRemovePlayerSimple(whichPlayer, whichForce)
 	ForceRemovePlayer(whichForce, whichPlayer)
 end
@@ -5790,7 +5575,6 @@ end
 --  The chance of picking a given unit over the "current pick" is 1/N, where N is
 --  the number of units considered thusfar (including the current consideration).
 -- 
----@return nil
 function GroupPickRandomUnitEnum()
 	bj_groupRandomConsidered = bj_groupRandomConsidered + 1
 	if (GetRandomInt(1, bj_groupRandomConsidered) == 1) then
@@ -5822,7 +5606,6 @@ end
 -- ===========================================================================
 --  See GroupPickRandomUnitEnum for the details of this algorithm.
 -- 
----@return nil
 function ForcePickRandomPlayerEnum()
 	bj_forceRandomConsidered = bj_forceRandomConsidered + 1
 	if (GetRandomInt(1, bj_forceRandomConsidered) == 1) then
@@ -5846,7 +5629,6 @@ end
 ---@param whichPlayer player
 ---@param enumFilter boolexpr
 ---@param enumAction code
----@return nil
 function EnumUnitsSelected(whichPlayer, enumFilter, enumAction)
 	local g = CreateGroup()
 	SyncSelections()
@@ -6046,7 +5828,6 @@ function GetPlayersMatching(filter)
 	return f
 end
 -- ===========================================================================
----@return nil
 function CountUnitsInGroupEnum()
 	bj_groupCountUnits = bj_groupCountUnits + 1
 end
@@ -6070,7 +5851,6 @@ function CountUnitsInGroup(g)
 	return bj_groupCountUnits
 end
 -- ===========================================================================
----@return nil
 function CountPlayersInForceEnum()
 	bj_forceCountPlayers = bj_forceCountPlayers + 1
 end
@@ -6084,7 +5864,6 @@ function CountPlayersInForceBJ(f)
 	return bj_forceCountPlayers
 end
 -- ===========================================================================
----@return nil
 function GetRandomSubGroupEnum()
 	if (bj_randomSubGroupWant > 0) then
 		if (bj_randomSubGroupWant >= bj_randomSubGroupTotal) or (GetRandomReal(0, 1) < bj_randomSubGroupChance) then
@@ -6146,7 +5925,6 @@ end
 -- ===========================================================================
 
 ---@param whichUnit unit
----@return nil
 function ResetUnitAnimation(whichUnit)
 	SetUnitAnimation(whichUnit, "stand")
 end
@@ -6154,7 +5932,6 @@ end
 
 ---@param whichUnit unit
 ---@param percentScale real
----@return nil
 function SetUnitTimeScalePercent(whichUnit, percentScale)
 	SetUnitTimeScale(whichUnit, percentScale * 0.01)
 end
@@ -6164,7 +5941,6 @@ end
 ---@param percentScaleX real
 ---@param percentScaleY real
 ---@param percentScaleZ real
----@return nil
 function SetUnitScalePercent(whichUnit, percentScaleX, percentScaleY, percentScaleZ)
 	SetUnitScale(whichUnit, percentScaleX * 0.01, percentScaleY * 0.01, percentScaleZ * 0.01)
 end
@@ -6179,7 +5955,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function SetUnitVertexColorBJ(whichUnit, red, green, blue, transparency)
 	SetUnitVertexColor(whichUnit, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -6190,7 +5965,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function UnitAddIndicatorBJ(whichUnit, red, green, blue, transparency)
 	AddIndicator(whichUnit, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -6201,7 +5975,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function DestructableAddIndicatorBJ(whichDestructable, red, green, blue, transparency)
 	AddIndicator(whichDestructable, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -6212,7 +5985,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function ItemAddIndicatorBJ(whichItem, red, green, blue, transparency)
 	AddIndicator(whichItem, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -6223,7 +5995,6 @@ end
 ---@param whichUnit unit
 ---@param target location
 ---@param duration real
----@return nil
 function SetUnitFacingToFaceLocTimed(whichUnit, target, duration)
 	local unitLoc = GetUnitLoc(whichUnit)
 	
@@ -6237,7 +6008,6 @@ end
 ---@param whichUnit unit
 ---@param target unit
 ---@param duration real
----@return nil
 function SetUnitFacingToFaceUnitTimed(whichUnit, target, duration)
 	local unitLoc = GetUnitLoc(target)
 	
@@ -6248,7 +6018,6 @@ end
 
 ---@param whichUnit unit
 ---@param whichAnimation string
----@return nil
 function QueueUnitAnimationBJ(whichUnit, whichAnimation)
 	QueueUnitAnimation(whichUnit, whichAnimation)
 end
@@ -6256,7 +6025,6 @@ end
 
 ---@param d destructable
 ---@param whichAnimation string
----@return nil
 function SetDestructableAnimationBJ(d, whichAnimation)
 	SetDestructableAnimation(d, whichAnimation)
 end
@@ -6264,7 +6032,6 @@ end
 
 ---@param d destructable
 ---@param whichAnimation string
----@return nil
 function QueueDestructableAnimationBJ(d, whichAnimation)
 	QueueDestructableAnimation(d, whichAnimation)
 end
@@ -6272,7 +6039,6 @@ end
 
 ---@param d destructable
 ---@param percentScale real
----@return nil
 function SetDestAnimationSpeedPercent(d, percentScale)
 	SetDestructableAnimationSpeed(d, percentScale * 0.01)
 end
@@ -6286,7 +6052,6 @@ end
 ---@param flag boolean
 ---@param whichDialog dialog
 ---@param whichPlayer player
----@return nil
 function DialogDisplayBJ(flag, whichDialog, whichPlayer)
 	DialogDisplay(whichPlayer, whichDialog, flag)
 end
@@ -6294,7 +6059,6 @@ end
 
 ---@param whichDialog dialog
 ---@param message string
----@return nil
 function DialogSetMessageBJ(whichDialog, message)
 	DialogSetMessage(whichDialog, message)
 end
@@ -6320,7 +6084,6 @@ end
 -- ===========================================================================
 
 ---@param whichDialog dialog
----@return nil
 function DialogClearBJ(whichDialog)
 	DialogClear(whichDialog)
 end
@@ -6350,7 +6113,6 @@ end
 ---@param whichAllianceSetting alliancetype
 ---@param value boolean
 ---@param otherPlayer player
----@return nil
 function SetPlayerAllianceBJ(sourcePlayer, whichAllianceSetting, value, otherPlayer)
 	--  Prevent players from attempting to ally with themselves.
 	if (sourcePlayer == otherPlayer) then
@@ -6366,7 +6128,6 @@ end
 ---@param sourcePlayer player
 ---@param otherPlayer player
 ---@param flag boolean
----@return nil
 function SetPlayerAllianceStateAllyBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_PASSIVE, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_HELP_REQUEST, flag)
@@ -6381,7 +6142,6 @@ end
 ---@param sourcePlayer player
 ---@param otherPlayer player
 ---@param flag boolean
----@return nil
 function SetPlayerAllianceStateVisionBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_SHARED_VISION, flag)
 end
@@ -6392,7 +6152,6 @@ end
 ---@param sourcePlayer player
 ---@param otherPlayer player
 ---@param flag boolean
----@return nil
 function SetPlayerAllianceStateControlBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_SHARED_CONTROL, flag)
 end
@@ -6404,7 +6163,6 @@ end
 ---@param sourcePlayer player
 ---@param otherPlayer player
 ---@param flag boolean
----@return nil
 function SetPlayerAllianceStateFullControlBJ(sourcePlayer, otherPlayer, flag)
 	SetPlayerAlliance(sourcePlayer, otherPlayer, ALLIANCE_SHARED_ADVANCED_CONTROL, flag)
 end
@@ -6413,7 +6171,6 @@ end
 ---@param sourcePlayer player
 ---@param otherPlayer player
 ---@param allianceState integer
----@return nil
 function SetPlayerAllianceStateBJ(sourcePlayer, otherPlayer, allianceState)
 	--  Prevent players from attempting to ally with themselves.
 	if (sourcePlayer == otherPlayer) then
@@ -6473,7 +6230,6 @@ end
 ---@param sourceForce force
 ---@param targetForce force
 ---@param allianceState integer
----@return nil
 function SetForceAllianceStateBJ(sourceForce, targetForce, allianceState)
 	local sourceIndex
 	local targetIndex
@@ -6524,7 +6280,6 @@ end
 -- 
 
 ---@param whichPlayer player
----@return nil
 function ShareEverythingWithTeamAI(whichPlayer)
 	local playerIndex
 	local indexPlayer
@@ -6549,7 +6304,6 @@ end
 -- 
 
 ---@param whichPlayer player
----@return nil
 function ShareEverythingWithTeam(whichPlayer)
 	local playerIndex
 	local indexPlayer
@@ -6572,7 +6326,6 @@ end
 --  Creates a 'Neutral Victim' player slot.  This slot is passive towards all
 --  other players, but all other players are aggressive towards him/her.
 -- 
----@return nil
 function ConfigureNeutralVictim()
 	local index
 	local indexPlayer
@@ -6598,7 +6351,6 @@ function ConfigureNeutralVictim()
 	SetPlayerState(neutralVictim, PLAYER_STATE_GIVES_BOUNTY, 0)
 end
 -- ===========================================================================
----@return nil
 function MakeUnitsPassiveForPlayerEnum()
 	SetUnitOwner(GetEnumUnit(), Player(bj_PLAYER_NEUTRAL_VICTIM), false)
 end
@@ -6607,7 +6359,6 @@ end
 -- 
 
 ---@param whichPlayer player
----@return nil
 function MakeUnitsPassiveForPlayer(whichPlayer)
 	local playerUnits = CreateGroup()
 	CachePlayerHeroData(whichPlayer)
@@ -6620,7 +6371,6 @@ end
 -- 
 
 ---@param whichPlayer player
----@return nil
 function MakeUnitsPassiveForTeam(whichPlayer)
 	local playerIndex
 	local indexPlayer
@@ -6655,7 +6405,6 @@ function AllowVictoryDefeat(gameResult)
 	return true
 end
 -- ===========================================================================
----@return nil
 function EndGameBJ()
 	EndGame(true)
 end
@@ -6663,7 +6412,6 @@ end
 
 ---@param whichPlayer player
 ---@param leftGame boolean
----@return nil
 function MeleeVictoryDialogBJ(whichPlayer, leftGame)
 	local t = CreateTrigger()
 	local d = DialogCreate()
@@ -6691,7 +6439,6 @@ end
 
 ---@param whichPlayer player
 ---@param leftGame boolean
----@return nil
 function MeleeDefeatDialogBJ(whichPlayer, leftGame)
 	local t = CreateTrigger()
 	local d = DialogCreate()
@@ -6723,7 +6470,6 @@ end
 
 ---@param whichPlayer player
 ---@param leftGame boolean
----@return nil
 function GameOverDialogBJ(whichPlayer, leftGame)
 	local t = CreateTrigger()
 	local d = DialogCreate()
@@ -6751,7 +6497,6 @@ end
 ---@param whichPlayer player
 ---@param gameResult playergameresult
 ---@param leftGame boolean
----@return nil
 function RemovePlayerPreserveUnitsBJ(whichPlayer, gameResult, leftGame)
 	if AllowVictoryDefeat(gameResult) then
 		
@@ -6769,7 +6514,6 @@ function RemovePlayerPreserveUnitsBJ(whichPlayer, gameResult, leftGame)
 	end
 end
 -- ===========================================================================
----@return nil
 function CustomVictoryOkBJ()
 	if bj_isSinglePlayer then
 		PauseGame(false)
@@ -6784,7 +6528,6 @@ function CustomVictoryOkBJ()
 	end
 end
 -- ===========================================================================
----@return nil
 function CustomVictoryQuitBJ()
 	if bj_isSinglePlayer then
 		PauseGame(false)
@@ -6797,7 +6540,6 @@ end
 -- ===========================================================================
 
 ---@param whichPlayer player
----@return nil
 function CustomVictoryDialogBJ(whichPlayer)
 	local t = CreateTrigger()
 	local d = DialogCreate()
@@ -6827,7 +6569,6 @@ end
 -- ===========================================================================
 
 ---@param whichPlayer player
----@return nil
 function CustomVictorySkipBJ(whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		if bj_isSinglePlayer then
@@ -6847,7 +6588,6 @@ end
 ---@param whichPlayer player
 ---@param showDialog boolean
 ---@param showScores boolean
----@return nil
 function CustomVictoryBJ(whichPlayer, showDialog, showScores)
 	if AllowVictoryDefeat(PLAYER_GAME_RESULT_VICTORY) then
 		RemovePlayer(whichPlayer, PLAYER_GAME_RESULT_VICTORY)
@@ -6868,13 +6608,11 @@ function CustomVictoryBJ(whichPlayer, showDialog, showScores)
 	end
 end
 -- ===========================================================================
----@return nil
 function CustomDefeatRestartBJ()
 	PauseGame(false)
 	RestartGame(true)
 end
 -- ===========================================================================
----@return nil
 function CustomDefeatReduceDifficultyBJ()
 	local diff = GetGameDifficulty()
 	
@@ -6894,13 +6632,11 @@ function CustomDefeatReduceDifficultyBJ()
 	RestartGame(true)
 end
 -- ===========================================================================
----@return nil
 function CustomDefeatLoadBJ()
 	PauseGame(false)
 	DisplayLoadDialog()
 end
 -- ===========================================================================
----@return nil
 function CustomDefeatQuitBJ()
 	if bj_isSinglePlayer then
 		PauseGame(false)
@@ -6914,7 +6650,6 @@ end
 
 ---@param whichPlayer player
 ---@param message string
----@return nil
 function CustomDefeatDialogBJ(whichPlayer, message)
 	local t = CreateTrigger()
 	local d = DialogCreate()
@@ -6957,7 +6692,6 @@ end
 
 ---@param whichPlayer player
 ---@param message string
----@return nil
 function CustomDefeatBJ(whichPlayer, message)
 	if AllowVictoryDefeat(PLAYER_GAME_RESULT_DEFEAT) then
 		RemovePlayer(whichPlayer, PLAYER_GAME_RESULT_DEFEAT)
@@ -6975,7 +6709,6 @@ end
 -- ===========================================================================
 
 ---@param nextLevel string
----@return nil
 function SetNextLevelBJ(nextLevel)
 	if (nextLevel == "") then
 		bj_changeLevelMapName = nil
@@ -6987,7 +6720,6 @@ end
 
 ---@param flag boolean
 ---@param whichPlayer player
----@return nil
 function SetPlayerOnScoreScreenBJ(flag, whichPlayer)
 	SetPlayerOnScoreScreen(whichPlayer, flag)
 end
@@ -7019,7 +6751,6 @@ end
 -- ===========================================================================
 
 ---@param whichQuest quest
----@return nil
 function DestroyQuestBJ(whichQuest)
 	DestroyQuest(whichQuest)
 end
@@ -7027,7 +6758,6 @@ end
 
 ---@param enabled boolean
 ---@param whichQuest quest
----@return nil
 function QuestSetEnabledBJ(enabled, whichQuest)
 	QuestSetEnabled(whichQuest, enabled)
 end
@@ -7035,7 +6765,6 @@ end
 
 ---@param whichQuest quest
 ---@param title string
----@return nil
 function QuestSetTitleBJ(whichQuest, title)
 	QuestSetTitle(whichQuest, title)
 end
@@ -7043,7 +6772,6 @@ end
 
 ---@param whichQuest quest
 ---@param description string
----@return nil
 function QuestSetDescriptionBJ(whichQuest, description)
 	QuestSetDescription(whichQuest, description)
 end
@@ -7051,7 +6779,6 @@ end
 
 ---@param whichQuest quest
 ---@param completed boolean
----@return nil
 function QuestSetCompletedBJ(whichQuest, completed)
 	QuestSetCompleted(whichQuest, completed)
 end
@@ -7059,7 +6786,6 @@ end
 
 ---@param whichQuest quest
 ---@param failed boolean
----@return nil
 function QuestSetFailedBJ(whichQuest, failed)
 	QuestSetFailed(whichQuest, failed)
 end
@@ -7067,7 +6793,6 @@ end
 
 ---@param whichQuest quest
 ---@param discovered boolean
----@return nil
 function QuestSetDiscoveredBJ(whichQuest, discovered)
 	QuestSetDiscovered(whichQuest, discovered)
 end
@@ -7091,7 +6816,6 @@ end
 
 ---@param whichQuestItem questitem
 ---@param description string
----@return nil
 function QuestItemSetDescriptionBJ(whichQuestItem, description)
 	QuestItemSetDescription(whichQuestItem, description)
 end
@@ -7099,7 +6823,6 @@ end
 
 ---@param whichQuestItem questitem
 ---@param completed boolean
----@return nil
 function QuestItemSetCompletedBJ(whichQuestItem, completed)
 	QuestItemSetCompleted(whichQuestItem, completed)
 end
@@ -7120,7 +6843,6 @@ end
 -- ===========================================================================
 
 ---@param whichCondition defeatcondition
----@return nil
 function DestroyDefeatConditionBJ(whichCondition)
 	DestroyDefeatCondition(whichCondition)
 end
@@ -7128,7 +6850,6 @@ end
 
 ---@param whichCondition defeatcondition
 ---@param description string
----@return nil
 function DefeatConditionSetDescriptionBJ(whichCondition, description)
 	DefeatConditionSetDescription(whichCondition, description)
 end
@@ -7138,7 +6859,6 @@ function GetLastCreatedDefeatConditionBJ()
 	return bj_lastCreatedDefeatCondition
 end
 -- ===========================================================================
----@return nil
 function FlashQuestDialogButtonBJ()
 	FlashQuestDialogButton()
 end
@@ -7147,7 +6867,6 @@ end
 ---@param f force
 ---@param messageType integer
 ---@param message string
----@return nil
 function QuestMessageBJ(f, messageType, message)
 	if (IsPlayerInForce(GetLocalPlayer(), f)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7253,7 +6972,6 @@ end
 -- ===========================================================================
 
 ---@param whichTimer timer
----@return nil
 function DestroyTimerBJ(whichTimer)
 	DestroyTimer(whichTimer)
 end
@@ -7261,7 +6979,6 @@ end
 
 ---@param pause boolean
 ---@param whichTimer timer
----@return nil
 function PauseTimerBJ(pause, whichTimer)
 	if pause then
 		PauseTimer(whichTimer)
@@ -7288,7 +7005,6 @@ end
 -- ===========================================================================
 
 ---@param td timerdialog
----@return nil
 function DestroyTimerDialogBJ(td)
 	DestroyTimerDialog(td)
 end
@@ -7296,7 +7012,6 @@ end
 
 ---@param td timerdialog
 ---@param title string
----@return nil
 function TimerDialogSetTitleBJ(td, title)
 	TimerDialogSetTitle(td, title)
 end
@@ -7307,7 +7022,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function TimerDialogSetTitleColorBJ(td, red, green, blue, transparency)
 	TimerDialogSetTitleColor(td, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7318,7 +7032,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function TimerDialogSetTimeColorBJ(td, red, green, blue, transparency)
 	TimerDialogSetTimeColor(td, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7326,7 +7039,6 @@ end
 
 ---@param td timerdialog
 ---@param speedMultFactor real
----@return nil
 function TimerDialogSetSpeedBJ(td, speedMultFactor)
 	TimerDialogSetSpeed(td, speedMultFactor)
 end
@@ -7335,7 +7047,6 @@ end
 ---@param show boolean
 ---@param td timerdialog
 ---@param whichPlayer player
----@return nil
 function TimerDialogDisplayForPlayerBJ(show, td, whichPlayer)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -7346,7 +7057,6 @@ end
 
 ---@param show boolean
 ---@param td timerdialog
----@return nil
 function TimerDialogDisplayBJ(show, td)
 	TimerDialogDisplay(td, show)
 end
@@ -7363,7 +7073,6 @@ end
 -- ===========================================================================
 
 ---@param lb leaderboard
----@return nil
 function LeaderboardResizeBJ(lb)
 	local size = LeaderboardGetItemCount(lb)
 	
@@ -7377,7 +7086,6 @@ end
 ---@param whichPlayer player
 ---@param lb leaderboard
 ---@param val integer
----@return nil
 function LeaderboardSetPlayerItemValueBJ(whichPlayer, lb, val)
 	LeaderboardSetItemValue(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), val)
 end
@@ -7386,7 +7094,6 @@ end
 ---@param whichPlayer player
 ---@param lb leaderboard
 ---@param val string
----@return nil
 function LeaderboardSetPlayerItemLabelBJ(whichPlayer, lb, val)
 	LeaderboardSetItemLabel(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), val)
 end
@@ -7397,7 +7104,6 @@ end
 ---@param showLabel boolean
 ---@param showValue boolean
 ---@param showIcon boolean
----@return nil
 function LeaderboardSetPlayerItemStyleBJ(whichPlayer, lb, showLabel, showValue, showIcon)
 	LeaderboardSetItemStyle(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), showLabel, showValue, showIcon)
 end
@@ -7409,7 +7115,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function LeaderboardSetPlayerItemLabelColorBJ(whichPlayer, lb, red, green, blue, transparency)
 	LeaderboardSetItemLabelColor(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7421,7 +7126,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function LeaderboardSetPlayerItemValueColorBJ(whichPlayer, lb, red, green, blue, transparency)
 	LeaderboardSetItemValueColor(lb, LeaderboardGetPlayerIndex(lb, whichPlayer), PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7432,7 +7136,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function LeaderboardSetLabelColorBJ(lb, red, green, blue, transparency)
 	LeaderboardSetLabelColor(lb, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7443,7 +7146,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function LeaderboardSetValueColorBJ(lb, red, green, blue, transparency)
 	LeaderboardSetValueColor(lb, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7451,7 +7153,6 @@ end
 
 ---@param lb leaderboard
 ---@param label string
----@return nil
 function LeaderboardSetLabelBJ(lb, label)
 	LeaderboardSetLabel(lb, label)
 	LeaderboardResizeBJ(lb)
@@ -7463,7 +7164,6 @@ end
 ---@param showNames boolean
 ---@param showValues boolean
 ---@param showIcons boolean
----@return nil
 function LeaderboardSetStyleBJ(lb, showLabel, showNames, showValues, showIcons)
 	LeaderboardSetStyle(lb, showLabel, showNames, showValues, showIcons)
 end
@@ -7486,7 +7186,6 @@ end
 
 ---@param lb leaderboard
 ---@param toForce force
----@return nil
 function ForceSetLeaderboardBJ(lb, toForce)
 	local index
 	local indexPlayer
@@ -7516,7 +7215,6 @@ end
 -- ===========================================================================
 
 ---@param lb leaderboard
----@return nil
 function DestroyLeaderboardBJ(lb)
 	DestroyLeaderboard(lb)
 end
@@ -7524,7 +7222,6 @@ end
 
 ---@param show boolean
 ---@param lb leaderboard
----@return nil
 function LeaderboardDisplayBJ(show, lb)
 	LeaderboardDisplay(lb, show)
 end
@@ -7534,7 +7231,6 @@ end
 ---@param lb leaderboard
 ---@param label string
 ---@param value integer
----@return nil
 function LeaderboardAddItemBJ(whichPlayer, lb, label, value)
 	if (LeaderboardHasPlayerItem(lb, whichPlayer)) then
 		LeaderboardRemovePlayerItem(lb, whichPlayer)
@@ -7547,7 +7243,6 @@ end
 
 ---@param whichPlayer player
 ---@param lb leaderboard
----@return nil
 function LeaderboardRemovePlayerItemBJ(whichPlayer, lb)
 	LeaderboardRemovePlayerItem(lb, whichPlayer)
 	LeaderboardResizeBJ(lb)
@@ -7557,7 +7252,6 @@ end
 ---@param lb leaderboard
 ---@param sortType integer
 ---@param ascending boolean
----@return nil
 function LeaderboardSortItemsBJ(lb, sortType, ascending)
 	if (sortType == bj_SORTTYPE_SORTBYVALUE) then
 		LeaderboardSortItemsByValue(lb, ascending)
@@ -7573,7 +7267,6 @@ end
 
 ---@param lb leaderboard
 ---@param ascending boolean
----@return nil
 function LeaderboardSortItemsByPlayerBJ(lb, ascending)
 	LeaderboardSortItemsByPlayer(lb, ascending)
 end
@@ -7581,7 +7274,6 @@ end
 
 ---@param lb leaderboard
 ---@param ascending boolean
----@return nil
 function LeaderboardSortItemsByLabelBJ(lb, ascending)
 	LeaderboardSortItemsByLabel(lb, ascending)
 end
@@ -7652,7 +7344,6 @@ end
 -- ===========================================================================
 
 ---@param mb multiboard
----@return nil
 function DestroyMultiboardBJ(mb)
 	DestroyMultiboard(mb)
 end
@@ -7665,7 +7356,6 @@ end
 
 ---@param show boolean
 ---@param mb multiboard
----@return nil
 function MultiboardDisplayBJ(show, mb)
 	MultiboardDisplay(mb, show)
 end
@@ -7673,7 +7363,6 @@ end
 
 ---@param minimize boolean
 ---@param mb multiboard
----@return nil
 function MultiboardMinimizeBJ(minimize, mb)
 	MultiboardMinimize(mb, minimize)
 end
@@ -7684,14 +7373,12 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function MultiboardSetTitleTextColorBJ(mb, red, green, blue, transparency)
 	MultiboardSetTitleTextColor(mb, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
 -- ===========================================================================
 
 ---@param flag boolean
----@return nil
 function MultiboardAllowDisplayBJ(flag)
 	MultiboardSuppressDisplay(not flag)
 end
@@ -7702,7 +7389,6 @@ end
 ---@param row integer
 ---@param showValue boolean
 ---@param showIcon boolean
----@return nil
 function MultiboardSetItemStyleBJ(mb, col, row, showValue, showIcon)
 	local curRow  = 0
 	local curCol  = 0
@@ -7739,7 +7425,6 @@ end
 ---@param col integer
 ---@param row integer
 ---@param val string
----@return nil
 function MultiboardSetItemValueBJ(mb, col, row, val)
 	local curRow  = 0
 	local curCol  = 0
@@ -7779,7 +7464,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function MultiboardSetItemColorBJ(mb, col, row, red, green, blue, transparency)
 	local curRow  = 0
 	local curCol  = 0
@@ -7816,7 +7500,6 @@ end
 ---@param col integer
 ---@param row integer
 ---@param width real
----@return nil
 function MultiboardSetItemWidthBJ(mb, col, row, width)
 	local curRow  = 0
 	local curCol  = 0
@@ -7853,7 +7536,6 @@ end
 ---@param col integer
 ---@param row integer
 ---@param iconFileName string
----@return nil
 function MultiboardSetItemIconBJ(mb, col, row, iconFileName)
 	local curRow  = 0
 	local curCol  = 0
@@ -7916,7 +7598,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param transparency real
----@return nil
 function SetTextTagColorBJ(tt, red, green, blue, transparency)
 	SetTextTagColor(tt, PercentTo255(red), PercentTo255(green), PercentTo255(blue), PercentTo255(100.0 - transparency))
 end
@@ -7925,7 +7606,6 @@ end
 ---@param tt texttag
 ---@param speed real
 ---@param angle real
----@return nil
 function SetTextTagVelocityBJ(tt, speed, angle)
 	local vel  = TextTagSpeed2Velocity(speed)
 	local xvel = vel * Cos(angle * bj_DEGTORAD)
@@ -7938,7 +7618,6 @@ end
 ---@param tt texttag
 ---@param s string
 ---@param size real
----@return nil
 function SetTextTagTextBJ(tt, s, size)
 	local textHeight = TextTagSize2Height(size)
 	
@@ -7949,7 +7628,6 @@ end
 ---@param tt texttag
 ---@param loc location
 ---@param zOffset real
----@return nil
 function SetTextTagPosBJ(tt, loc, zOffset)
 	SetTextTagPos(tt, GetLocationX(loc), GetLocationY(loc), zOffset)
 end
@@ -7958,7 +7636,6 @@ end
 ---@param tt texttag
 ---@param whichUnit unit
 ---@param zOffset real
----@return nil
 function SetTextTagPosUnitBJ(tt, whichUnit, zOffset)
 	SetTextTagPosUnit(tt, whichUnit, zOffset)
 end
@@ -7966,7 +7643,6 @@ end
 
 ---@param tt texttag
 ---@param flag boolean
----@return nil
 function SetTextTagSuspendedBJ(tt, flag)
 	SetTextTagSuspended(tt, flag)
 end
@@ -7974,7 +7650,6 @@ end
 
 ---@param tt texttag
 ---@param flag boolean
----@return nil
 function SetTextTagPermanentBJ(tt, flag)
 	SetTextTagPermanent(tt, flag)
 end
@@ -7982,7 +7657,6 @@ end
 
 ---@param tt texttag
 ---@param age real
----@return nil
 function SetTextTagAgeBJ(tt, age)
 	SetTextTagAge(tt, age)
 end
@@ -7990,7 +7664,6 @@ end
 
 ---@param tt texttag
 ---@param lifespan real
----@return nil
 function SetTextTagLifespanBJ(tt, lifespan)
 	SetTextTagLifespan(tt, lifespan)
 end
@@ -7998,7 +7671,6 @@ end
 
 ---@param tt texttag
 ---@param fadepoint real
----@return nil
 function SetTextTagFadepointBJ(tt, fadepoint)
 	SetTextTagFadepoint(tt, fadepoint)
 end
@@ -8043,7 +7715,6 @@ end
 -- ===========================================================================
 
 ---@param tt texttag
----@return nil
 function DestroyTextTagBJ(tt)
 	DestroyTextTag(tt)
 end
@@ -8052,7 +7723,6 @@ end
 ---@param show boolean
 ---@param tt texttag
 ---@param whichForce force
----@return nil
 function ShowTextTagForceBJ(show, tt, whichForce)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8070,19 +7740,16 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
----@return nil
 function PauseGameOn()
 	PauseGame(true)
 end
 -- ===========================================================================
----@return nil
 function PauseGameOff()
 	PauseGame(false)
 end
 -- ===========================================================================
 
 ---@param whichForce force
----@return nil
 function SetUserControlForceOn(whichForce)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8092,7 +7759,6 @@ end
 -- ===========================================================================
 
 ---@param whichForce force
----@return nil
 function SetUserControlForceOff(whichForce)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8103,7 +7769,6 @@ end
 
 ---@param whichForce force
 ---@param fadeDuration real
----@return nil
 function ShowInterfaceForceOn(whichForce, fadeDuration)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8114,7 +7779,6 @@ end
 
 ---@param whichForce force
 ---@param fadeDuration real
----@return nil
 function ShowInterfaceForceOff(whichForce, fadeDuration)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8127,7 +7791,6 @@ end
 ---@param x real
 ---@param y real
 ---@param duration real
----@return nil
 function PingMinimapForForce(whichForce, x, y, duration)
 	if (IsPlayerInForce(GetLocalPlayer(), whichForce)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8140,7 +7803,6 @@ end
 ---@param whichForce force
 ---@param loc location
 ---@param duration real
----@return nil
 function PingMinimapLocForForce(whichForce, loc, duration)
 	PingMinimapForForce(whichForce, GetLocationX(loc), GetLocationY(loc), duration)
 end
@@ -8150,7 +7812,6 @@ end
 ---@param x real
 ---@param y real
 ---@param duration real
----@return nil
 function PingMinimapForPlayer(whichPlayer, x, y, duration)
 	if (GetLocalPlayer() == whichPlayer) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8163,7 +7824,6 @@ end
 ---@param whichPlayer player
 ---@param loc location
 ---@param duration real
----@return nil
 function PingMinimapLocForPlayer(whichPlayer, loc, duration)
 	PingMinimapForPlayer(whichPlayer, GetLocationX(loc), GetLocationY(loc), duration)
 end
@@ -8177,7 +7837,6 @@ end
 ---@param red real
 ---@param green real
 ---@param blue real
----@return nil
 function PingMinimapForForceEx(whichForce, x, y, duration, style, red, green, blue)
 	local red255   = PercentTo255(red)
 	local green255 = PercentTo255(green)
@@ -8213,7 +7872,6 @@ end
 ---@param red real
 ---@param green real
 ---@param blue real
----@return nil
 function PingMinimapLocForForceEx(whichForce, loc, duration, style, red, green, blue)
 	PingMinimapForForceEx(whichForce, GetLocationX(loc), GetLocationY(loc), duration, style, red, green, blue)
 end
@@ -8221,7 +7879,6 @@ end
 
 ---@param enable boolean
 ---@param f force
----@return nil
 function EnableWorldFogBoundaryBJ(enable, f)
 	if (IsPlayerInForce(GetLocalPlayer(), f)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8232,7 +7889,6 @@ end
 
 ---@param enable boolean
 ---@param f force
----@return nil
 function EnableOcclusionBJ(enable, f)
 	if (IsPlayerInForce(GetLocalPlayer(), f)) then
 		--  Use only local code (no net traffic) within this block to avoid desyncs.
@@ -8247,7 +7903,6 @@ end
 -- ===========================================================================
 --  If cancelled, stop the sound and end the cinematic scene.
 -- 
----@return nil
 function CancelCineSceneBJ()
 	StopSoundBJ(bj_cineSceneLastSound, true)
 	EndCinematicScene()
@@ -8258,7 +7913,6 @@ end
 --  only be called once a cinematic scene has been started, so that maps
 --  lacking such scenes do not bother to register for these events.
 -- 
----@return nil
 function TryInitCinematicBehaviorBJ()
 	local index
 	
@@ -8282,7 +7936,6 @@ end
 ---@param text string
 ---@param sceneDuration real
 ---@param voiceoverDuration real
----@return nil
 function SetCinematicSceneBJ(soundHandle, portraitUnitId, color, speakerTitle, text, sceneDuration, voiceoverDuration)
 	bj_cineSceneLastSound = soundHandle
 	SetCinematicScene(portraitUnitId, color, speakerTitle, text, sceneDuration, voiceoverDuration)
@@ -8319,7 +7972,6 @@ end
 ---@param soundHandle sound
 ---@param timeType integer
 ---@param timeVal real
----@return nil
 function WaitTransmissionDuration(soundHandle, timeType, timeVal)
 	if (timeType == bj_TIMETYPE_SET) then
 		--  If we have a static duration wait, just perform the wait.
@@ -8354,7 +8006,6 @@ end
 ---@param unitName string
 ---@param message string
 ---@param duration real
----@return nil
 function DoTransmissionBasicsXYBJ(unitId, color, x, y, soundHandle, unitName, message, duration)
 	SetCinematicSceneBJ(soundHandle, unitId, color, unitName, message, duration + bj_TRANSMISSION_PORT_HANGTIME, duration)
 	
@@ -8382,7 +8033,6 @@ end
 ---@param timeType integer
 ---@param timeVal real
 ---@param wait boolean
----@return nil
 function TransmissionFromUnitWithNameBJ(toForce, whichUnit, unitName, soundHandle, message, timeType, timeVal, wait)
 	TryInitCinematicBehaviorBJ()
 	
@@ -8502,7 +8152,6 @@ end
 ---@param timeType integer
 ---@param timeVal real
 ---@param wait boolean
----@return nil
 function TransmissionFromUnitTypeWithNameBJ(toForce, fromPlayer, unitId, unitName, loc, soundHandle, message, timeType, timeVal, wait)
 	TryInitCinematicBehaviorBJ()
 	
@@ -8532,7 +8181,6 @@ end
 -- ===========================================================================
 
 ---@param flag boolean
----@return nil
 function ForceCinematicSubtitlesBJ(flag)
 	ForceCinematicSubtitles(flag)
 end
@@ -8564,7 +8212,6 @@ end
 ---@param cineMode boolean
 ---@param forForce force
 ---@param interfaceFadeTime real
----@return nil
 function CinematicModeExBJ(cineMode, forForce, interfaceFadeTime)
 	--  If the game hasn't started yet, perform interface fades immediately
 	if (not bj_gameStarted) then
@@ -8632,7 +8279,6 @@ end
 
 ---@param cineMode boolean
 ---@param forForce force
----@return nil
 function CinematicModeBJ(cineMode, forForce)
 	CinematicModeExBJ(cineMode, forForce, bj_CINEMODE_INTERFACEFADE)
 end
@@ -8644,7 +8290,6 @@ end
 -- ===========================================================================
 
 ---@param flag boolean
----@return nil
 function DisplayCineFilterBJ(flag)
 	DisplayCineFilter(flag)
 end
@@ -8657,7 +8302,6 @@ end
 ---@param tex string
 ---@param startTrans real
 ---@param endTrans real
----@return nil
 function CinematicFadeCommonBJ(red, green, blue, duration, tex, startTrans, endTrans)
 	if (duration == 0) then
 		--  If the fade is instant, use the same starting and ending values,
@@ -8676,7 +8320,6 @@ function CinematicFadeCommonBJ(red, green, blue, duration, tex, startTrans, endT
 	DisplayCineFilter(true)
 end
 -- ===========================================================================
----@return nil
 function FinishCinematicFadeBJ()
 	DestroyTimer(bj_cineFadeFinishTimer)
 	bj_cineFadeFinishTimer = nil
@@ -8686,14 +8329,12 @@ end
 -- ===========================================================================
 
 ---@param duration real
----@return nil
 function FinishCinematicFadeAfterBJ(duration)
 	--  Create a timer to end the cinematic fade.
 	bj_cineFadeFinishTimer = CreateTimer()
 	TimerStart(bj_cineFadeFinishTimer, duration, false, FinishCinematicFadeBJ)
 end
 -- ===========================================================================
----@return nil
 function ContinueCinematicFadeBJ()
 	DestroyTimer(bj_cineFadeContinueTimer)
 	bj_cineFadeContinueTimer = nil
@@ -8707,7 +8348,6 @@ end
 ---@param blue real
 ---@param trans real
 ---@param tex string
----@return nil
 function ContinueCinematicFadeAfterBJ(duration, red, green, blue, trans, tex)
 	bj_cineFadeContinueRed      = red
 	bj_cineFadeContinueGreen    = green
@@ -8721,7 +8361,6 @@ function ContinueCinematicFadeAfterBJ(duration, red, green, blue, trans, tex)
 	TimerStart(bj_cineFadeContinueTimer, duration, false, ContinueCinematicFadeBJ)
 end
 -- ===========================================================================
----@return nil
 function AbortCinematicFadeBJ()
 	if (bj_cineFadeContinueTimer ~= nil) then
 		DestroyTimer(bj_cineFadeContinueTimer)
@@ -8740,7 +8379,6 @@ end
 ---@param green real
 ---@param blue real
 ---@param trans real
----@return nil
 function CinematicFadeBJ(fadetype, duration, tex, red, green, blue, trans)
 	if (fadetype == bj_CINEFADETYPE_FADEOUT) then
 		--  Fade out to the requested color.
@@ -8776,7 +8414,6 @@ end
 ---@param green1 real
 ---@param blue1 real
 ---@param trans1 real
----@return nil
 function CinematicFilterGenericBJ(duration, bmode, tex, red0, green0, blue0, trans0, red1, green1, blue1, trans1)
 	AbortCinematicFadeBJ()
 	SetCineFilterTexture(tex)
@@ -8803,7 +8440,6 @@ end
 ---@param whichUnit unit
 ---@param rescuer player
 ---@param changeColor boolean
----@return nil
 function RescueUnitBJ(whichUnit, rescuer, changeColor)
 	if IsUnitDeadBJ(whichUnit) or (GetOwningPlayer(whichUnit) == rescuer) then
 		return
@@ -8815,7 +8451,6 @@ function RescueUnitBJ(whichUnit, rescuer, changeColor)
 	PingMinimapForPlayer(rescuer, GetUnitX(whichUnit), GetUnitY(whichUnit), bj_RESCUE_PING_TIME)
 end
 -- ===========================================================================
----@return nil
 function TriggerActionUnitRescuedBJ()
 	local theUnit = GetTriggerUnit()
 	
@@ -8830,7 +8465,6 @@ end
 --  reasons, this should only be attempted if a player is set to Rescuable,
 --  or if a specific unit is thus flagged.
 -- 
----@return nil
 function TryInitRescuableTriggersBJ()
 	local index
 	
@@ -8851,7 +8485,6 @@ end
 -- 
 
 ---@param changeColor boolean
----@return nil
 function SetRescueUnitColorChangeBJ(changeColor)
 	bj_rescueChangeColorUnit = changeColor
 end
@@ -8861,12 +8494,10 @@ end
 -- 
 
 ---@param changeColor boolean
----@return nil
 function SetRescueBuildingColorChangeBJ(changeColor)
 	bj_rescueChangeColorBldg = changeColor
 end
 -- ===========================================================================
----@return nil
 function MakeUnitRescuableToForceBJEnum()
 	TryInitRescuableTriggersBJ()
 	SetUnitRescuable(bj_makeUnitRescuableUnit, GetEnumPlayer(), bj_makeUnitRescuableFlag)
@@ -8876,7 +8507,6 @@ end
 ---@param whichUnit unit
 ---@param isRescuable boolean
 ---@param whichForce force
----@return nil
 function MakeUnitRescuableToForceBJ(whichUnit, isRescuable, whichForce)
 	--  Flag the unit as rescuable/unrescuable for the appropriate players.
 	bj_makeUnitRescuableUnit = whichUnit
@@ -8884,7 +8514,6 @@ function MakeUnitRescuableToForceBJ(whichUnit, isRescuable, whichForce)
 	ForForce(whichForce, MakeUnitRescuableToForceBJEnum)
 end
 -- ===========================================================================
----@return nil
 function InitRescuableBehaviorBJ()
 	local index
 	
@@ -8910,7 +8539,6 @@ end
 ---@param techid integer
 ---@param levels integer
 ---@param whichPlayer player
----@return nil
 function SetPlayerTechResearchedSwap(techid, levels, whichPlayer)
 	SetPlayerTechResearched(whichPlayer, techid, levels)
 end
@@ -8919,7 +8547,6 @@ end
 ---@param techid integer
 ---@param maximum integer
 ---@param whichPlayer player
----@return nil
 function SetPlayerTechMaxAllowedSwap(techid, maximum, whichPlayer)
 	SetPlayerTechMaxAllowed(whichPlayer, techid, maximum)
 end
@@ -8927,7 +8554,6 @@ end
 
 ---@param maximum integer
 ---@param whichPlayer player
----@return nil
 function SetPlayerMaxHeroesAllowed(maximum, whichPlayer)
 	SetPlayerTechMaxAllowed(whichPlayer, FourCC('HERO'), maximum)
 end
@@ -8952,7 +8578,6 @@ end
 ---@param avail boolean
 ---@param abilid integer
 ---@param whichPlayer player
----@return nil
 function SetPlayerAbilityAvailableBJ(avail, abilid, whichPlayer)
 	SetPlayerAbilityAvailable(whichPlayer, abilid, avail)
 end
@@ -8963,7 +8588,6 @@ end
 -- ***************************************************************************
 
 ---@param campaignNumber integer
----@return nil
 function SetCampaignMenuRaceBJ(campaignNumber)
 	if (campaignNumber == bj_CAMPAIGN_INDEX_T) then
 		SetCampaignMenuRace(RACE_OTHER)
@@ -8997,7 +8621,6 @@ end
 
 ---@param available boolean
 ---@param missionIndex integer
----@return nil
 function SetMissionAvailableBJ(available, missionIndex)
 	local campaignNumber = missionIndex / 1000
 	local missionNumber  = missionIndex - campaignNumber * 1000
@@ -9008,7 +8631,6 @@ end
 
 ---@param available boolean
 ---@param campaignNumber integer
----@return nil
 function SetCampaignAvailableBJ(available, campaignNumber)
 	local campaignOffset
 	
@@ -9036,7 +8658,6 @@ end
 
 ---@param available boolean
 ---@param cinematicIndex integer
----@return nil
 function SetCinematicAvailableBJ(available, cinematicIndex)
 	if (cinematicIndex == bj_CINEMATICINDEX_TOP) then
 		SetOpCinematicAvailable(bj_CAMPAIGN_INDEX_T, available)
@@ -9112,7 +8733,6 @@ end
 ---@param key string
 ---@param missionKey string
 ---@param cache gamecache
----@return nil
 function StoreRealBJ(value, key, missionKey, cache)
 	StoreReal(cache, missionKey, key, value)
 end
@@ -9122,7 +8742,6 @@ end
 ---@param key string
 ---@param missionKey string
 ---@param cache gamecache
----@return nil
 function StoreIntegerBJ(value, key, missionKey, cache)
 	StoreInteger(cache, missionKey, key, value)
 end
@@ -9132,7 +8751,6 @@ end
 ---@param key string
 ---@param missionKey string
 ---@param cache gamecache
----@return nil
 function StoreBooleanBJ(value, key, missionKey, cache)
 	StoreBoolean(cache, missionKey, key, value)
 end
@@ -9162,7 +8780,6 @@ end
 ---@param key integer
 ---@param missionKey integer
 ---@param table hashtable
----@return nil
 function SaveRealBJ(value, key, missionKey, table)
 	SaveReal(table, missionKey, key, value)
 end
@@ -9172,7 +8789,6 @@ end
 ---@param key integer
 ---@param missionKey integer
 ---@param table hashtable
----@return nil
 function SaveIntegerBJ(value, key, missionKey, table)
 	SaveInteger(table, missionKey, key, value)
 end
@@ -9182,7 +8798,6 @@ end
 ---@param key integer
 ---@param missionKey integer
 ---@param table hashtable
----@return nil
 function SaveBooleanBJ(value, key, missionKey, table)
 	SaveBoolean(table, missionKey, key, value)
 end
@@ -10057,7 +9672,6 @@ end
 -- ===========================================================================
 
 ---@param cache gamecache
----@return nil
 function FlushGameCacheBJ(cache)
 	FlushGameCache(cache)
 end
@@ -10065,14 +9679,12 @@ end
 
 ---@param missionKey string
 ---@param cache gamecache
----@return nil
 function FlushStoredMissionBJ(missionKey, cache)
 	FlushStoredMission(cache, missionKey)
 end
 -- ===========================================================================
 
 ---@param table hashtable
----@return nil
 function FlushParentHashtableBJ(table)
 	FlushParentHashtable(table)
 end
@@ -10080,7 +9692,6 @@ end
 
 ---@param missionKey integer
 ---@param table hashtable
----@return nil
 function FlushChildHashtableBJ(missionKey, table)
 	FlushChildHashtable(table, missionKey)
 end
@@ -10134,7 +9745,6 @@ end
 
 ---@param show boolean
 ---@param whichButton integer
----@return nil
 function ShowCustomCampaignButton(show, whichButton)
 	SetCustomCampaignButtonVisible(whichButton - 1, show)
 end
@@ -10151,7 +9761,6 @@ end
 
 ---@param mapSaveName string
 ---@param doCheckpointHint boolean
----@return nil
 function SaveGameCheckPointBJ(mapSaveName, doCheckpointHint)
 	SaveGameCheckpoint(mapSaveName, doCheckpointHint)
 end
@@ -10159,7 +9768,6 @@ end
 
 ---@param loadFileName string
 ---@param doScoreScreen boolean
----@return nil
 function LoadGameBJ(loadFileName, doScoreScreen)
 	LoadGame(loadFileName, doScoreScreen)
 end
@@ -10168,7 +9776,6 @@ end
 ---@param saveFileName string
 ---@param newLevel string
 ---@param doScoreScreen boolean
----@return nil
 function SaveAndChangeLevelBJ(saveFileName, newLevel, doScoreScreen)
 	SaveGame(saveFileName)
 	ChangeLevel(newLevel, doScoreScreen)
@@ -10178,7 +9785,6 @@ end
 ---@param saveFileName string
 ---@param loadFileName string
 ---@param doScoreScreen boolean
----@return nil
 function SaveAndLoadGameBJ(saveFileName, loadFileName, doScoreScreen)
 	SaveGame(saveFileName)
 	LoadGame(loadFileName, doScoreScreen)
@@ -10272,7 +9878,6 @@ end
 ---@param whichPlayer player
 ---@param whichPlayerState playerstate
 ---@param delta integer
----@return nil
 function AdjustPlayerStateSimpleBJ(whichPlayer, whichPlayerState, delta)
 	SetPlayerState(whichPlayer, whichPlayerState, GetPlayerState(whichPlayer, whichPlayerState) + delta)
 end
@@ -10281,7 +9886,6 @@ end
 ---@param delta integer
 ---@param whichPlayer player
 ---@param whichPlayerState playerstate
----@return nil
 function AdjustPlayerStateBJ(delta, whichPlayer, whichPlayerState)
 	--  If the change was positive, apply the difference to the player's
 	--  gathered resources property as well.
@@ -10300,7 +9904,6 @@ end
 ---@param whichPlayer player
 ---@param whichPlayerState playerstate
 ---@param value integer
----@return nil
 function SetPlayerStateBJ(whichPlayer, whichPlayerState, value)
 	local oldValue = GetPlayerState(whichPlayer, whichPlayerState)
 	AdjustPlayerStateBJ(value - oldValue, whichPlayer, whichPlayerState)
@@ -10310,7 +9913,6 @@ end
 ---@param whichPlayerFlag playerstate
 ---@param flag boolean
 ---@param whichPlayer player
----@return nil
 function SetPlayerFlagBJ(whichPlayerFlag, flag, whichPlayer)
 	SetPlayerState(whichPlayer, whichPlayerFlag, IntegerTertiaryOp(flag, 1, 0))
 end
@@ -10320,7 +9922,6 @@ end
 ---@param whichResource playerstate
 ---@param sourcePlayer player
 ---@param otherPlayer player
----@return nil
 function SetPlayerTaxRateBJ(rate, whichResource, sourcePlayer, otherPlayer)
 	SetPlayerTaxRate(sourcePlayer, otherPlayer, whichResource, rate)
 end
@@ -10345,7 +9946,6 @@ end
 
 ---@param delta integer
 ---@param whichUnit unit
----@return nil
 function AddResourceAmountBJ(delta, whichUnit)
 	AddResourceAmount(whichUnit, delta)
 end
@@ -10428,7 +10028,6 @@ function IsPointBlightedBJ(where)
 	return IsPointBlighted(GetLocationX(where), GetLocationY(where))
 end
 -- ===========================================================================
----@return nil
 function SetPlayerColorBJEnum()
 	SetUnitColor(GetEnumUnit(), bj_setPlayerTargetColor)
 end
@@ -10437,7 +10036,6 @@ end
 ---@param whichPlayer player
 ---@param color playercolor
 ---@param changeExisting boolean
----@return nil
 function SetPlayerColorBJ(whichPlayer, color, changeExisting)
 	local g
 	
@@ -10455,7 +10053,6 @@ end
 ---@param unitId integer
 ---@param allowed boolean
 ---@param whichPlayer player
----@return nil
 function SetPlayerUnitAvailableBJ(unitId, allowed, whichPlayer)
 	if allowed then
 		SetPlayerTechMaxAllowed(whichPlayer, unitId, -1)
@@ -10464,12 +10061,10 @@ function SetPlayerUnitAvailableBJ(unitId, allowed, whichPlayer)
 	end
 end
 -- ===========================================================================
----@return nil
 function LockGameSpeedBJ()
 	SetMapFlag(MAP_LOCK_SPEED, true)
 end
 -- ===========================================================================
----@return nil
 function UnlockGameSpeedBJ()
 	SetMapFlag(MAP_LOCK_SPEED, false)
 end
@@ -10576,7 +10171,6 @@ end
 
 ---@param whichUnit unit
 ---@param targPos location
----@return nil
 function SetUnitRallyPoint(whichUnit, targPos)
 	IssuePointOrderLocBJ(whichUnit, "setrally", targPos)
 end
@@ -10584,7 +10178,6 @@ end
 
 ---@param whichUnit unit
 ---@param targUnit unit
----@return nil
 function SetUnitRallyUnit(whichUnit, targUnit)
 	IssueTargetOrder(whichUnit, "setrally", targUnit)
 end
@@ -10592,7 +10185,6 @@ end
 
 ---@param whichUnit unit
 ---@param targDest destructable
----@return nil
 function SetUnitRallyDestructable(whichUnit, targDest)
 	IssueTargetOrder(whichUnit, "setrally", targDest)
 end
@@ -10601,7 +10193,6 @@ end
 --  This function is added as an action to all destructable drop triggers,
 --  so that a widget drop may be differentiated from a unit drop.
 -- 
----@return nil
 function SaveDyingWidget()
 	bj_lastDyingWidget = GetTriggerWidget()
 end
@@ -10610,7 +10201,6 @@ end
 ---@param addBlight boolean
 ---@param whichPlayer player
 ---@param r rect
----@return nil
 function SetBlightRectBJ(addBlight, whichPlayer, r)
 	SetBlightRect(whichPlayer, r, addBlight)
 end
@@ -10620,7 +10210,6 @@ end
 ---@param whichPlayer player
 ---@param loc location
 ---@param radius real
----@return nil
 function SetBlightRadiusLocBJ(addBlight, whichPlayer, loc, radius)
 	SetBlightLoc(whichPlayer, loc, radius, addBlight)
 end
@@ -10637,7 +10226,6 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
----@return nil
 function MeleeStartingVisibility()
 	--  Start by setting the ToD.
 	SetFloatGameState(GAME_STATE_TIME_OF_DAY, bj_MELEE_STARTING_TOD)
@@ -10651,7 +10239,6 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
----@return nil
 function MeleeStartingResources()
 	local index
 	local indexPlayer
@@ -10691,7 +10278,6 @@ end
 ---@param whichPlayer player
 ---@param techId integer
 ---@param limit integer
----@return nil
 function ReducePlayerTechMaxAllowed(whichPlayer, techId, limit)
 	local oldMax = GetPlayerTechMaxAllowed(whichPlayer, techId)
 	
@@ -10701,7 +10287,6 @@ function ReducePlayerTechMaxAllowed(whichPlayer, techId, limit)
 	end
 end
 -- ===========================================================================
----@return nil
 function MeleeStartingHeroLimit()
 	local index
 	
@@ -10761,7 +10346,6 @@ end
 -- 
 
 ---@param whichUnit unit
----@return nil
 function MeleeGrantItemsToHero(whichUnit)
 	local owner = GetPlayerId(GetOwningPlayer(whichUnit))
 	
@@ -10772,17 +10356,14 @@ function MeleeGrantItemsToHero(whichUnit)
 	end
 end
 -- ===========================================================================
----@return nil
 function MeleeGrantItemsToTrainedHero()
 	MeleeGrantItemsToHero(GetTrainedUnit())
 end
 -- ===========================================================================
----@return nil
 function MeleeGrantItemsToHiredHero()
 	MeleeGrantItemsToHero(GetSoldUnit())
 end
 -- ===========================================================================
----@return nil
 function MeleeGrantHeroItems()
 	local index
 	local trig
@@ -10824,7 +10405,6 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
----@return nil
 function MeleeClearExcessUnit()
 	local theUnit = GetEnumUnit()
 	local owner   = GetPlayerId(GetOwningPlayer(theUnit))
@@ -10844,7 +10424,6 @@ end
 ---@param x real
 ---@param y real
 ---@param range real
----@return nil
 function MeleeClearNearbyUnits(x, y, range)
 	local nearbyUnits
 	
@@ -10854,7 +10433,6 @@ function MeleeClearNearbyUnits(x, y, range)
 	DestroyGroup(nearbyUnits)
 end
 -- ===========================================================================
----@return nil
 function MeleeClearExcessUnits()
 	local index
 	local locX
@@ -10883,7 +10461,6 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
----@return nil
 function MeleeEnumFindNearestMine()
 	local enumUnit = GetEnumUnit()
 	local dist
@@ -11015,7 +10592,6 @@ end
 ---@param doHeroes boolean
 ---@param doCamera boolean
 ---@param doPreload boolean
----@return nil
 function MeleeStartingUnitsHuman(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
 	local unitSpacing   = 64.00
@@ -11096,7 +10672,6 @@ end
 ---@param doHeroes boolean
 ---@param doCamera boolean
 ---@param doPreload boolean
----@return nil
 function MeleeStartingUnitsOrc(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
 	local unitSpacing   = 64.00
@@ -11174,7 +10749,6 @@ end
 ---@param doHeroes boolean
 ---@param doCamera boolean
 ---@param doPreload boolean
----@return nil
 function MeleeStartingUnitsUndead(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
 	local unitSpacing   = 64.00
@@ -11264,7 +10838,6 @@ end
 ---@param doHeroes boolean
 ---@param doCamera boolean
 ---@param doPreload boolean
----@return nil
 function MeleeStartingUnitsNightElf(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local useRandomHero = IsMapFlagSet(MAP_RANDOM_HERO)
 	local unitSpacing   = 64.00
@@ -11348,7 +10921,6 @@ end
 ---@param doHeroes boolean
 ---@param doCamera boolean
 ---@param doPreload boolean
----@return nil
 function MeleeStartingUnitsUnknownRace(whichPlayer, startLoc, doHeroes, doCamera, doPreload)
 	local index
 	
@@ -11374,7 +10946,6 @@ function MeleeStartingUnitsUnknownRace(whichPlayer, startLoc, doHeroes, doCamera
 	end
 end
 -- ===========================================================================
----@return nil
 function MeleeStartingUnits()
 	local index
 	local indexPlayer
@@ -11415,7 +10986,6 @@ end
 ---@param whichPlayer player
 ---@param loc location
 ---@param doHeroes boolean
----@return nil
 function MeleeStartingUnitsForPlayer(whichRace, whichPlayer, loc, doHeroes)
 	--  Create initial race-specific starting units
 	if (whichRace == RACE_HUMAN) then
@@ -11441,7 +11011,6 @@ end
 ---@param s1 string
 ---@param s2 string
 ---@param s3 string
----@return nil
 function PickMeleeAI(num, s1, s2, s3)
 	local pick
 	
@@ -11469,7 +11038,6 @@ function PickMeleeAI(num, s1, s2, s3)
 	end
 end
 -- ===========================================================================
----@return nil
 function MeleeStartingAI()
 	local index
 	local indexPlayer
@@ -11504,7 +11072,6 @@ function MeleeStartingAI()
 end
 
 ---@param targ unit
----@return nil
 function LockGuardPosition(targ)
 	SetUnitCreepGuard(targ, true)
 end
@@ -11637,7 +11204,6 @@ end
 -- ===========================================================================
 --  Enum: Draw out a specific player.
 -- 
----@return nil
 function MeleeDoDrawEnum()
 	local thePlayer = GetEnumPlayer()
 	
@@ -11647,7 +11213,6 @@ end
 -- ===========================================================================
 --  Enum: Victory out a specific player.
 -- 
----@return nil
 function MeleeDoVictoryEnum()
 	local thePlayer   = GetEnumPlayer()
 	local playerIndex = GetPlayerId(thePlayer)
@@ -11663,7 +11228,6 @@ end
 -- 
 
 ---@param whichPlayer player
----@return nil
 function MeleeDoDefeat(whichPlayer)
 	bj_meleeDefeated[GetPlayerId(whichPlayer)] = true
 	RemovePlayerPreserveUnitsBJ(whichPlayer, PLAYER_GAME_RESULT_DEFEAT, false)
@@ -11671,7 +11235,6 @@ end
 -- ===========================================================================
 --  Enum: Defeat out a specific player.
 -- 
----@return nil
 function MeleeDoDefeatEnum()
 	local thePlayer = GetEnumPlayer()
 	
@@ -11685,7 +11248,6 @@ end
 -- 
 
 ---@param whichPlayer player
----@return nil
 function MeleeDoLeave(whichPlayer)
 	if (GetIntegerGameState(GAME_STATE_DISCONNECTED) ~= 0) then
 		GameOverDialogBJ(whichPlayer, true)
@@ -11697,7 +11259,6 @@ end
 -- ===========================================================================
 --  Remove all observers
 -- 
----@return nil
 function MeleeRemoveObservers()
 	local playerIndex
 	local indexPlayer
@@ -11762,7 +11323,6 @@ end
 -- ===========================================================================
 --  Test each player to determine if anyone has been defeated.
 -- 
----@return nil
 function MeleeCheckForLosersAndVictors()
 	local playerIndex
 	local indexPlayer
@@ -11877,7 +11437,6 @@ end
 
 ---@param whichPlayer player
 ---@param expose boolean
----@return nil
 function MeleeExposePlayer(whichPlayer, expose)
 	local playerIndex
 	local indexPlayer
@@ -11901,7 +11460,6 @@ function MeleeExposePlayer(whichPlayer, expose)
 	DestroyForce(toExposeTo)
 end
 -- ===========================================================================
----@return nil
 function MeleeExposeAllPlayers()
 	local playerIndex
 	local indexPlayer
@@ -11939,7 +11497,6 @@ function MeleeExposeAllPlayers()
 	DestroyForce(toExposeTo)
 end
 -- ===========================================================================
----@return nil
 function MeleeCrippledPlayerTimeout()
 	local expiredTimer = GetExpiredTimer()
 	local playerIndex
@@ -11987,7 +11544,6 @@ end
 -- ===========================================================================
 --  Test each player to determine if anyone has become crippled.
 -- 
----@return nil
 function MeleeCheckForCrippledPlayers()
 	local playerIndex
 	local indexPlayer
@@ -12058,7 +11614,6 @@ end
 -- 
 
 ---@param lostUnit unit
----@return nil
 function MeleeCheckLostUnit(lostUnit)
 	local lostUnitOwner = GetOwningPlayer(lostUnit)
 	
@@ -12077,7 +11632,6 @@ end
 -- 
 
 ---@param addedUnit unit
----@return nil
 function MeleeCheckAddedUnit(addedUnit)
 	local addedUnitOwner = GetOwningPlayer(addedUnit)
 	
@@ -12087,24 +11641,20 @@ function MeleeCheckAddedUnit(addedUnit)
 	end
 end
 -- ===========================================================================
----@return nil
 function MeleeTriggerActionConstructCancel()
 	MeleeCheckLostUnit(GetCancelledStructure())
 end
 -- ===========================================================================
----@return nil
 function MeleeTriggerActionUnitDeath()
 	if (IsUnitType(GetDyingUnit(), UNIT_TYPE_STRUCTURE)) then
 		MeleeCheckLostUnit(GetDyingUnit())
 	end
 end
 -- ===========================================================================
----@return nil
 function MeleeTriggerActionUnitConstructionStart()
 	MeleeCheckAddedUnit(GetConstructingStructure())
 end
 -- ===========================================================================
----@return nil
 function MeleeTriggerActionPlayerDefeated()
 	local thePlayer = GetTriggerPlayer()
 	CachePlayerHeroData(thePlayer)
@@ -12127,7 +11677,6 @@ function MeleeTriggerActionPlayerDefeated()
 	MeleeCheckForLosersAndVictors()
 end
 -- ===========================================================================
----@return nil
 function MeleeTriggerActionPlayerLeft()
 	local thePlayer = GetTriggerPlayer()
 	
@@ -12156,13 +11705,11 @@ function MeleeTriggerActionPlayerLeft()
 	MeleeCheckForLosersAndVictors()
 end
 -- ===========================================================================
----@return nil
 function MeleeTriggerActionAllianceChange()
 	MeleeCheckForLosersAndVictors()
 	MeleeCheckForCrippledPlayers()
 end
 -- ===========================================================================
----@return nil
 function MeleeTriggerTournamentFinishSoon()
 	--  Note: We may get this trigger multiple times
 	local playerIndex
@@ -12219,7 +11766,6 @@ end
 -- ===========================================================================
 
 ---@param multiplier integer
----@return nil
 function MeleeTournamentFinishNowRuleA(multiplier)
 	local playerScore = {}
 	local teamScore   = {}
@@ -12346,7 +11892,6 @@ function MeleeTournamentFinishNowRuleA(multiplier)
 
 end
 -- ===========================================================================
----@return nil
 function MeleeTriggerTournamentFinishNow()
 	local rule = GetTournamentFinishNowRule()
 	
@@ -12368,7 +11913,6 @@ function MeleeTriggerTournamentFinishNow()
 
 end
 -- ===========================================================================
----@return nil
 function MeleeInitVictoryDefeat()
 	local trig
 	local index
@@ -12462,7 +12006,6 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
----@return nil
 function CheckInitPlayerSlotAvailability()
 	local index
 	
@@ -12481,7 +12024,6 @@ end
 
 ---@param whichPlayer player
 ---@param control mapcontrol
----@return nil
 function SetPlayerSlotAvailable(whichPlayer, control)
 	local playerIndex = GetPlayerId(whichPlayer)
 	
@@ -12497,7 +12039,6 @@ end
 -- ===========================================================================
 
 ---@param teamCount integer
----@return nil
 function TeamInitPlayerSlots(teamCount)
 	local index
 	local indexPlayer
@@ -12523,17 +12064,14 @@ function TeamInitPlayerSlots(teamCount)
 	end
 end
 -- ===========================================================================
----@return nil
 function MeleeInitPlayerSlots()
 	TeamInitPlayerSlots(bj_MAX_PLAYERS)
 end
 -- ===========================================================================
----@return nil
 function FFAInitPlayerSlots()
 	TeamInitPlayerSlots(bj_MAX_PLAYERS)
 end
 -- ===========================================================================
----@return nil
 function OneOnOneInitPlayerSlots()
 	--  Limit the game to 2 players.
 	SetTeams(2)
@@ -12541,7 +12079,6 @@ function OneOnOneInitPlayerSlots()
 	TeamInitPlayerSlots(2)
 end
 -- ===========================================================================
----@return nil
 function InitGenericPlayerSlots()
 	local gType = GetGameTypeSelected()
 	
@@ -12569,21 +12106,18 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
----@return nil
 function SetDNCSoundsDawn()
 	if bj_useDawnDuskSounds then
 		StartSound(bj_dawnSound)
 	end
 end
 -- ===========================================================================
----@return nil
 function SetDNCSoundsDusk()
 	if bj_useDawnDuskSounds then
 		StartSound(bj_duskSound)
 	end
 end
 -- ===========================================================================
----@return nil
 function SetDNCSoundsDay()
 	local ToD = GetTimeOfDay()
 	
@@ -12596,7 +12130,6 @@ function SetDNCSoundsDay()
 	end
 end
 -- ===========================================================================
----@return nil
 function SetDNCSoundsNight()
 	local ToD = GetTimeOfDay()
 	
@@ -12609,7 +12142,6 @@ function SetDNCSoundsNight()
 	end
 end
 -- ===========================================================================
----@return nil
 function InitDNCSounds()
 	--  Create sounds to be played at dawn and dusk.
 	bj_dawnSound     = CreateSoundFromLabel("RoosterSound", false, false, false, 10000, 10000)
@@ -12636,7 +12168,6 @@ function InitDNCSounds()
 	TriggerAddAction(bj_dncSoundsNight, SetDNCSoundsNight)
 end
 -- ===========================================================================
----@return nil
 function InitBlizzardGlobals()
 	local index
 	local userControlledPlayers
@@ -12716,20 +12247,17 @@ function InitBlizzardGlobals()
 	end
 end
 -- ===========================================================================
----@return nil
 function InitQueuedTriggers()
 	bj_queuedExecTimeout = CreateTrigger()
 	TriggerRegisterTimerExpireEvent(bj_queuedExecTimeout, bj_queuedExecTimeoutTimer)
 	TriggerAddAction(bj_queuedExecTimeout, QueuedTriggerDoneBJ)
 end
 -- ===========================================================================
----@return nil
 function InitMapRects()
 	bj_mapInitialPlayableArea = Rect(GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT), GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM), GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT), GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP))
 	bj_mapInitialCameraBounds = GetCurrentCameraBoundsMapRectBJ()
 end
 -- ===========================================================================
----@return nil
 function InitSummonableCaps()
 	local index
 	
@@ -12759,7 +12287,6 @@ end
 -- 
 
 ---@param whichItem item
----@return nil
 function UpdateStockAvailability(whichItem)
 	local iType  = GetItemType(whichItem)
 	local iLevel = GetItemLevel(whichItem)
@@ -12778,7 +12305,6 @@ end
 -- ===========================================================================
 --  Find a sellable item of the given type and level, and then add it.
 -- 
----@return nil
 function UpdateEachStockBuildingEnum()
 	local iteration = 0
 	local pickedItemId
@@ -12800,7 +12326,6 @@ end
 
 ---@param iType itemtype
 ---@param iLevel integer
----@return nil
 function UpdateEachStockBuilding(iType, iLevel)
 	local g
 	
@@ -12815,7 +12340,6 @@ end
 -- ===========================================================================
 --  Update stock inventory.
 -- 
----@return nil
 function PerformStockUpdates()
 	local pickedItemId
 	local pickedItemType
@@ -12862,18 +12386,15 @@ end
 -- ===========================================================================
 --  Perform the first update, and then arrange future updates.
 -- 
----@return nil
 function StartStockUpdates()
 	PerformStockUpdates()
 	TimerStart(bj_stockUpdateTimer, bj_STOCK_RESTOCK_INTERVAL, true, PerformStockUpdates)
 end
 -- ===========================================================================
----@return nil
 function RemovePurchasedItem()
 	RemoveItemFromStock(GetSellingUnit(), GetItemTypeId(GetSoldItem()))
 end
 -- ===========================================================================
----@return nil
 function InitNeutralBuildings()
 	local iLevel
 	
@@ -12901,19 +12422,16 @@ function InitNeutralBuildings()
 	TriggerAddAction(bj_stockItemPurchased, RemovePurchasedItem)
 end
 -- ===========================================================================
----@return nil
 function MarkGameStarted()
 	bj_gameStarted = true
 	DestroyTimer(bj_gameStartedTimer)
 end
 -- ===========================================================================
----@return nil
 function DetectGameStarted()
 	bj_gameStartedTimer = CreateTimer()
 	TimerStart(bj_gameStartedTimer, bj_GAME_STARTED_THRESHOLD, false, MarkGameStarted)
 end
 -- ===========================================================================
----@return nil
 function InitBlizzard()
 	--  Set up the Neutral Victim player slot, to torture the abandoned units
 	--  of defeated players.  Since some triggers expect this player slot to
@@ -12948,7 +12466,6 @@ end
 -- 
 -- ***************************************************************************
 -- ===========================================================================
----@return nil
 function RandomDistReset()
 	bj_randDistCount = 0
 end
@@ -12956,7 +12473,6 @@ end
 
 ---@param inID integer
 ---@param inChance integer
----@return nil
 function RandomDistAddItem(inID, inChance)
 	bj_randDistID[bj_randDistCount]     = inID
 	bj_randDistChance[bj_randDistCount] = inChance
@@ -13092,7 +12608,6 @@ end
 ---@param whichAbility ability
 ---@param whichField abilitybooleanfield
 ---@param value boolean
----@return nil
 function BlzSetAbilityBooleanFieldBJ(whichAbility, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityBooleanField(whichAbility, whichField, value)
 end
@@ -13101,7 +12616,6 @@ end
 ---@param whichAbility ability
 ---@param whichField abilityintegerfield
 ---@param value integer
----@return nil
 function BlzSetAbilityIntegerFieldBJ(whichAbility, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityIntegerField(whichAbility, whichField, value)
 end
@@ -13110,7 +12624,6 @@ end
 ---@param whichAbility ability
 ---@param whichField abilityrealfield
 ---@param value real
----@return nil
 function BlzSetAbilityRealFieldBJ(whichAbility, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityRealField(whichAbility, whichField, value)
 end
@@ -13119,7 +12632,6 @@ end
 ---@param whichAbility ability
 ---@param whichField abilitystringfield
 ---@param value string
----@return nil
 function BlzSetAbilityStringFieldBJ(whichAbility, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityStringField(whichAbility, whichField, value)
 end
@@ -13129,7 +12641,6 @@ end
 ---@param whichField abilitybooleanlevelfield
 ---@param level integer
 ---@param value boolean
----@return nil
 function BlzSetAbilityBooleanLevelFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityBooleanLevelField(whichAbility, whichField, level, value)
 end
@@ -13139,7 +12650,6 @@ end
 ---@param whichField abilityintegerlevelfield
 ---@param level integer
 ---@param value integer
----@return nil
 function BlzSetAbilityIntegerLevelFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityIntegerLevelField(whichAbility, whichField, level, value)
 end
@@ -13149,7 +12659,6 @@ end
 ---@param whichField abilityreallevelfield
 ---@param level integer
 ---@param value real
----@return nil
 function BlzSetAbilityRealLevelFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityRealLevelField(whichAbility, whichField, level, value)
 end
@@ -13159,7 +12668,6 @@ end
 ---@param whichField abilitystringlevelfield
 ---@param level integer
 ---@param value string
----@return nil
 function BlzSetAbilityStringLevelFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityStringLevelField(whichAbility, whichField, level, value)
 end
@@ -13170,7 +12678,6 @@ end
 ---@param level integer
 ---@param index integer
 ---@param value boolean
----@return nil
 function BlzSetAbilityBooleanLevelArrayFieldBJ(whichAbility, whichField, level, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityBooleanLevelArrayField(whichAbility, whichField, level, index, value)
 end
@@ -13181,7 +12688,6 @@ end
 ---@param level integer
 ---@param index integer
 ---@param value integer
----@return nil
 function BlzSetAbilityIntegerLevelArrayFieldBJ(whichAbility, whichField, level, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityIntegerLevelArrayField(whichAbility, whichField, level, index, value)
 end
@@ -13192,7 +12698,6 @@ end
 ---@param level integer
 ---@param index integer
 ---@param value real
----@return nil
 function BlzSetAbilityRealLevelArrayFieldBJ(whichAbility, whichField, level, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityRealLevelArrayField(whichAbility, whichField, level, index, value)
 end
@@ -13203,7 +12708,6 @@ end
 ---@param level integer
 ---@param index integer
 ---@param value string
----@return nil
 function BlzSetAbilityStringLevelArrayFieldBJ(whichAbility, whichField, level, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetAbilityStringLevelArrayField(whichAbility, whichField, level, index, value)
 end
@@ -13213,7 +12717,6 @@ end
 ---@param whichField abilitybooleanlevelarrayfield
 ---@param level integer
 ---@param value boolean
----@return nil
 function BlzAddAbilityBooleanLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzAddAbilityBooleanLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -13223,7 +12726,6 @@ end
 ---@param whichField abilityintegerlevelarrayfield
 ---@param level integer
 ---@param value integer
----@return nil
 function BlzAddAbilityIntegerLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzAddAbilityIntegerLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -13233,7 +12735,6 @@ end
 ---@param whichField abilityreallevelarrayfield
 ---@param level integer
 ---@param value real
----@return nil
 function BlzAddAbilityRealLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzAddAbilityRealLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -13243,7 +12744,6 @@ end
 ---@param whichField abilitystringlevelarrayfield
 ---@param level integer
 ---@param value string
----@return nil
 function BlzAddAbilityStringLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzAddAbilityStringLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -13253,7 +12753,6 @@ end
 ---@param whichField abilitybooleanlevelarrayfield
 ---@param level integer
 ---@param value boolean
----@return nil
 function BlzRemoveAbilityBooleanLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzRemoveAbilityBooleanLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -13263,7 +12762,6 @@ end
 ---@param whichField abilityintegerlevelarrayfield
 ---@param level integer
 ---@param value integer
----@return nil
 function BlzRemoveAbilityIntegerLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzRemoveAbilityIntegerLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -13273,7 +12771,6 @@ end
 ---@param whichField abilityreallevelarrayfield
 ---@param level integer
 ---@param value real
----@return nil
 function BlzRemoveAbilityRealLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzRemoveAbilityRealLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -13283,7 +12780,6 @@ end
 ---@param whichField abilitystringlevelarrayfield
 ---@param level integer
 ---@param value string
----@return nil
 function BlzRemoveAbilityStringLevelArrayFieldBJ(whichAbility, whichField, level, value)
 	bj_lastInstObjFuncSuccessful = BlzRemoveAbilityStringLevelArrayField(whichAbility, whichField, level, value)
 end
@@ -13292,7 +12788,6 @@ end
 
 ---@param whichItem item
 ---@param abilCode integer
----@return nil
 function BlzItemAddAbilityBJ(whichItem, abilCode)
 	bj_lastInstObjFuncSuccessful = BlzItemAddAbility(whichItem, abilCode)
 end
@@ -13300,7 +12795,6 @@ end
 
 ---@param whichItem item
 ---@param abilCode integer
----@return nil
 function BlzItemRemoveAbilityBJ(whichItem, abilCode)
 	bj_lastInstObjFuncSuccessful = BlzItemRemoveAbility(whichItem, abilCode)
 end
@@ -13309,7 +12803,6 @@ end
 ---@param whichItem item
 ---@param whichField itembooleanfield
 ---@param value boolean
----@return nil
 function BlzSetItemBooleanFieldBJ(whichItem, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetItemBooleanField(whichItem, whichField, value)
 end
@@ -13318,7 +12811,6 @@ end
 ---@param whichItem item
 ---@param whichField itemintegerfield
 ---@param value integer
----@return nil
 function BlzSetItemIntegerFieldBJ(whichItem, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetItemIntegerField(whichItem, whichField, value)
 end
@@ -13327,7 +12819,6 @@ end
 ---@param whichItem item
 ---@param whichField itemrealfield
 ---@param value real
----@return nil
 function BlzSetItemRealFieldBJ(whichItem, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetItemRealField(whichItem, whichField, value)
 end
@@ -13336,7 +12827,6 @@ end
 ---@param whichItem item
 ---@param whichField itemstringfield
 ---@param value string
----@return nil
 function BlzSetItemStringFieldBJ(whichItem, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetItemStringField(whichItem, whichField, value)
 end
@@ -13346,7 +12836,6 @@ end
 ---@param whichUnit unit
 ---@param whichField unitbooleanfield
 ---@param value boolean
----@return nil
 function BlzSetUnitBooleanFieldBJ(whichUnit, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitBooleanField(whichUnit, whichField, value)
 end
@@ -13355,7 +12844,6 @@ end
 ---@param whichUnit unit
 ---@param whichField unitintegerfield
 ---@param value integer
----@return nil
 function BlzSetUnitIntegerFieldBJ(whichUnit, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitIntegerField(whichUnit, whichField, value)
 end
@@ -13364,7 +12852,6 @@ end
 ---@param whichUnit unit
 ---@param whichField unitrealfield
 ---@param value real
----@return nil
 function BlzSetUnitRealFieldBJ(whichUnit, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitRealField(whichUnit, whichField, value)
 end
@@ -13373,7 +12860,6 @@ end
 ---@param whichUnit unit
 ---@param whichField unitstringfield
 ---@param value string
----@return nil
 function BlzSetUnitStringFieldBJ(whichUnit, whichField, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitStringField(whichUnit, whichField, value)
 end
@@ -13384,7 +12870,6 @@ end
 ---@param whichField unitweaponbooleanfield
 ---@param index integer
 ---@param value boolean
----@return nil
 function BlzSetUnitWeaponBooleanFieldBJ(whichUnit, whichField, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitWeaponBooleanField(whichUnit, whichField, index, value)
 end
@@ -13394,7 +12879,6 @@ end
 ---@param whichField unitweaponintegerfield
 ---@param index integer
 ---@param value integer
----@return nil
 function BlzSetUnitWeaponIntegerFieldBJ(whichUnit, whichField, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitWeaponIntegerField(whichUnit, whichField, index, value)
 end
@@ -13404,7 +12888,6 @@ end
 ---@param whichField unitweaponrealfield
 ---@param index integer
 ---@param value real
----@return nil
 function BlzSetUnitWeaponRealFieldBJ(whichUnit, whichField, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitWeaponRealField(whichUnit, whichField, index, value)
 end
@@ -13414,7 +12897,6 @@ end
 ---@param whichField unitweaponstringfield
 ---@param index integer
 ---@param value string
----@return nil
 function BlzSetUnitWeaponStringFieldBJ(whichUnit, whichField, index, value)
 	bj_lastInstObjFuncSuccessful = BlzSetUnitWeaponStringField(whichUnit, whichField, index, value)
 end

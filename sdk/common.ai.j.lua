@@ -3,32 +3,27 @@
 -- ==================================================================================================
 
 ---@param str string
----@return nil
 function DebugS(str) end    -- (native)
 
 
 ---@param str string
 ---@param val integer
----@return nil
 function DebugFI(str, val) end    -- (native)
 
 
 ---@param str string
 ---@param val integer
----@return nil
 function DebugUnitID(str, val) end    -- (native)
 
 
 ---@param p integer
 ---@param str string
----@return nil
 function DisplayText(p, str) end    -- (native)
 
 
 ---@param p integer
 ---@param str string
 ---@param val integer
----@return nil
 function DisplayTextI(p, str, val) end    -- (native)
 
 
@@ -36,7 +31,6 @@ function DisplayTextI(p, str, val) end    -- (native)
 ---@param str string
 ---@param v1 integer
 ---@param v2 integer
----@return nil
 function DisplayTextII(p, str, v1, v2) end    -- (native)
 
 
@@ -45,7 +39,6 @@ function DisplayTextII(p, str, v1, v2) end    -- (native)
 ---@param v1 integer
 ---@param v2 integer
 ---@param v3 integer
----@return nil
 function DisplayTextIII(p, str, v1, v2, v3) end    -- (native)
 
 ---@return boolean
@@ -148,7 +141,6 @@ function GetEnemyPower() end    -- (native)
 
 
 ---@param id unit
----@return nil
 function SetAllianceTarget(id) end    -- (native)
 
 ---@return unit
@@ -163,7 +155,6 @@ function SetProduce(qty, id, town) end    -- (native)
 
 
 ---@param unitid unit
----@return nil
 function Unsummon(unitid) end    -- (native)
 
 
@@ -179,15 +170,11 @@ function SetUpgrade(id) end    -- (native)
 
 
 ---@param func code
----@return nil
 function SetHeroLevels(func) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetNewHeroes(state) end    -- (native)
-
----@return nil
 function PurchaseZeppelin() end    -- (native)
 
 
@@ -203,100 +190,74 @@ function MergeUnits(qty, a, b, make) end    -- (native)
 ---@param id integer
 ---@return boolean
 function ConvertUnits(qty, id) end    -- (native)
-
----@return nil
 function SetCampaignAI() end    -- (native)
-
----@return nil
 function SetMeleeAI() end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetTargetHeroes(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetPeonsRepair(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetRandomPaths(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetDefendPlayer(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetHeroesFlee(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetHeroesBuyItems(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetWatchMegaTargets(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetIgnoreInjured(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetHeroesTakeItems(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetUnitsFlee(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetGroupsFlee(state) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetSlowChopping(state) end    -- (native)
 
 
 ---@param allow boolean
----@return nil
 function SetCaptainChanges(allow) end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetSmartArtillery(state) end    -- (native)
 
 
 ---@param qty integer
----@return nil
 function SetReplacementCount(qty) end    -- (native)
 
 
 ---@param allow boolean
----@return nil
 function GroupTimedLife(allow) end    -- (native)
-
----@return nil
 function RemoveInjuries() end    -- (native)
-
----@return nil
 function RemoveSiege() end    -- (native)
-
----@return nil
 function InitAssault() end    -- (native)
 
 
@@ -317,8 +278,6 @@ function AddDefenders(qty, id) end    -- (native)
 ---@param flyers_ok boolean
 ---@return unit
 function GetCreepCamp(min, max, flyers_ok) end    -- (native)
-
----@return nil
 function StartGetEnemyBase() end    -- (native)
 
 ---@return boolean
@@ -342,24 +301,20 @@ function GetExpansionY() end    -- (native)
 
 ---@param x real
 ---@param y real
----@return nil
 function SetStagePoint(x, y) end    -- (native)
 
 
 ---@param target unit
----@return nil
 function AttackMoveKill(target) end    -- (native)
 
 
 ---@param x integer
 ---@param y integer
----@return nil
 function AttackMoveXY(x, y) end    -- (native)
 
 
 ---@param x integer
 ---@param y integer
----@return nil
 function LoadZepWave(x, y) end    -- (native)
 
 
@@ -383,86 +338,61 @@ function CaptainInCombat(attack_captain) end    -- (native)
 ---@param target unit
 ---@return boolean
 function IsTowered(target) end    -- (native)
-
----@return nil
 function ClearHarvestAI() end    -- (native)
 
 
 ---@param town integer
 ---@param peons integer
----@return nil
 function HarvestGold(town, peons) end    -- (native)
 
 
 ---@param town integer
 ---@param peons integer
----@return nil
 function HarvestWood(town, peons) end    -- (native)
 
 ---@return unit
 function GetExpansionPeon() end    -- (native)
-
----@return nil
 function StopGathering() end    -- (native)
 
 
 ---@param id integer
 ---@param x real
 ---@param y real
----@return nil
 function AddGuardPost(id, x, y) end    -- (native)
-
----@return nil
 function FillGuardPosts() end    -- (native)
-
----@return nil
 function ReturnGuardPosts() end    -- (native)
-
----@return nil
 function CreateCaptains() end    -- (native)
 
 
 ---@param which integer
 ---@param x real
 ---@param y real
----@return nil
 function SetCaptainHome(which, x, y) end    -- (native)
-
----@return nil
 function ResetCaptainLocs() end    -- (native)
 
 
 ---@param x real
 ---@param y real
----@return nil
 function ShiftTownSpot(x, y) end    -- (native)
 
 
 ---@param x real
 ---@param y real
----@return nil
 function TeleportCaptain(x, y) end    -- (native)
-
----@return nil
 function ClearCaptainTargets() end    -- (native)
 
 
 ---@param x real
 ---@param y real
----@return nil
 function CaptainAttack(x, y) end    -- (native)
 
 
 ---@param id player
----@return nil
 function CaptainVsUnits(id) end    -- (native)
 
 
 ---@param id player
----@return nil
 function CaptainVsPlayer(id) end    -- (native)
-
----@return nil
 function CaptainGoHome() end    -- (native)
 
 ---@return boolean
@@ -498,24 +428,20 @@ function CreepsOnMap() end    -- (native)
 
 ---@param count integer
 ---@param unitid integer
----@return nil
 function SuicideUnit(count, unitid) end    -- (native)
 
 
 ---@param ct integer
 ---@param uid integer
 ---@param pid integer
----@return nil
 function SuicideUnitEx(ct, uid, pid) end    -- (native)
 
 
 ---@param func code
----@return nil
 function StartThread(func) end    -- (native)
 
 
 ---@param seconds real
----@return nil
 function Sleep(seconds) end    -- (native)
 
 
@@ -535,11 +461,7 @@ function IgnoredUnits(unitid) end    -- (native)
 
 ---@return boolean
 function TownThreatened() end    -- (native)
-
----@return nil
 function DisablePathing() end    -- (native)
-
----@return nil
 function SetAmphibious() end    -- (native)
 
 ---@return integer
@@ -550,8 +472,6 @@ function GetLastCommand() end    -- (native)
 
 ---@return integer
 function GetLastData() end    -- (native)
-
----@return nil
 function PopLastCommand() end    -- (native)
 
 ---@return integer
@@ -806,16 +726,16 @@ UNDEAD_MINE              = FourCC('ugol')    ---@type integer
 UNDEAD_ALTAR             = FourCC('uaod')    ---@type integer
 BONEYARD                 = FourCC('ubon')    ---@type integer
 GARG_SPIRE               = FourCC('ugsp')    ---@type integer
-NECROPOLIS_1             = FourCC('unpl')    ---@type integer      normal
-NECROPOLIS_2             = FourCC('unp1')    ---@type integer      upgraded once
-NECROPOLIS_3             = FourCC('unp2')    ---@type integer      full upgrade
+NECROPOLIS_1             = FourCC('unpl')    ---@type integer    --  normal
+NECROPOLIS_2             = FourCC('unp1')    ---@type integer    --  upgraded once
+NECROPOLIS_3             = FourCC('unp2')    ---@type integer    --  full upgrade
 SAC_PIT                  = FourCC('usap')    ---@type integer
 CRYPT                    = FourCC('usep')    ---@type integer
 SLAUGHTERHOUSE           = FourCC('uslh')    ---@type integer
 DAMNED_TEMPLE            = FourCC('utod')    ---@type integer
-ZIGGURAT_1               = FourCC('uzig')    ---@type integer      normal
-ZIGGURAT_2               = FourCC('uzg1')    ---@type integer      upgraded
-ZIGGURAT_FROST           = FourCC('uzg2')    ---@type integer      frost tower
+ZIGGURAT_1               = FourCC('uzig')    ---@type integer    --  normal
+ZIGGURAT_2               = FourCC('uzg1')    ---@type integer    --  upgraded
+ZIGGURAT_FROST           = FourCC('uzg2')    ---@type integer    --  frost tower
 GRAVEYARD                = FourCC('ugrv')    ---@type integer
 TOMB_OF_RELICS           = FourCC('utom')    ---@type integer
 --  undead upgrades
@@ -976,25 +896,25 @@ FURBOLG_ELDER            = FourCC('nfre')    ---@type integer
 NAGA_SORCERESS           = FourCC('Nngs')    ---@type integer
 NAGA_VASHJ               = FourCC('Hvsh')    ---@type integer
 --  naga units
-NAGA_DRAGON              = FourCC('nsnp')    ---@type integer      old names
+NAGA_DRAGON              = FourCC('nsnp')    ---@type integer    --  old names
 NAGA_WITCH               = FourCC('nnsw')    ---@type integer
 NAGA_SERPENT             = FourCC('nwgs')    ---@type integer
 NAGA_HYDRA               = FourCC('nhyc')    ---@type integer
-NAGA_SLAVE               = FourCC('nmpe')    ---@type integer      peon
-NAGA_SNAP_DRAGON         = NAGA_DRAGON    ---@type integer      weak ranged
-NAGA_COUATL              = NAGA_SERPENT    ---@type integer     weak air
-NAGA_SIREN               = NAGA_WITCH    ---@type integer     caster
-NAGA_MYRMIDON            = FourCC('nmyr')    ---@type integer     knight
-NAGA_REAVER              = FourCC('nnmg')    ---@type integer     footman
-NAGA_TURTLE              = NAGA_HYDRA    ---@type integer     siege
-NAGA_ROYAL               = FourCC('nnrg')    ---@type integer     royal guard
+NAGA_SLAVE               = FourCC('nmpe')    ---@type integer    --  peon
+NAGA_SNAP_DRAGON         = NAGA_DRAGON    ---@type integer    --  weak ranged
+NAGA_COUATL              = NAGA_SERPENT    ---@type integer    --  weak air
+NAGA_SIREN               = NAGA_WITCH    ---@type integer    --  caster
+NAGA_MYRMIDON            = FourCC('nmyr')    ---@type integer    --  knight
+NAGA_REAVER              = FourCC('nnmg')    ---@type integer    --  footman
+NAGA_TURTLE              = NAGA_HYDRA    ---@type integer    --  siege
+NAGA_ROYAL               = FourCC('nnrg')    ---@type integer    --  royal guard
 --  naga buildings
-NAGA_TEMPLE              = FourCC('nntt')    ---@type integer    town hall
-NAGA_CORAL               = FourCC('nnfm')    ---@type integer    farm
-NAGA_SHRINE              = FourCC('nnsa')    ---@type integer    sirens & couatls
-NAGA_SPAWNING            = FourCC('nnsg')    ---@type integer    myrm, snap dragon, hydra
-NAGA_GUARDIAN            = FourCC('nntg')    ---@type integer    tower
-NAGA_ALTAR               = FourCC('nnad')    ---@type integer    altar
+NAGA_TEMPLE              = FourCC('nntt')    ---@type integer    --  town hall
+NAGA_CORAL               = FourCC('nnfm')    ---@type integer    --  farm
+NAGA_SHRINE              = FourCC('nnsa')    ---@type integer    --  sirens & couatls
+NAGA_SPAWNING            = FourCC('nnsg')    ---@type integer    --  myrm, snap dragon, hydra
+NAGA_GUARDIAN            = FourCC('nntg')    ---@type integer    --  tower
+NAGA_ALTAR               = FourCC('nnad')    ---@type integer    --  altar
 --  naga upgrades
 UPG_NAGA_ARMOR           = FourCC('Rnam')    ---@type integer
 UPG_NAGA_ATTACK          = FourCC('Rnat')    ---@type integer
@@ -1020,7 +940,7 @@ M15                      = 15 * 60    ---@type integer
 EASY                     = 1    ---@type integer
 NORMAL                   = 2    ---@type integer
 HARD                     = 3    ---@type integer
-INSANE                   = 4    ---@type integer    not used
+INSANE                   = 4    ---@type integer    --  not used
 MELEE_NEWBIE             = 1    ---@type integer
 MELEE_NORMAL             = 2    ---@type integer
 MELEE_INSANE             = 3    ---@type integer
@@ -1037,7 +957,7 @@ UPKEEP_TIER2             = 80    ---@type integer
 -- sleep_seconds	---@type integer	
 total_gold               = 0    ---@type integer
 total_wood               = 0    ---@type integer
-gold_buffer              = 0    ---@type integer    usually for potion money
+gold_buffer              = 0    ---@type integer    --  usually for potion money
 difficulty               = NORMAL    ---@type integer
 exp_seen                 = 0    ---@type integer
 racial_farm              = FourCC('hhou')    ---@type integer
@@ -1091,7 +1011,6 @@ end
 -- ============================================================================
 
 ---@param message string
----@return nil
 function Trace(message)
 	if trace_on then
 		DisplayText(GetAiPlayer(), message)
@@ -1101,7 +1020,6 @@ end
 
 ---@param message string
 ---@param val integer
----@return nil
 function TraceI(message, val)
 	if trace_on then
 		DisplayTextI(GetAiPlayer(), message, val)
@@ -1112,7 +1030,6 @@ end
 ---@param message string
 ---@param v1 integer
 ---@param v2 integer
----@return nil
 function TraceII(message, v1, v2)
 	if trace_on then
 		DisplayTextII(GetAiPlayer(), message, v1, v2)
@@ -1124,14 +1041,12 @@ end
 ---@param v1 integer
 ---@param v2 integer
 ---@param v3 integer
----@return nil
 function TraceIII(message, v1, v2, v3)
 	if trace_on then
 		DisplayTextIII(GetAiPlayer(), message, v1, v2, v3)
 	end
 end
 -- ============================================================================
----@return nil
 function InitAI()
 	ai_player     = Player(GetAiPlayer())
 	sleep_seconds = 0
@@ -1142,7 +1057,6 @@ end
 ---@param heroes code
 ---@param peons code
 ---@param attacks code
----@return nil
 function StandardAI(heroes, peons, attacks)
 	
 	local isNewbie = (MeleeDifficulty() == MELEE_NEWBIE)
@@ -1196,14 +1110,11 @@ function Max(A, B)
 		return B
 	end
 end
-
----@return nil
 function SetZepNextWave()
 	zep_next_wave = true
 end
 
 ---@param seconds integer
----@return nil
 function SuicideSleep(seconds)
 	sleep_seconds = sleep_seconds - seconds
 	while true do
@@ -1256,21 +1167,18 @@ end
 -- ============================================================================
 
 ---@param count integer
----@return nil
 function SetWoodPeons(count)
 	campaign_wood_peons = count
 end
 -- ============================================================================
 
 ---@param count integer
----@return nil
 function SetGoldPeons(count)
 	campaign_gold_peons = count
 end
 -- ============================================================================
 
 ---@param harvest boolean
----@return nil
 function SetHarvestLumber(harvest)
 	if harvest then
 		campaign_wood_peons = 3
@@ -1281,14 +1189,12 @@ end
 -- ============================================================================
 
 ---@param state boolean
----@return nil
 function SetFormGroupTimeouts(state)
 	form_group_timeouts = state
 end
 -- ============================================================================
 
 ---@param state boolean
----@return nil
 function DoCampaignFarms(state)
 	do_campaign_farms = state
 end
@@ -1313,29 +1219,24 @@ function GetWood()
 	return GetPlayerState(ai_player, PLAYER_STATE_RESOURCE_LUMBER)
 end
 -- ============================================================================
----@return nil
 function InitBuildArray()
 	build_length = 0
 end
 -- ============================================================================
----@return nil
 function InitAssaultGroup()
 	harass_length = 0
 end
 -- ============================================================================
----@return nil
 function InitDefenseGroup()
 	defense_length = 0
 end
 -- ============================================================================
----@return nil
 function InitMeleeGroup()
 	InitAssaultGroup()
 	RemoveInjuries()
 	RemoveSiege()
 end
 -- ============================================================================
----@return nil
 function PrepFullSuicide()
 	InitAssaultGroup()
 	InitDefenseGroup()
@@ -1347,7 +1248,6 @@ end
 ---@param easy integer
 ---@param med integer
 ---@param hard integer
----@return nil
 function SetReplacements(easy, med, hard)
 	if difficulty == EASY then
 		SetReplacementCount(easy)
@@ -1360,7 +1260,6 @@ end
 -- ============================================================================
 
 ---@param func code
----@return nil
 function StartTownBuilder(func)
 	StartThread(func)
 end
@@ -1370,7 +1269,6 @@ end
 ---@param qty integer
 ---@param unitid integer
 ---@param town integer
----@return nil
 function SetBuildAll(t, qty, unitid, town)
 	if qty > 0 then
 		build_qty[build_length]  = qty
@@ -1384,7 +1282,6 @@ end
 
 ---@param qty integer
 ---@param unitid integer
----@return nil
 function SetBuildUnit(qty, unitid)
 	SetBuildAll(BUILD_UNIT, qty, unitid, -1)
 end
@@ -1392,7 +1289,6 @@ end
 
 ---@param qty integer
 ---@param unitid integer
----@return nil
 function SetBuildNext(qty, unitid)
 	local has = GetUnitCount(unitid)
 	if has >= qty then
@@ -1406,7 +1302,6 @@ end
 ---@param med integer
 ---@param hard integer
 ---@param unitid integer
----@return nil
 function SetBuildUnitEx(easy, med, hard, unitid)
 	if difficulty == EASY then
 		SetBuildAll(BUILD_UNIT, easy, unitid, -1)
@@ -1421,7 +1316,6 @@ end
 ---@param town integer
 ---@param qty integer
 ---@param unitid integer
----@return nil
 function SecondaryTown(town, qty, unitid)
 	SetBuildAll(BUILD_UNIT, qty, unitid, town)
 end
@@ -1430,7 +1324,6 @@ end
 ---@param town integer
 ---@param qty integer
 ---@param unitid integer
----@return nil
 function SecTown(town, qty, unitid)
 	SetBuildAll(BUILD_UNIT, qty, unitid, town)
 end
@@ -1438,7 +1331,6 @@ end
 
 ---@param qty integer
 ---@param unitid integer
----@return nil
 function SetBuildUpgr(qty, unitid)
 	if MeleeDifficulty() ~= MELEE_NEWBIE or qty == 1 then
 		SetBuildAll(BUILD_UPGRADE, qty, unitid, -1)
@@ -1450,7 +1342,6 @@ end
 ---@param med integer
 ---@param hard integer
 ---@param unitid integer
----@return nil
 function SetBuildUpgrEx(easy, med, hard, unitid)
 	if difficulty == EASY then
 		SetBuildAll(BUILD_UPGRADE, easy, unitid, -1)
@@ -1464,7 +1355,6 @@ end
 
 ---@param qty integer
 ---@param unitid integer
----@return nil
 function SetBuildExpa(qty, unitid)
 	SetBuildAll(BUILD_EXPAND, qty, unitid, -1)
 end
@@ -1496,7 +1386,6 @@ end
 -- ============================================================================
 
 ---@param unitid integer
----@return nil
 function BuildFactory(unitid)
 	if GetGold() > 1000 and GetWood() > 500 then
 		SetBuildUnit(2, unitid)
@@ -1516,7 +1405,6 @@ end
 ---@param townid integer
 ---@param qty integer
 ---@param unitid integer
----@return nil
 function GuardSecondary(townid, qty, unitid)
 	if TownHasHall(townid) and TownHasMine(townid) then
 		SecondaryTown(townid, qty, unitid)
@@ -1623,7 +1511,6 @@ end
 
 ---@param build_it boolean
 ---@param unitid integer
----@return nil
 function BasicExpansion(build_it, unitid)
 	if build_it and HallsCompleted(unitid) then
 		SetBuildExpa(TownCount(unitid) + 1, unitid)
@@ -1633,7 +1520,6 @@ end
 
 ---@param baseid integer
 ---@param newid integer
----@return nil
 function UpgradeAll(baseid, newid)
 	SetBuildUnit(TownCountDone(baseid), newid)
 end
@@ -1656,7 +1542,6 @@ end
 ---@param strong boolean
 ---@param id2 integer
 ---@param use2 integer
----@return nil
 function FoodPool(food, weak, id1, use1, strong, id2, use2)
 	if strong then
 		SetBuildUnit((food - use1 * TownCount(id1)) / use2, id2)
@@ -1670,7 +1555,6 @@ end
 
 ---@param townid integer
 ---@param unitid integer
----@return nil
 function MeleeTownHall(townid, unitid)
 	if TownHasMine(townid) and not TownHasHall(townid) then
 		SecondaryTown(townid, 1, unitid)
@@ -1680,7 +1564,6 @@ end
 
 ---@param unitid integer
 ---@param qty integer
----@return nil
 function WaitForUnits(unitid, qty)
 	while true do
 		if TownCountDone(unitid) == qty then break end
@@ -1768,7 +1651,6 @@ end
 
 ---@param towns integer
 ---@param townid integer
----@return nil
 function WaitForTown(towns, townid)
 	local i = 0
 	while true do
@@ -1819,7 +1701,6 @@ function StartExpansion(qty, hall)
 	return true
 end
 -- ============================================================================
----@return nil
 function OneBuildLoop()
 	local index = 0
 	local qty
@@ -1861,12 +1742,10 @@ end
 
 ---@param base real
 ---@param spread real
----@return nil
 function StaggerSleep(base, spread)
 	Sleep(base + spread * I2R(GetAiPlayer()) / I2R(GetPlayers()))
 end
 -- ============================================================================
----@return nil
 function BuildLoop()
 	OneBuildLoop()
 	StaggerSleep(1, 2)
@@ -1876,26 +1755,22 @@ function BuildLoop()
 	end
 end
 -- ============================================================================
----@return nil
 function StartBuildLoop()
 	StartThread(BuildLoop)
 end
 -- ============================================================================
 
 ---@param seconds integer
----@return nil
 function SetInitialWave(seconds)
 	sleep_seconds = seconds
 end
 -- ============================================================================
 
 ---@param seconds integer
----@return nil
 function AddSleepSeconds(seconds)
 	sleep_seconds = sleep_seconds + seconds
 end
 -- ============================================================================
----@return nil
 function SleepForever()
 	Trace("going to sleep forever\n")    -- xxx
 	while true do
@@ -1903,7 +1778,6 @@ function SleepForever()
 	end
 end
 -- ============================================================================
----@return nil
 function PlayGame()
 	StartBuildLoop()
 	SleepForever()
@@ -1911,7 +1785,6 @@ end
 -- ============================================================================
 
 ---@param unitid integer
----@return nil
 function ConvertNeeds(unitid)
 	if GetUnitCount(unitid) < 1 then
 		StartUnit(1, unitid, -1)
@@ -1921,7 +1794,6 @@ end
 
 ---@param desire integer
 ---@param unitid integer
----@return nil
 function Conversions(desire, unitid)
 	
 	if GetUnitCount(unitid) >= desire then
@@ -1943,7 +1815,6 @@ end
 ---@param qty integer
 ---@param max integer
 ---@param unitid integer
----@return nil
 function SetAssaultGroup(qty, max, unitid)
 	Conversions(max, unitid)
 	
@@ -1969,7 +1840,6 @@ end
 ---@param m3 integer
 ---@param h3 integer
 ---@param u3 integer
----@return nil
 function Interleave3(e1, m1, h1, u1, e2, m2, h2, u2, e3, m3, h3, u3)
 	local i1 = 1
 	local i2 = 1
@@ -2018,7 +1888,6 @@ end
 -- ============================================================================
 
 ---@param unitid integer
----@return nil
 function SetMeleeGroup(unitid)
 	if unitid == hero_id then
 		SetAssaultGroup(1, 9, unitid)
@@ -2031,7 +1900,6 @@ end
 ---@param level integer
 ---@param qty integer
 ---@param unitid integer
----@return nil
 function CampaignDefender(level, qty, unitid)
 	if qty > 0 and difficulty >= level then
 		defense_qty[defense_length]   = qty
@@ -2047,7 +1915,6 @@ end
 ---@param med integer
 ---@param hard integer
 ---@param unitid integer
----@return nil
 function CampaignDefenderEx(easy, med, hard, unitid)
 	if difficulty == EASY then
 		CampaignDefender(EASY, easy, unitid)
@@ -2062,7 +1929,6 @@ end
 ---@param level integer
 ---@param qty integer
 ---@param unitid integer
----@return nil
 function CampaignAttacker(level, qty, unitid)
 	if qty > 0 and difficulty >= level then
 		SetAssaultGroup(qty, qty, unitid)
@@ -2074,7 +1940,6 @@ end
 ---@param med integer
 ---@param hard integer
 ---@param unitid integer
----@return nil
 function CampaignAttackerEx(easy, med, hard, unitid)
 	if difficulty == EASY then
 		CampaignAttacker(EASY, easy, unitid)
@@ -2088,7 +1953,6 @@ end
 
 ---@param seconds integer
 ---@param testReady boolean
----@return nil
 function FormGroup(seconds, testReady)
 	local index
 	local count
@@ -2214,7 +2078,6 @@ function PrepSuicideOnPlayer(seconds)
 	return true
 end
 -- ============================================================================
----@return nil
 function SleepUntilAtGoal()
 	while true do
 		if CaptainRetreating() then break end
@@ -2225,7 +2088,6 @@ function SleepUntilAtGoal()
 	end
 end
 -- ============================================================================
----@return nil
 function SleepInCombat()
 	local count = 0
 	debugTrace("SleepInCombat\n")
@@ -2248,7 +2110,6 @@ end
 
 ---@param x integer
 ---@param y integer
----@return nil
 function AttackMoveXYA(x, y)
 	
 	if zep_next_wave then
@@ -2261,7 +2122,6 @@ function AttackMoveXYA(x, y)
 	SleepInCombat()
 end
 -- ============================================================================
----@return nil
 function SuicideOnPlayerWave()
 	Trace("waiting for attack wave to enter combat\n")    -- xxx
 	while true do
@@ -2322,7 +2182,6 @@ end
 ---@param p player
 ---@param x integer
 ---@param y integer
----@return nil
 function CommonSuicideOnPlayer(standard, bldgs, seconds, p, x, y)
 	local save_peons
 	
@@ -2373,7 +2232,6 @@ end
 
 ---@param seconds integer
 ---@param p player
----@return nil
 function SuicideOnPlayer(seconds, p)
 	CommonSuicideOnPlayer(true, true, seconds, p, 0, 0)
 end
@@ -2381,7 +2239,6 @@ end
 
 ---@param seconds integer
 ---@param p player
----@return nil
 function SuicideOnUnits(seconds, p)
 	CommonSuicideOnPlayer(true, false, seconds, p, 0, 0)
 end
@@ -2391,7 +2248,6 @@ end
 ---@param p player
 ---@param x integer
 ---@param y integer
----@return nil
 function SuicideOnPoint(seconds, p, x, y)
 	CommonSuicideOnPlayer(false, false, seconds, p, x, y)
 end
@@ -2399,7 +2255,6 @@ end
 
 ---@param seconds integer
 ---@param p player
----@return nil
 function SuicideUntilSignal(seconds, p)
 	local save
 	local wave_prep = PrepTime()
@@ -2438,7 +2293,6 @@ end
 ---@param med integer
 ---@param hard integer
 ---@param unitid integer
----@return nil
 function SuicideOnce(easy, med, hard, unitid)
 	if difficulty == EASY then
 		SuicideUnit(easy, unitid)
@@ -2451,7 +2305,6 @@ end
 -- --------------------------------------------------------------------------------------------------
 
 ---@param unitid integer
----@return nil
 function SuicideUnitA(unitid)
 	if unitid ~= 0 then
 		SuicideUnit(1, unitid)
@@ -2462,7 +2315,6 @@ end
 
 ---@param unitid integer
 ---@param playerid integer
----@return nil
 function SuicideUnitB(unitid, playerid)
 	if unitid ~= 0 then
 		SuicideUnitEx(1, unitid, playerid)
@@ -2481,7 +2333,6 @@ end
 ---@param u8 integer
 ---@param u9 integer
 ---@param uA integer
----@return nil
 function SuicideUnits(u1, u2, u3, u4, u5, u6, u7, u8, u9, uA)
 	Trace("MASS SUICIDE - this script is now technically done\n")    -- xxx
 	
@@ -2512,7 +2363,6 @@ end
 ---@param u8 integer
 ---@param u9 integer
 ---@param uA integer
----@return nil
 function SuicideUnitsEx(playerid, u1, u2, u3, u4, u5, u6, u7, u8, u9, uA)
 	Trace("MASS SUICIDE - this script is now technically done\n")    -- xxx
 	
@@ -2536,7 +2386,6 @@ end
 ---@param med integer
 ---@param hard integer
 ---@param p player
----@return nil
 function SuicideOnPlayerEx(easy, med, hard, p)
 	if difficulty == EASY then
 		SuicideOnPlayer(easy, p)
@@ -2552,7 +2401,6 @@ end
 ---@param med integer
 ---@param hard integer
 ---@param p player
----@return nil
 function SuicideOnUnitsEx(easy, med, hard, p)
 	if difficulty == EASY then
 		SuicideOnUnits(easy, p)
@@ -2570,7 +2418,6 @@ end
 ---@param p player
 ---@param x integer
 ---@param y integer
----@return nil
 function SuicideOnPointEx(easy, med, hard, p, x, y)
 	if difficulty == EASY then
 		SuicideOnPoint(easy, p, x, y)
@@ -2584,7 +2431,6 @@ end
 
 ---@param seconds integer
 ---@param p player
----@return nil
 function ForeverSuicideOnPlayer(seconds, p)
 	local length = harass_length
 	while true do
@@ -2597,7 +2443,6 @@ end
 
 ---@param target unit
 ---@param reform boolean
----@return nil
 function CommonSleepUntilTargetDead(target, reform)
 	while true do
 		if CaptainRetreating() then break end
@@ -2625,14 +2470,12 @@ end
 -- ============================================================================
 
 ---@param target unit
----@return nil
 function SleepUntilTargetDead(target)
 	CommonSleepUntilTargetDead(target, false)
 end
 -- ============================================================================
 
 ---@param target unit
----@return nil
 function ReformUntilTargetDead(target)
 	debugTrace("ReformUntilTargetDead\n")
 	CommonSleepUntilTargetDead(target, true)
@@ -2640,7 +2483,6 @@ end
 -- ============================================================================
 
 ---@param target unit
----@return nil
 function AttackMoveKillA(target)
 	if target == nil then
 		SuicideSleep(3)
@@ -2653,7 +2495,6 @@ function AttackMoveKillA(target)
 	SleepInCombat()
 end
 -- ============================================================================
----@return nil
 function MinorCreepAttack()
 	local target = GetMinorCreep()
 	SetAllianceTarget(target)
@@ -2661,7 +2502,6 @@ function MinorCreepAttack()
 	AttackMoveKillA(target)
 end
 -- ============================================================================
----@return nil
 function MajorCreepAttack()
 	local target = GetMajorCreep()
 	SetAllianceTarget(target)
@@ -2669,7 +2509,6 @@ function MajorCreepAttack()
 	AttackMoveKillA(target)
 end
 -- ============================================================================
----@return nil
 function CreepAttackEx()
 	local target = GetCreepCamp(min_creeps, max_creeps, allow_air_creeps)
 	SetAllianceTarget(target)
@@ -2677,7 +2516,6 @@ function CreepAttackEx()
 	AttackMoveKillA(target)
 end
 -- ============================================================================
----@return nil
 function AnyPlayerAttack()
 	local hall
 	
@@ -2696,7 +2534,6 @@ function AnyPlayerAttack()
 	AttackMoveKillA(hall)
 end
 -- ============================================================================
----@return nil
 function ExpansionAttack()
 	local creep = GetExpansionFoe()
 	local x
@@ -2714,7 +2551,6 @@ end
 -- ============================================================================
 --   AddSiege
 -- ============================================================================
----@return nil
 function AddSiege()
 	SetAssaultGroup(0, 9, SHADE)
 	SetAssaultGroup(0, 9, MEAT_WAGON)
@@ -2761,7 +2597,6 @@ end
 ---@param has_siege boolean
 ---@param major_ok boolean
 ---@param air_units boolean
----@return nil
 function SingleMeleeAttack(needs_exp, has_siege, major_ok, air_units)
 	local can_siege
 	local daytime
@@ -2889,7 +2724,6 @@ function SingleMeleeAttack(needs_exp, has_siege, major_ok, air_units)
 	MinorCreepAttack()
 end
 -- ============================================================================
----@return nil
 function GetZeppelin()
 	if ready_for_zeppelin then
 		get_zeppelin = true
@@ -2918,7 +2752,6 @@ function FoodAvail(base)
 	return GetFoodMade(racial_farm) * TownCount(racial_farm) + GetFoodMade(base) * TownCount(base)
 end
 -- ============================================================================
----@return nil
 function BuildAttackers()
 	local index = 0
 	local unitid
@@ -2942,7 +2775,6 @@ function BuildAttackers()
 	end
 end
 -- ============================================================================
----@return nil
 function BuildDefenders()
 	local index = 0
 	local unitid
@@ -2960,7 +2792,6 @@ function BuildDefenders()
 	end
 end
 -- ============================================================================
----@return nil
 function CampaignBasicsA()
 	local food_each = GetFoodMade(racial_farm)
 	local on_wood
@@ -3007,7 +2838,6 @@ function CampaignBasicsA()
 	ReturnGuardPosts()
 end
 -- ============================================================================
----@return nil
 function CampaignBasics()
 	Sleep(1)
 	CampaignBasicsA()
@@ -3021,7 +2851,6 @@ end
 
 ---@param farms integer
 ---@param heroes code
----@return nil
 function CampaignAI(farms, heroes)
 	if GetGameDifficulty() == MAP_DIFFICULTY_EASY then
 		difficulty = EASY
@@ -3065,7 +2894,6 @@ function CampaignAI(farms, heroes)
 	StartBuildLoop()
 end
 -- ============================================================================
----@return nil
 function UnsummonAll()
 	local bldg
 	while true do
@@ -3100,7 +2928,6 @@ end
 
 ---@param index integer
 ---@param id integer
----@return nil
 function SetSkillArray(index, id)
 	local i = 1
 	
@@ -3136,7 +2963,6 @@ end
 -- ============================================================================
 --   AwaitMeleeHeroes
 -- ============================================================================
----@return nil
 function AwaitMeleeHeroes()
 	if GetUnitCountDone(hero_id2) > 0 then
 		two_heroes = true

@@ -9,11 +9,11 @@ function FourCC(raw) end
 --  Native types. All native functions take extended handle types when
 --  possible to help prevent passing bad values to native functions
 -- 
----@class  agent:handle  all reference counted objects
----@class  event:agent   a reference to an event registration
----@class  player:agent   a single player reference
----@class  widget:agent   an interactive game object with life
----@class  unit:widget   a single unit reference
+---@class  agent:handle --  all reference counted objects
+---@class  event:agent --  a reference to an event registration
+---@class  player:agent --  a single player reference
+---@class  widget:agent --  an interactive game object with life
+---@class  unit:widget --  a single unit reference
 ---@class  destructable:widget
 ---@class  item:widget
 ---@class  ability:agent
@@ -841,10 +841,10 @@ MAP_SHARED_ADVANCED_CONTROL                               = ConvertMapFlag(8192 
 MAP_RANDOM_HERO                                           = ConvertMapFlag(8192 * 16)    ---@type mapflag
 MAP_RANDOM_RACES                                          = ConvertMapFlag(8192 * 32)    ---@type mapflag
 MAP_RELOADED                                              = ConvertMapFlag(8192 * 64)    ---@type mapflag
-MAP_PLACEMENT_RANDOM                                      = ConvertPlacement(0)    ---@type placement      random among all slots
-MAP_PLACEMENT_FIXED                                       = ConvertPlacement(1)    ---@type placement      player 0 in start loc 0...
-MAP_PLACEMENT_USE_MAP_SETTINGS                            = ConvertPlacement(2)    ---@type placement      whatever was specified by the script
-MAP_PLACEMENT_TEAMS_TOGETHER                              = ConvertPlacement(3)    ---@type placement      random with allies next to each other
+MAP_PLACEMENT_RANDOM                                      = ConvertPlacement(0)    ---@type placement    --  random among all slots
+MAP_PLACEMENT_FIXED                                       = ConvertPlacement(1)    ---@type placement    --  player 0 in start loc 0...
+MAP_PLACEMENT_USE_MAP_SETTINGS                            = ConvertPlacement(2)    ---@type placement    --  whatever was specified by the script
+MAP_PLACEMENT_TEAMS_TOGETHER                              = ConvertPlacement(3)    ---@type placement    --  random with allies next to each other
 MAP_LOC_PRIO_LOW                                          = ConvertStartLocPrio(0)    ---@type startlocprio
 MAP_LOC_PRIO_HIGH                                         = ConvertStartLocPrio(1)    ---@type startlocprio
 MAP_LOC_PRIO_NOT                                          = ConvertStartLocPrio(2)    ---@type startlocprio
@@ -1005,7 +1005,7 @@ EVENT_PLAYER_UNIT_RESEARCH_FINISH                         = ConvertPlayerUnitEve
 EVENT_PLAYER_UNIT_ISSUED_ORDER                            = ConvertPlayerUnitEvent(38)    ---@type playerunitevent
 EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER                      = ConvertPlayerUnitEvent(39)    ---@type playerunitevent
 EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER                     = ConvertPlayerUnitEvent(40)    ---@type playerunitevent
-EVENT_PLAYER_UNIT_ISSUED_UNIT_ORDER                       = ConvertPlayerUnitEvent(40)    ---@type playerunitevent      for compat
+EVENT_PLAYER_UNIT_ISSUED_UNIT_ORDER                       = ConvertPlayerUnitEvent(40)    ---@type playerunitevent    --  for compat
 EVENT_PLAYER_HERO_LEVEL                                   = ConvertPlayerUnitEvent(41)    ---@type playerunitevent
 EVENT_PLAYER_HERO_SKILL                                   = ConvertPlayerUnitEvent(42)    ---@type playerunitevent
 EVENT_PLAYER_HERO_REVIVABLE                               = ConvertPlayerUnitEvent(43)    ---@type playerunitevent
@@ -1110,6 +1110,7 @@ EVENT_PLAYER_UNIT_SPELL_EFFECT                            = ConvertPlayerUnitEve
 EVENT_PLAYER_UNIT_SPELL_FINISH                            = ConvertPlayerUnitEvent(275)    ---@type playerunitevent
 EVENT_PLAYER_UNIT_SPELL_ENDCAST                           = ConvertPlayerUnitEvent(276)    ---@type playerunitevent
 EVENT_PLAYER_UNIT_PAWN_ITEM                               = ConvertPlayerUnitEvent(277)    ---@type playerunitevent
+EVENT_PLAYER_UNIT_STACK_ITEM                              = ConvertPlayerUnitEvent(319)    ---@type playerunitevent
 -- ===================================================
 --  For use with TriggerRegisterUnitEvent
 -- ===================================================
@@ -1122,6 +1123,7 @@ EVENT_UNIT_SPELL_EFFECT                                   = ConvertUnitEvent(291
 EVENT_UNIT_SPELL_FINISH                                   = ConvertUnitEvent(292)    ---@type unitevent
 EVENT_UNIT_SPELL_ENDCAST                                  = ConvertUnitEvent(293)    ---@type unitevent
 EVENT_UNIT_PAWN_ITEM                                      = ConvertUnitEvent(294)    ---@type unitevent
+EVENT_UNIT_STACK_ITEM                                     = ConvertUnitEvent(318)    ---@type unitevent
 -- ===================================================
 --  Limit Event API constants
 --  variable, player state, game state, and unit state events
@@ -1492,11 +1494,11 @@ ABILITY_IF_PRIORITY                                       = ConvertAbilityIntege
 ABILITY_IF_LEVELS                                         = ConvertAbilityIntegerField(FourCC('alev'))    ---@type abilityintegerfield
 ABILITY_IF_REQUIRED_LEVEL                                 = ConvertAbilityIntegerField(FourCC('arlv'))    ---@type abilityintegerfield
 ABILITY_IF_LEVEL_SKIP_REQUIREMENT                         = ConvertAbilityIntegerField(FourCC('alsk'))    ---@type abilityintegerfield
-ABILITY_BF_HERO_ABILITY                                   = ConvertAbilityBooleanField(FourCC('aher'))    ---@type abilitybooleanfield      Get only
+ABILITY_BF_HERO_ABILITY                                   = ConvertAbilityBooleanField(FourCC('aher'))    ---@type abilitybooleanfield    --  Get only
 ABILITY_BF_ITEM_ABILITY                                   = ConvertAbilityBooleanField(FourCC('aite'))    ---@type abilitybooleanfield
 ABILITY_BF_CHECK_DEPENDENCIES                             = ConvertAbilityBooleanField(FourCC('achd'))    ---@type abilitybooleanfield
 ABILITY_RF_ARF_MISSILE_ARC                                = ConvertAbilityRealField(FourCC('amac'))    ---@type abilityrealfield
-ABILITY_SF_NAME                                           = ConvertAbilityStringField(FourCC('anam'))    ---@type abilitystringfield      Get Only
+ABILITY_SF_NAME                                           = ConvertAbilityStringField(FourCC('anam'))    ---@type abilitystringfield    --  Get Only
 ABILITY_SF_ICON_ACTIVATED                                 = ConvertAbilityStringField(FourCC('auar'))    ---@type abilitystringfield
 ABILITY_SF_ICON_RESEARCH                                  = ConvertAbilityStringField(FourCC('arar'))    ---@type abilitystringfield
 ABILITY_SF_EFFECT_SOUND                                   = ConvertAbilityStringField(FourCC('aefs'))    ---@type abilitystringfield
@@ -2557,41 +2559,34 @@ function GetLocalizedHotkey(source) end    -- (native)
 --
 
 ---@param name string
----@return nil
 function SetMapName(name) end    -- (native)
 
 
 ---@param description string
----@return nil
 function SetMapDescription(description) end    -- (native)
 
 
 ---@param teamcount integer
----@return nil
 function SetTeams(teamcount) end    -- (native)
 
 
 ---@param playercount integer
----@return nil
 function SetPlayers(playercount) end    -- (native)
 
 
 ---@param whichStartLoc integer
 ---@param x real
 ---@param y real
----@return nil
 function DefineStartLocation(whichStartLoc, x, y) end    -- (native)
 
 
 ---@param whichStartLoc integer
 ---@param whichLocation location
----@return nil
 function DefineStartLocationLoc(whichStartLoc, whichLocation) end    -- (native)
 
 
 ---@param whichStartLoc integer
 ---@param prioSlotCount integer
----@return nil
 function SetStartLocPrioCount(whichStartLoc, prioSlotCount) end    -- (native)
 
 
@@ -2599,7 +2594,6 @@ function SetStartLocPrioCount(whichStartLoc, prioSlotCount) end    -- (native)
 ---@param prioSlotIndex integer
 ---@param otherStartLocIndex integer
 ---@param priority startlocprio
----@return nil
 function SetStartLocPrio(whichStartLoc, prioSlotIndex, otherStartLocIndex, priority) end    -- (native)
 
 
@@ -2617,7 +2611,6 @@ function GetStartLocPrio(whichStartLoc, prioSlotIndex) end    -- (native)
 
 ---@param whichStartLoc integer
 ---@param prioSlotCount integer
----@return nil
 function SetEnemyStartLocPrioCount(whichStartLoc, prioSlotCount) end    -- (native)
 
 
@@ -2625,44 +2618,36 @@ function SetEnemyStartLocPrioCount(whichStartLoc, prioSlotCount) end    -- (nati
 ---@param prioSlotIndex integer
 ---@param otherStartLocIndex integer
 ---@param priority startlocprio
----@return nil
 function SetEnemyStartLocPrio(whichStartLoc, prioSlotIndex, otherStartLocIndex, priority) end    -- (native)
 
 
 ---@param whichGameType gametype
 ---@param value boolean
----@return nil
 function SetGameTypeSupported(whichGameType, value) end    -- (native)
 
 
 ---@param whichMapFlag mapflag
 ---@param value boolean
----@return nil
 function SetMapFlag(whichMapFlag, value) end    -- (native)
 
 
 ---@param whichPlacementType placement
----@return nil
 function SetGamePlacement(whichPlacementType) end    -- (native)
 
 
 ---@param whichspeed gamespeed
----@return nil
 function SetGameSpeed(whichspeed) end    -- (native)
 
 
 ---@param whichdifficulty gamedifficulty
----@return nil
 function SetGameDifficulty(whichdifficulty) end    -- (native)
 
 
 ---@param whichdensity mapdensity
----@return nil
 function SetResourceDensity(whichdensity) end    -- (native)
 
 
 ---@param whichdensity mapdensity
----@return nil
 function SetCreatureDensity(whichdensity) end    -- (native)
 
 ---@return integer
@@ -2717,13 +2702,11 @@ function GetStartLocationLoc(whichStartLocation) end    -- (native)
 
 ---@param whichPlayer player
 ---@param whichTeam integer
----@return nil
 function SetPlayerTeam(whichPlayer, whichTeam) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param startLocIndex integer
----@return nil
 function SetPlayerStartLocation(whichPlayer, startLocIndex) end    -- (native)
 --  forces player to have the specified start loc and marks the start loc as occupied
 --  which removes it from consideration for subsequently placed players
@@ -2732,13 +2715,11 @@ function SetPlayerStartLocation(whichPlayer, startLocIndex) end    -- (native)
 
 ---@param whichPlayer player
 ---@param startLocIndex integer
----@return nil
 function ForcePlayerStartLocation(whichPlayer, startLocIndex) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param color playercolor
----@return nil
 function SetPlayerColor(whichPlayer, color) end    -- (native)
 
 
@@ -2746,7 +2727,6 @@ function SetPlayerColor(whichPlayer, color) end    -- (native)
 ---@param otherPlayer player
 ---@param whichAllianceSetting alliancetype
 ---@param value boolean
----@return nil
 function SetPlayerAlliance(sourcePlayer, otherPlayer, whichAllianceSetting, value) end    -- (native)
 
 
@@ -2754,37 +2734,31 @@ function SetPlayerAlliance(sourcePlayer, otherPlayer, whichAllianceSetting, valu
 ---@param otherPlayer player
 ---@param whichResource playerstate
 ---@param rate integer
----@return nil
 function SetPlayerTaxRate(sourcePlayer, otherPlayer, whichResource, rate) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param whichRacePreference racepreference
----@return nil
 function SetPlayerRacePreference(whichPlayer, whichRacePreference) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param value boolean
----@return nil
 function SetPlayerRaceSelectable(whichPlayer, value) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param controlType mapcontrol
----@return nil
 function SetPlayerController(whichPlayer, controlType) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param name string
----@return nil
 function SetPlayerName(whichPlayer, name) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param flag boolean
----@return nil
 function SetPlayerOnScoreScreen(whichPlayer, flag) end    -- (native)
 
 
@@ -2842,7 +2816,6 @@ function CreateTimer() end    -- (native)
 
 
 ---@param whichTimer timer
----@return nil
 function DestroyTimer(whichTimer) end    -- (native)
 
 
@@ -2850,7 +2823,6 @@ function DestroyTimer(whichTimer) end    -- (native)
 ---@param timeout real
 ---@param periodic boolean
 ---@param handlerFunc code
----@return nil
 function TimerStart(whichTimer, timeout, periodic, handlerFunc) end    -- (native)
 
 
@@ -2870,12 +2842,10 @@ function TimerGetTimeout(whichTimer) end    -- (native)
 
 
 ---@param whichTimer timer
----@return nil
 function PauseTimer(whichTimer) end    -- (native)
 
 
 ---@param whichTimer timer
----@return nil
 function ResumeTimer(whichTimer) end    -- (native)
 
 ---@return timer
@@ -2888,7 +2858,6 @@ function CreateGroup() end    -- (native)
 
 
 ---@param whichGroup group
----@return nil
 function DestroyGroup(whichGroup) end    -- (native)
 
 
@@ -2917,7 +2886,6 @@ function BlzGroupRemoveGroupFast(whichGroup, removeGroup) end    -- (native)
 
 
 ---@param whichGroup group
----@return nil
 function GroupClear(whichGroup) end    -- (native)
 
 
@@ -2935,14 +2903,12 @@ function BlzGroupUnitAt(whichGroup, index) end    -- (native)
 ---@param whichGroup group
 ---@param unitname string
 ---@param filter boolexpr
----@return nil
 function GroupEnumUnitsOfType(whichGroup, unitname, filter) end    -- (native)
 
 
 ---@param whichGroup group
 ---@param whichPlayer player
 ---@param filter boolexpr
----@return nil
 function GroupEnumUnitsOfPlayer(whichGroup, whichPlayer, filter) end    -- (native)
 
 
@@ -2950,14 +2916,12 @@ function GroupEnumUnitsOfPlayer(whichGroup, whichPlayer, filter) end    -- (nati
 ---@param unitname string
 ---@param filter boolexpr
 ---@param countLimit integer
----@return nil
 function GroupEnumUnitsOfTypeCounted(whichGroup, unitname, filter, countLimit) end    -- (native)
 
 
 ---@param whichGroup group
 ---@param r rect
 ---@param filter boolexpr
----@return nil
 function GroupEnumUnitsInRect(whichGroup, r, filter) end    -- (native)
 
 
@@ -2965,7 +2929,6 @@ function GroupEnumUnitsInRect(whichGroup, r, filter) end    -- (native)
 ---@param r rect
 ---@param filter boolexpr
 ---@param countLimit integer
----@return nil
 function GroupEnumUnitsInRectCounted(whichGroup, r, filter, countLimit) end    -- (native)
 
 
@@ -2974,7 +2937,6 @@ function GroupEnumUnitsInRectCounted(whichGroup, r, filter, countLimit) end    -
 ---@param y real
 ---@param radius real
 ---@param filter boolexpr
----@return nil
 function GroupEnumUnitsInRange(whichGroup, x, y, radius, filter) end    -- (native)
 
 
@@ -2982,7 +2944,6 @@ function GroupEnumUnitsInRange(whichGroup, x, y, radius, filter) end    -- (nati
 ---@param whichLocation location
 ---@param radius real
 ---@param filter boolexpr
----@return nil
 function GroupEnumUnitsInRangeOfLoc(whichGroup, whichLocation, radius, filter) end    -- (native)
 
 
@@ -2992,7 +2953,6 @@ function GroupEnumUnitsInRangeOfLoc(whichGroup, whichLocation, radius, filter) e
 ---@param radius real
 ---@param filter boolexpr
 ---@param countLimit integer
----@return nil
 function GroupEnumUnitsInRangeCounted(whichGroup, x, y, radius, filter, countLimit) end    -- (native)
 
 
@@ -3001,14 +2961,12 @@ function GroupEnumUnitsInRangeCounted(whichGroup, x, y, radius, filter, countLim
 ---@param radius real
 ---@param filter boolexpr
 ---@param countLimit integer
----@return nil
 function GroupEnumUnitsInRangeOfLocCounted(whichGroup, whichLocation, radius, filter, countLimit) end    -- (native)
 
 
 ---@param whichGroup group
 ---@param whichPlayer player
 ---@param filter boolexpr
----@return nil
 function GroupEnumUnitsSelected(whichGroup, whichPlayer, filter) end    -- (native)
 
 
@@ -3073,7 +3031,6 @@ function GroupTargetOrderById(whichGroup, order, targetWidget) end    -- (native
 
 ---@param whichGroup group
 ---@param callback code
----@return nil
 function ForGroup(whichGroup, callback) end    -- (native)
 
 
@@ -3088,19 +3045,16 @@ function CreateForce() end    -- (native)
 
 
 ---@param whichForce force
----@return nil
 function DestroyForce(whichForce) end    -- (native)
 
 
 ---@param whichForce force
 ---@param whichPlayer player
----@return nil
 function ForceAddPlayer(whichForce, whichPlayer) end    -- (native)
 
 
 ---@param whichForce force
 ---@param whichPlayer player
----@return nil
 function ForceRemovePlayer(whichForce, whichPlayer) end    -- (native)
 
 
@@ -3111,40 +3065,34 @@ function BlzForceHasPlayer(whichForce, whichPlayer) end    -- (native)
 
 
 ---@param whichForce force
----@return nil
 function ForceClear(whichForce) end    -- (native)
 
 
 ---@param whichForce force
 ---@param filter boolexpr
----@return nil
 function ForceEnumPlayers(whichForce, filter) end    -- (native)
 
 
 ---@param whichForce force
 ---@param filter boolexpr
 ---@param countLimit integer
----@return nil
 function ForceEnumPlayersCounted(whichForce, filter, countLimit) end    -- (native)
 
 
 ---@param whichForce force
 ---@param whichPlayer player
 ---@param filter boolexpr
----@return nil
 function ForceEnumAllies(whichForce, whichPlayer, filter) end    -- (native)
 
 
 ---@param whichForce force
 ---@param whichPlayer player
 ---@param filter boolexpr
----@return nil
 function ForceEnumEnemies(whichForce, whichPlayer, filter) end    -- (native)
 
 
 ---@param whichForce force
 ---@param callback code
----@return nil
 function ForForce(whichForce, callback) end    -- (native)
 -- ============================================================================
 --  Region and Location API
@@ -3165,7 +3113,6 @@ function RectFromLoc(min, max) end    -- (native)
 
 
 ---@param whichRect rect
----@return nil
 function RemoveRect(whichRect) end    -- (native)
 
 
@@ -3174,27 +3121,23 @@ function RemoveRect(whichRect) end    -- (native)
 ---@param miny real
 ---@param maxx real
 ---@param maxy real
----@return nil
 function SetRect(whichRect, minx, miny, maxx, maxy) end    -- (native)
 
 
 ---@param whichRect rect
 ---@param min location
 ---@param max location
----@return nil
 function SetRectFromLoc(whichRect, min, max) end    -- (native)
 
 
 ---@param whichRect rect
 ---@param newCenterX real
 ---@param newCenterY real
----@return nil
 function MoveRectTo(whichRect, newCenterX, newCenterY) end    -- (native)
 
 
 ---@param whichRect rect
 ---@param newCenterLoc location
----@return nil
 function MoveRectToLoc(whichRect, newCenterLoc) end    -- (native)
 
 
@@ -3232,45 +3175,38 @@ function CreateRegion() end    -- (native)
 
 
 ---@param whichRegion region
----@return nil
 function RemoveRegion(whichRegion) end    -- (native)
 
 
 ---@param whichRegion region
 ---@param r rect
----@return nil
 function RegionAddRect(whichRegion, r) end    -- (native)
 
 
 ---@param whichRegion region
 ---@param r rect
----@return nil
 function RegionClearRect(whichRegion, r) end    -- (native)
 
 
 ---@param whichRegion region
 ---@param x real
 ---@param y real
----@return nil
 function RegionAddCell(whichRegion, x, y) end    -- (native)
 
 
 ---@param whichRegion region
 ---@param whichLocation location
----@return nil
 function RegionAddCellAtLoc(whichRegion, whichLocation) end    -- (native)
 
 
 ---@param whichRegion region
 ---@param x real
 ---@param y real
----@return nil
 function RegionClearCell(whichRegion, x, y) end    -- (native)
 
 
 ---@param whichRegion region
 ---@param whichLocation location
----@return nil
 function RegionClearCellAtLoc(whichRegion, whichLocation) end    -- (native)
 
 
@@ -3281,14 +3217,12 @@ function Location(x, y) end    -- (native)
 
 
 ---@param whichLocation location
----@return nil
 function RemoveLocation(whichLocation) end    -- (native)
 
 
 ---@param whichLocation location
 ---@param newX real
 ---@param newY real
----@return nil
 function MoveLocation(whichLocation, newX, newY) end    -- (native)
 
 
@@ -3336,22 +3270,18 @@ function CreateTrigger() end    -- (native)
 
 
 ---@param whichTrigger trigger
----@return nil
 function DestroyTrigger(whichTrigger) end    -- (native)
 
 
 ---@param whichTrigger trigger
----@return nil
 function ResetTrigger(whichTrigger) end    -- (native)
 
 
 ---@param whichTrigger trigger
----@return nil
 function EnableTrigger(whichTrigger) end    -- (native)
 
 
 ---@param whichTrigger trigger
----@return nil
 function DisableTrigger(whichTrigger) end    -- (native)
 
 
@@ -3362,7 +3292,6 @@ function IsTriggerEnabled(whichTrigger) end    -- (native)
 
 ---@param whichTrigger trigger
 ---@param flag boolean
----@return nil
 function TriggerWaitOnSleeps(whichTrigger, flag) end    -- (native)
 
 
@@ -3417,7 +3346,6 @@ function GetTriggerExecCount(whichTrigger) end    -- (native)
 
 
 ---@param funcName string
----@return nil
 function ExecuteFunc(funcName) end    -- (native)
 -- ============================================================================
 --  Boolean Expr API ( for compositing trigger conditions and unit filter funcs...)
@@ -3446,7 +3374,6 @@ function Condition(func) end    -- (native)
 
 
 ---@param c conditionfunc
----@return nil
 function DestroyCondition(c) end    -- (native)
 
 
@@ -3456,12 +3383,10 @@ function Filter(func) end    -- (native)
 
 
 ---@param f filterfunc
----@return nil
 function DestroyFilter(f) end    -- (native)
 
 
 ---@param e boolexpr
----@return nil
 function DestroyBoolExpr(e) end    -- (native)
 -- ============================================================================
 --  Trigger Game Event API
@@ -3724,6 +3649,23 @@ function GetManipulatingUnit() end    -- (native)
 
 ---@return item
 function GetManipulatedItem() end    -- (native)
+--  For EVENT_PLAYER_UNIT_PICKUP_ITEM, returns the item absorbing the picked up item in case it is stacking.
+--  Returns null if the item was a powerup and not a stacking item.
+---@return item
+function BlzGetAbsorbingItem() end    -- (native)
+
+---@return boolean
+function BlzGetManipulatedItemWasAbsorbed() end    -- (native)
+--  EVENT_PLAYER_UNIT_STACK_ITEM
+--  Source is the item that is losing charges, Target is the item getting charges.
+---@return item
+function BlzGetStackingItemSource() end    -- (native)
+
+---@return item
+function BlzGetStackingItemTarget() end    -- (native)
+
+---@return integer
+function BlzGetStackingItemTargetPreviousCharges() end    -- (native)
 --  EVENT_PLAYER_UNIT_ISSUED_ORDER
 ---@return unit
 function GetOrderedUnit() end    -- (native)
@@ -3895,6 +3837,8 @@ function GetEventTargetUnit() end    -- (native)
 --  EVENT_UNIT_PICKUP_ITEM
 --  EVENT_UNIT_USE_ITEM
 --  See the Player Unit/Item manipulation Event API above for event info funcs
+--  EVENT_UNIT_STACK_ITEM
+--  See the Player Unit/Item stack Event API above for event info funcs
 --  EVENT_UNIT_ISSUED_ORDER
 --  EVENT_UNIT_ISSUED_POINT_ORDER
 --  EVENT_UNIT_ISSUED_TARGET_ORDER
@@ -3916,12 +3860,10 @@ function TriggerAddCondition(whichTrigger, condition) end    -- (native)
 
 ---@param whichTrigger trigger
 ---@param whichCondition triggercondition
----@return nil
 function TriggerRemoveCondition(whichTrigger, whichCondition) end    -- (native)
 
 
 ---@param whichTrigger trigger
----@return nil
 function TriggerClearConditions(whichTrigger) end    -- (native)
 
 
@@ -3933,23 +3875,19 @@ function TriggerAddAction(whichTrigger, actionFunc) end    -- (native)
 
 ---@param whichTrigger trigger
 ---@param whichAction triggeraction
----@return nil
 function TriggerRemoveAction(whichTrigger, whichAction) end    -- (native)
 
 
 ---@param whichTrigger trigger
----@return nil
 function TriggerClearActions(whichTrigger) end    -- (native)
 
 
 ---@param timeout real
----@return nil
 function TriggerSleepAction(timeout) end    -- (native)
 
 
 ---@param s sound
 ---@param offset real
----@return nil
 function TriggerWaitForSound(s, offset) end    -- (native)
 
 
@@ -3959,18 +3897,12 @@ function TriggerEvaluate(whichTrigger) end    -- (native)
 
 
 ---@param whichTrigger trigger
----@return nil
 function TriggerExecute(whichTrigger) end    -- (native)
 
 
 ---@param whichTrigger trigger
----@return nil
 function TriggerExecuteWait(whichTrigger) end    -- (native)
-
----@return nil
 function TriggerSyncStart() end    -- (native)
-
----@return nil
 function TriggerSyncReady() end    -- (native)
 -- ============================================================================
 --  Widget API
@@ -3982,7 +3914,6 @@ function GetWidgetLife(whichWidget) end    -- (native)
 
 ---@param whichWidget widget
 ---@param newLife real
----@return nil
 function SetWidgetLife(whichWidget, newLife) end    -- (native)
 
 
@@ -4044,18 +3975,15 @@ function CreateDeadDestructableZ(objectid, x, y, z, face, scale, variation) end 
 
 
 ---@param d destructable
----@return nil
 function RemoveDestructable(d) end    -- (native)
 
 
 ---@param d destructable
----@return nil
 function KillDestructable(d) end    -- (native)
 
 
 ---@param d destructable
 ---@param flag boolean
----@return nil
 function SetDestructableInvulnerable(d, flag) end    -- (native)
 
 
@@ -4067,7 +3995,6 @@ function IsDestructableInvulnerable(d) end    -- (native)
 ---@param r rect
 ---@param filter boolexpr
 ---@param actionFunc code
----@return nil
 function EnumDestructablesInRect(r, filter, actionFunc) end    -- (native)
 
 
@@ -4088,7 +4015,6 @@ function GetDestructableY(d) end    -- (native)
 
 ---@param d destructable
 ---@param life real
----@return nil
 function SetDestructableLife(d, life) end    -- (native)
 
 
@@ -4099,7 +4025,6 @@ function GetDestructableLife(d) end    -- (native)
 
 ---@param d destructable
 ---@param max real
----@return nil
 function SetDestructableMaxLife(d, max) end    -- (native)
 
 
@@ -4111,31 +4036,26 @@ function GetDestructableMaxLife(d) end    -- (native)
 ---@param d destructable
 ---@param life real
 ---@param birth boolean
----@return nil
 function DestructableRestoreLife(d, life, birth) end    -- (native)
 
 
 ---@param d destructable
 ---@param whichAnimation string
----@return nil
 function QueueDestructableAnimation(d, whichAnimation) end    -- (native)
 
 
 ---@param d destructable
 ---@param whichAnimation string
----@return nil
 function SetDestructableAnimation(d, whichAnimation) end    -- (native)
 
 
 ---@param d destructable
 ---@param speedFactor real
----@return nil
 function SetDestructableAnimationSpeed(d, speedFactor) end    -- (native)
 
 
 ---@param d destructable
 ---@param flag boolean
----@return nil
 function ShowDestructable(d, flag) end    -- (native)
 
 
@@ -4146,7 +4066,6 @@ function GetDestructableOccluderHeight(d) end    -- (native)
 
 ---@param d destructable
 ---@param height real
----@return nil
 function SetDestructableOccluderHeight(d, height) end    -- (native)
 
 
@@ -4167,7 +4086,6 @@ function CreateItem(itemid, x, y) end    -- (native)
 
 
 ---@param whichItem item
----@return nil
 function RemoveItem(whichItem) end    -- (native)
 
 
@@ -4194,38 +4112,32 @@ function GetItemY(i) end    -- (native)
 ---@param i item
 ---@param x real
 ---@param y real
----@return nil
 function SetItemPosition(i, x, y) end    -- (native)
 
 
 ---@param whichItem item
 ---@param flag boolean
----@return nil
 function SetItemDropOnDeath(whichItem, flag) end    -- (native)
 
 
 ---@param i item
 ---@param flag boolean
----@return nil
 function SetItemDroppable(i, flag) end    -- (native)
 
 
 ---@param i item
 ---@param flag boolean
----@return nil
 function SetItemPawnable(i, flag) end    -- (native)
 
 
 ---@param whichItem item
 ---@param whichPlayer player
 ---@param changeColor boolean
----@return nil
 function SetItemPlayer(whichItem, whichPlayer, changeColor) end    -- (native)
 
 
 ---@param whichItem item
 ---@param flag boolean
----@return nil
 function SetItemInvulnerable(whichItem, flag) end    -- (native)
 
 
@@ -4236,7 +4148,6 @@ function IsItemInvulnerable(whichItem) end    -- (native)
 
 ---@param whichItem item
 ---@param show boolean
----@return nil
 function SetItemVisible(whichItem, show) end    -- (native)
 
 
@@ -4283,7 +4194,6 @@ function IsItemIdPawnable(itemId) end    -- (native)
 ---@param r rect
 ---@param filter boolexpr
 ---@param actionFunc code
----@return nil
 function EnumItemsInRect(r, filter, actionFunc) end    -- (native)
 
 
@@ -4299,7 +4209,6 @@ function GetItemType(whichItem) end    -- (native)
 
 ---@param whichItem item
 ---@param unitId integer
----@return nil
 function SetItemDropID(whichItem, unitId) end    -- (native)
 
 
@@ -4315,7 +4224,6 @@ function GetItemCharges(whichItem) end    -- (native)
 
 ---@param whichItem item
 ---@param charges integer
----@return nil
 function SetItemCharges(whichItem, charges) end    -- (native)
 
 
@@ -4326,7 +4234,6 @@ function GetItemUserData(whichItem) end    -- (native)
 
 ---@param whichItem item
 ---@param data integer
----@return nil
 function SetItemUserData(whichItem, data) end    -- (native)
 -- ============================================================================
 --  Unit API
@@ -4376,100 +4283,84 @@ function CreateCorpse(whichPlayer, unitid, x, y, face) end    -- (native)
 
 
 ---@param whichUnit unit
----@return nil
 function KillUnit(whichUnit) end    -- (native)
 
 
 ---@param whichUnit unit
----@return nil
 function RemoveUnit(whichUnit) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param show boolean
----@return nil
 function ShowUnit(whichUnit, show) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param whichUnitState unitstate
 ---@param newVal real
----@return nil
 function SetUnitState(whichUnit, whichUnitState, newVal) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param newX real
----@return nil
 function SetUnitX(whichUnit, newX) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param newY real
----@return nil
 function SetUnitY(whichUnit, newY) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param newX real
 ---@param newY real
----@return nil
 function SetUnitPosition(whichUnit, newX, newY) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param whichLocation location
----@return nil
 function SetUnitPositionLoc(whichUnit, whichLocation) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param facingAngle real
----@return nil
 function SetUnitFacing(whichUnit, facingAngle) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param facingAngle real
 ---@param duration real
----@return nil
 function SetUnitFacingTimed(whichUnit, facingAngle, duration) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param newSpeed real
----@return nil
 function SetUnitMoveSpeed(whichUnit, newSpeed) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param newHeight real
 ---@param rate real
----@return nil
 function SetUnitFlyHeight(whichUnit, newHeight, rate) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param newTurnSpeed real
----@return nil
 function SetUnitTurnSpeed(whichUnit, newTurnSpeed) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param newPropWindowAngle real
----@return nil
 function SetUnitPropWindow(whichUnit, newPropWindowAngle) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param newAcquireRange real
----@return nil
 function SetUnitAcquireRange(whichUnit, newAcquireRange) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param creepGuard boolean
----@return nil
 function SetUnitCreepGuard(whichUnit, creepGuard) end    -- (native)
 
 
@@ -4516,13 +4407,11 @@ function GetUnitDefaultFlyHeight(whichUnit) end    -- (native)
 ---@param whichUnit unit
 ---@param whichPlayer player
 ---@param changeColor boolean
----@return nil
 function SetUnitOwner(whichUnit, whichPlayer, changeColor) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param whichColor playercolor
----@return nil
 function SetUnitColor(whichUnit, whichColor) end    -- (native)
 
 
@@ -4530,19 +4419,16 @@ function SetUnitColor(whichUnit, whichColor) end    -- (native)
 ---@param scaleX real
 ---@param scaleY real
 ---@param scaleZ real
----@return nil
 function SetUnitScale(whichUnit, scaleX, scaleY, scaleZ) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param timeScale real
----@return nil
 function SetUnitTimeScale(whichUnit, timeScale) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param blendTime real
----@return nil
 function SetUnitBlendTime(whichUnit, blendTime) end    -- (native)
 
 
@@ -4551,39 +4437,33 @@ function SetUnitBlendTime(whichUnit, blendTime) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function SetUnitVertexColor(whichUnit, red, green, blue, alpha) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param whichAnimation string
----@return nil
 function QueueUnitAnimation(whichUnit, whichAnimation) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param whichAnimation string
----@return nil
 function SetUnitAnimation(whichUnit, whichAnimation) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param whichAnimation integer
----@return nil
 function SetUnitAnimationByIndex(whichUnit, whichAnimation) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param whichAnimation string
 ---@param rarity raritycontrol
----@return nil
 function SetUnitAnimationWithRarity(whichUnit, whichAnimation, rarity) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param animProperties string
 ---@param add boolean
----@return nil
 function AddUnitAnimationProperties(whichUnit, animProperties, add) end    -- (native)
 
 
@@ -4593,46 +4473,39 @@ function AddUnitAnimationProperties(whichUnit, animProperties, add) end    -- (n
 ---@param offsetX real
 ---@param offsetY real
 ---@param offsetZ real
----@return nil
 function SetUnitLookAt(whichUnit, whichBone, lookAtTarget, offsetX, offsetY, offsetZ) end    -- (native)
 
 
 ---@param whichUnit unit
----@return nil
 function ResetUnitLookAt(whichUnit) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param byWhichPlayer player
 ---@param flag boolean
----@return nil
 function SetUnitRescuable(whichUnit, byWhichPlayer, flag) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param range real
----@return nil
 function SetUnitRescueRange(whichUnit, range) end    -- (native)
 
 
 ---@param whichHero unit
 ---@param newStr integer
 ---@param permanent boolean
----@return nil
 function SetHeroStr(whichHero, newStr, permanent) end    -- (native)
 
 
 ---@param whichHero unit
 ---@param newAgi integer
 ---@param permanent boolean
----@return nil
 function SetHeroAgi(whichHero, newAgi, permanent) end    -- (native)
 
 
 ---@param whichHero unit
 ---@param newInt integer
 ---@param permanent boolean
----@return nil
 function SetHeroInt(whichHero, newInt, permanent) end    -- (native)
 
 
@@ -4668,7 +4541,6 @@ function GetHeroXP(whichHero) end    -- (native)
 ---@param whichHero unit
 ---@param newXpVal integer
 ---@param showEyeCandy boolean
----@return nil
 function SetHeroXP(whichHero, newXpVal, showEyeCandy) end    -- (native)
 
 
@@ -4686,14 +4558,12 @@ function UnitModifySkillPoints(whichHero, skillPointDelta) end    -- (native)
 ---@param whichHero unit
 ---@param xpToAdd integer
 ---@param showEyeCandy boolean
----@return nil
 function AddHeroXP(whichHero, xpToAdd, showEyeCandy) end    -- (native)
 
 
 ---@param whichHero unit
 ---@param level integer
 ---@param showEyeCandy boolean
----@return nil
 function SetHeroLevel(whichHero, level, showEyeCandy) end    -- (native)
 
 
@@ -4714,7 +4584,6 @@ function GetHeroProperName(whichHero) end    -- (native)
 
 ---@param whichHero unit
 ---@param flag boolean
----@return nil
 function SuspendHeroXP(whichHero, flag) end    -- (native)
 
 
@@ -4725,7 +4594,6 @@ function IsSuspendedXP(whichHero) end    -- (native)
 
 ---@param whichHero unit
 ---@param abilcode integer
----@return nil
 function SelectHeroSkill(whichHero, abilcode) end    -- (native)
 
 
@@ -4771,19 +4639,16 @@ function ReviveHeroLoc(whichHero, loc, doEyecandy) end    -- (native)
 
 ---@param whichUnit unit
 ---@param exploded boolean
----@return nil
 function SetUnitExploded(whichUnit, exploded) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param flag boolean
----@return nil
 function SetUnitInvulnerable(whichUnit, flag) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param flag boolean
----@return nil
 function PauseUnit(whichUnit, flag) end    -- (native)
 
 
@@ -4794,16 +4659,12 @@ function IsUnitPaused(whichHero) end    -- (native)
 
 ---@param whichUnit unit
 ---@param flag boolean
----@return nil
 function SetUnitPathing(whichUnit, flag) end    -- (native)
-
----@return nil
 function ClearSelection() end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param flag boolean
----@return nil
 function SelectUnit(whichUnit, flag) end    -- (native)
 
 
@@ -4838,7 +4699,6 @@ function UnitAddItemToSlotById(whichUnit, itemId, itemSlot) end    -- (native)
 
 ---@param whichUnit unit
 ---@param whichItem item
----@return nil
 function UnitRemoveItem(whichUnit, whichItem) end    -- (native)
 
 
@@ -4986,7 +4846,6 @@ function GetFoodUsed(unitId) end    -- (native)
 
 ---@param whichUnit unit
 ---@param useFood boolean
----@return nil
 function SetUnitUseFood(whichUnit, useFood) end    -- (native)
 
 
@@ -5146,13 +5005,11 @@ function IsUnitIdType(unitId, whichUnitType) end    -- (native)
 ---@param whichUnit unit
 ---@param whichPlayer player
 ---@param share boolean
----@return nil
 function UnitShareVision(whichUnit, whichPlayer, share) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param suspend boolean
----@return nil
 function UnitSuspendDecay(whichUnit, suspend) end    -- (native)
 
 
@@ -5190,7 +5047,6 @@ function UnitMakeAbilityPermanent(whichUnit, permanent, abilityId) end    -- (na
 ---@param whichUnit unit
 ---@param removePositive boolean
 ---@param removeNegative boolean
----@return nil
 function UnitRemoveBuffs(whichUnit, removePositive, removeNegative) end    -- (native)
 
 
@@ -5202,7 +5058,6 @@ function UnitRemoveBuffs(whichUnit, removePositive, removeNegative) end    -- (n
 ---@param timedLife boolean
 ---@param aura boolean
 ---@param autoDispel boolean
----@return nil
 function UnitRemoveBuffsEx(whichUnit, removePositive, removeNegative, magic, physical, timedLife, aura, autoDispel) end    -- (native)
 
 
@@ -5232,7 +5087,6 @@ function UnitCountBuffsEx(whichUnit, removePositive, removeNegative, magic, phys
 
 ---@param whichUnit unit
 ---@param add boolean
----@return nil
 function UnitAddSleep(whichUnit, add) end    -- (native)
 
 
@@ -5243,7 +5097,6 @@ function UnitCanSleep(whichUnit) end    -- (native)
 
 ---@param whichUnit unit
 ---@param add boolean
----@return nil
 function UnitAddSleepPerm(whichUnit, add) end    -- (native)
 
 
@@ -5258,14 +5111,12 @@ function UnitIsSleeping(whichUnit) end    -- (native)
 
 
 ---@param whichUnit unit
----@return nil
 function UnitWakeUp(whichUnit) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param buffId integer
 ---@param duration real
----@return nil
 function UnitApplyTimedLife(whichUnit, buffId, duration) end    -- (native)
 
 
@@ -5281,31 +5132,26 @@ function UnitIgnoreAlarmToggled(whichUnit) end    -- (native)
 
 
 ---@param whichUnit unit
----@return nil
 function UnitResetCooldown(whichUnit) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param constructionPercentage integer
----@return nil
 function UnitSetConstructionProgress(whichUnit, constructionPercentage) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param upgradePercentage integer
----@return nil
 function UnitSetUpgradeProgress(whichUnit, upgradePercentage) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param flag boolean
----@return nil
 function UnitPauseTimedLife(whichUnit, flag) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param flag boolean
----@return nil
 function UnitSetUsesAltIcon(whichUnit, flag) end    -- (native)
 
 
@@ -5497,13 +5343,11 @@ function GetUnitCurrentOrder(whichUnit) end    -- (native)
 
 ---@param whichUnit unit
 ---@param amount integer
----@return nil
 function SetResourceAmount(whichUnit, amount) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param amount integer
----@return nil
 function AddResourceAmount(whichUnit, amount) end    -- (native)
 
 
@@ -5525,13 +5369,11 @@ function WaygateGetDestinationY(waygate) end    -- (native)
 ---@param waygate unit
 ---@param x real
 ---@param y real
----@return nil
 function WaygateSetDestination(waygate, x, y) end    -- (native)
 
 
 ---@param waygate unit
 ---@param activate boolean
----@return nil
 function WaygateActivate(waygate, activate) end    -- (native)
 
 
@@ -5543,7 +5385,6 @@ function WaygateIsActive(waygate) end    -- (native)
 ---@param itemId integer
 ---@param currentStock integer
 ---@param stockMax integer
----@return nil
 function AddItemToAllStock(itemId, currentStock, stockMax) end    -- (native)
 
 
@@ -5551,14 +5392,12 @@ function AddItemToAllStock(itemId, currentStock, stockMax) end    -- (native)
 ---@param itemId integer
 ---@param currentStock integer
 ---@param stockMax integer
----@return nil
 function AddItemToStock(whichUnit, itemId, currentStock, stockMax) end    -- (native)
 
 
 ---@param unitId integer
 ---@param currentStock integer
 ---@param stockMax integer
----@return nil
 function AddUnitToAllStock(unitId, currentStock, stockMax) end    -- (native)
 
 
@@ -5566,51 +5405,42 @@ function AddUnitToAllStock(unitId, currentStock, stockMax) end    -- (native)
 ---@param unitId integer
 ---@param currentStock integer
 ---@param stockMax integer
----@return nil
 function AddUnitToStock(whichUnit, unitId, currentStock, stockMax) end    -- (native)
 
 
 ---@param itemId integer
----@return nil
 function RemoveItemFromAllStock(itemId) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param itemId integer
----@return nil
 function RemoveItemFromStock(whichUnit, itemId) end    -- (native)
 
 
 ---@param unitId integer
----@return nil
 function RemoveUnitFromAllStock(unitId) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param unitId integer
----@return nil
 function RemoveUnitFromStock(whichUnit, unitId) end    -- (native)
 
 
 ---@param slots integer
----@return nil
 function SetAllItemTypeSlots(slots) end    -- (native)
 
 
 ---@param slots integer
----@return nil
 function SetAllUnitTypeSlots(slots) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param slots integer
----@return nil
 function SetItemTypeSlots(whichUnit, slots) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param slots integer
----@return nil
 function SetUnitTypeSlots(whichUnit, slots) end    -- (native)
 
 
@@ -5621,7 +5451,6 @@ function GetUnitUserData(whichUnit) end    -- (native)
 
 ---@param whichUnit unit
 ---@param data integer
----@return nil
 function SetUnitUserData(whichUnit, data) end    -- (native)
 -- ============================================================================
 --  Player API
@@ -5767,32 +5596,27 @@ function GetPlayerHandicapDamage(whichPlayer) end    -- (native)
 
 ---@param whichPlayer player
 ---@param handicap real
----@return nil
 function SetPlayerHandicap(whichPlayer, handicap) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param handicap real
----@return nil
 function SetPlayerHandicapXP(whichPlayer, handicap) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param handicap real
----@return nil
 function SetPlayerHandicapReviveTime(whichPlayer, handicap) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param handicap real
----@return nil
 function SetPlayerHandicapDamage(whichPlayer, handicap) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param techid integer
 ---@param maximum integer
----@return nil
 function SetPlayerTechMaxAllowed(whichPlayer, techid, maximum) end    -- (native)
 
 
@@ -5805,14 +5629,12 @@ function GetPlayerTechMaxAllowed(whichPlayer, techid) end    -- (native)
 ---@param whichPlayer player
 ---@param techid integer
 ---@param levels integer
----@return nil
 function AddPlayerTechResearched(whichPlayer, techid, levels) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param techid integer
 ---@param setToLevel integer
----@return nil
 function SetPlayerTechResearched(whichPlayer, techid, setToLevel) end    -- (native)
 
 
@@ -5832,41 +5654,35 @@ function GetPlayerTechCount(whichPlayer, techid, specificonly) end    -- (native
 
 ---@param whichPlayer player
 ---@param newOwner integer
----@return nil
 function SetPlayerUnitsOwner(whichPlayer, newOwner) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param toWhichPlayers force
 ---@param flag boolean
----@return nil
 function CripplePlayer(whichPlayer, toWhichPlayers, flag) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param abilid integer
 ---@param avail boolean
----@return nil
 function SetPlayerAbilityAvailable(whichPlayer, abilid, avail) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param whichPlayerState playerstate
 ---@param value integer
----@return nil
 function SetPlayerState(whichPlayer, whichPlayerState, value) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param gameResult playergameresult
----@return nil
 function RemovePlayer(whichPlayer, gameResult) end    -- (native)
 --  Used to store hero level data for the scorescreen
 --  before units are moved to neutral passive in melee games
 --
 
 ---@param whichPlayer player
----@return nil
 function CachePlayerHeroData(whichPlayer) end    -- (native)
 -- ============================================================================
 --  Fog of War API
@@ -5875,7 +5691,6 @@ function CachePlayerHeroData(whichPlayer) end    -- (native)
 ---@param whichState fogstate
 ---@param where rect
 ---@param useSharedVision boolean
----@return nil
 function SetFogStateRect(forWhichPlayer, whichState, where, useSharedVision) end    -- (native)
 
 
@@ -5885,7 +5700,6 @@ function SetFogStateRect(forWhichPlayer, whichState, where, useSharedVision) end
 ---@param centerY real
 ---@param radius real
 ---@param useSharedVision boolean
----@return nil
 function SetFogStateRadius(forWhichPlayer, whichState, centerx, centerY, radius, useSharedVision) end    -- (native)
 
 
@@ -5894,12 +5708,10 @@ function SetFogStateRadius(forWhichPlayer, whichState, centerx, centerY, radius,
 ---@param center location
 ---@param radius real
 ---@param useSharedVision boolean
----@return nil
 function SetFogStateRadiusLoc(forWhichPlayer, whichState, center, radius, useSharedVision) end    -- (native)
 
 
 ---@param enable boolean
----@return nil
 function FogMaskEnable(enable) end    -- (native)
 
 ---@return boolean
@@ -5907,7 +5719,6 @@ function IsFogMaskEnabled() end    -- (native)
 
 
 ---@param enable boolean
----@return nil
 function FogEnable(enable) end    -- (native)
 
 ---@return boolean
@@ -5945,17 +5756,14 @@ function CreateFogModifierRadiusLoc(forWhichPlayer, whichState, center, radius, 
 
 
 ---@param whichFogModifier fogmodifier
----@return nil
 function DestroyFogModifier(whichFogModifier) end    -- (native)
 
 
 ---@param whichFogModifier fogmodifier
----@return nil
 function FogModifierStart(whichFogModifier) end    -- (native)
 
 
 ---@param whichFogModifier fogmodifier
----@return nil
 function FogModifierStop(whichFogModifier) end    -- (native)
 -- ============================================================================
 --  Game API
@@ -5974,46 +5782,35 @@ function VersionSupported(whichVersion) end    -- (native)
 
 
 ---@param doScoreScreen boolean
----@return nil
 function EndGame(doScoreScreen) end    -- (native)
 --  Async only!
 
 ---@param newLevel string
 ---@param doScoreScreen boolean
----@return nil
 function ChangeLevel(newLevel, doScoreScreen) end    -- (native)
 
 
 ---@param doScoreScreen boolean
----@return nil
 function RestartGame(doScoreScreen) end    -- (native)
-
----@return nil
 function ReloadGame() end    -- (native)
 --  %%% SetCampaignMenuRace is deprecated.  It must remain to support
 --  old maps which use it, but all new maps should use SetCampaignMenuRaceEx
 
 ---@param r race
----@return nil
 function SetCampaignMenuRace(r) end    -- (native)
 
 
 ---@param campaignIndex integer
----@return nil
 function SetCampaignMenuRaceEx(campaignIndex) end    -- (native)
-
----@return nil
 function ForceCampaignSelectScreen() end    -- (native)
 
 
 ---@param saveFileName string
 ---@param doScoreScreen boolean
----@return nil
 function LoadGame(saveFileName, doScoreScreen) end    -- (native)
 
 
 ---@param saveFileName string
----@return nil
 function SaveGame(saveFileName) end    -- (native)
 
 
@@ -6040,22 +5837,17 @@ function SaveGameExists(saveName) end    -- (native)
 
 
 ---@param maxCheckpointSaves integer
----@return nil
 function SetMaxCheckpointSaves(maxCheckpointSaves) end    -- (native)
 
 
 ---@param saveFileName string
 ---@param showWindow boolean
----@return nil
 function SaveGameCheckpoint(saveFileName, showWindow) end    -- (native)
-
----@return nil
 function SyncSelections() end    -- (native)
 
 
 ---@param whichFloatGameState fgamestate
 ---@param value real
----@return nil
 function SetFloatGameState(whichFloatGameState, value) end    -- (native)
 
 
@@ -6066,7 +5858,6 @@ function GetFloatGameState(whichFloatGameState) end    -- (native)
 
 ---@param whichIntegerGameState igamestate
 ---@param value integer
----@return nil
 function SetIntegerGameState(whichIntegerGameState, value) end    -- (native)
 
 
@@ -6077,32 +5868,27 @@ function GetIntegerGameState(whichIntegerGameState) end    -- (native)
 --  Campaign API
 
 ---@param cleared boolean
----@return nil
 function SetTutorialCleared(cleared) end    -- (native)
 
 
 ---@param campaignNumber integer
 ---@param missionNumber integer
 ---@param available boolean
----@return nil
 function SetMissionAvailable(campaignNumber, missionNumber, available) end    -- (native)
 
 
 ---@param campaignNumber integer
 ---@param available boolean
----@return nil
 function SetCampaignAvailable(campaignNumber, available) end    -- (native)
 
 
 ---@param campaignNumber integer
 ---@param available boolean
----@return nil
 function SetOpCinematicAvailable(campaignNumber, available) end    -- (native)
 
 
 ---@param campaignNumber integer
 ---@param available boolean
----@return nil
 function SetEdCinematicAvailable(campaignNumber, available) end    -- (native)
 
 ---@return gamedifficulty
@@ -6110,21 +5896,17 @@ function GetDefaultDifficulty() end    -- (native)
 
 
 ---@param g gamedifficulty
----@return nil
 function SetDefaultDifficulty(g) end    -- (native)
 
 
 ---@param whichButton integer
 ---@param visible boolean
----@return nil
 function SetCustomCampaignButtonVisible(whichButton, visible) end    -- (native)
 
 
 ---@param whichButton integer
 ---@return boolean
 function GetCustomCampaignButtonVisible(whichButton) end    -- (native)
-
----@return nil
 function DoNotSaveReplay() end    -- (native)
 -- ============================================================================
 --  Dialog API
@@ -6133,18 +5915,15 @@ function DialogCreate() end    -- (native)
 
 
 ---@param whichDialog dialog
----@return nil
 function DialogDestroy(whichDialog) end    -- (native)
 
 
 ---@param whichDialog dialog
----@return nil
 function DialogClear(whichDialog) end    -- (native)
 
 
 ---@param whichDialog dialog
 ---@param messageText string
----@return nil
 function DialogSetMessage(whichDialog, messageText) end    -- (native)
 
 
@@ -6166,7 +5945,6 @@ function DialogAddQuitButton(whichDialog, doScoreScreen, buttonText, hotkey) end
 ---@param whichPlayer player
 ---@param whichDialog dialog
 ---@param flag boolean
----@return nil
 function DialogDisplay(whichPlayer, whichDialog, flag) end    -- (native)
 --  Creates a new or reads in an existing game cache file stored
 --  in the current campaign profile dir
@@ -6189,7 +5967,6 @@ function SaveGameCache(whichCache) end    -- (native)
 ---@param missionKey string
 ---@param key string
 ---@param value integer
----@return nil
 function StoreInteger(cache, missionKey, key, value) end    -- (native)
 
 
@@ -6197,7 +5974,6 @@ function StoreInteger(cache, missionKey, key, value) end    -- (native)
 ---@param missionKey string
 ---@param key string
 ---@param value real
----@return nil
 function StoreReal(cache, missionKey, key, value) end    -- (native)
 
 
@@ -6205,7 +5981,6 @@ function StoreReal(cache, missionKey, key, value) end    -- (native)
 ---@param missionKey string
 ---@param key string
 ---@param value boolean
----@return nil
 function StoreBoolean(cache, missionKey, key, value) end    -- (native)
 
 
@@ -6228,35 +6003,30 @@ function StoreString(cache, missionKey, key, value) end    -- (native)
 ---@param cache gamecache
 ---@param missionKey string
 ---@param key string
----@return nil
 function SyncStoredInteger(cache, missionKey, key) end    -- (native)
 
 
 ---@param cache gamecache
 ---@param missionKey string
 ---@param key string
----@return nil
 function SyncStoredReal(cache, missionKey, key) end    -- (native)
 
 
 ---@param cache gamecache
 ---@param missionKey string
 ---@param key string
----@return nil
 function SyncStoredBoolean(cache, missionKey, key) end    -- (native)
 
 
 ---@param cache gamecache
 ---@param missionKey string
 ---@param key string
----@return nil
 function SyncStoredUnit(cache, missionKey, key) end    -- (native)
 
 
 ---@param cache gamecache
 ---@param missionKey string
 ---@param key string
----@return nil
 function SyncStoredString(cache, missionKey, key) end    -- (native)
 
 
@@ -6296,48 +6066,41 @@ function HaveStoredString(cache, missionKey, key) end    -- (native)
 
 
 ---@param cache gamecache
----@return nil
 function FlushGameCache(cache) end    -- (native)
 
 
 ---@param cache gamecache
 ---@param missionKey string
----@return nil
 function FlushStoredMission(cache, missionKey) end    -- (native)
 
 
 ---@param cache gamecache
 ---@param missionKey string
 ---@param key string
----@return nil
 function FlushStoredInteger(cache, missionKey, key) end    -- (native)
 
 
 ---@param cache gamecache
 ---@param missionKey string
 ---@param key string
----@return nil
 function FlushStoredReal(cache, missionKey, key) end    -- (native)
 
 
 ---@param cache gamecache
 ---@param missionKey string
 ---@param key string
----@return nil
 function FlushStoredBoolean(cache, missionKey, key) end    -- (native)
 
 
 ---@param cache gamecache
 ---@param missionKey string
 ---@param key string
----@return nil
 function FlushStoredUnit(cache, missionKey, key) end    -- (native)
 
 
 ---@param cache gamecache
 ---@param missionKey string
 ---@param key string
----@return nil
 function FlushStoredString(cache, missionKey, key) end    -- (native)
 --  Will return 0 if the specified value's data is not found in the cache
 
@@ -6387,7 +6150,6 @@ function InitHashtable() end    -- (native)
 ---@param parentKey integer
 ---@param childKey integer
 ---@param value integer
----@return nil
 function SaveInteger(table, parentKey, childKey, value) end    -- (native)
 
 
@@ -6395,7 +6157,6 @@ function SaveInteger(table, parentKey, childKey, value) end    -- (native)
 ---@param parentKey integer
 ---@param childKey integer
 ---@param value real
----@return nil
 function SaveReal(table, parentKey, childKey, value) end    -- (native)
 
 
@@ -6403,7 +6164,6 @@ function SaveReal(table, parentKey, childKey, value) end    -- (native)
 ---@param parentKey integer
 ---@param childKey integer
 ---@param value boolean
----@return nil
 function SaveBoolean(table, parentKey, childKey, value) end    -- (native)
 
 
@@ -7074,46 +6834,39 @@ function HaveSavedHandle(table, parentKey, childKey) end    -- (native)
 ---@param table hashtable
 ---@param parentKey integer
 ---@param childKey integer
----@return nil
 function RemoveSavedInteger(table, parentKey, childKey) end    -- (native)
 
 
 ---@param table hashtable
 ---@param parentKey integer
 ---@param childKey integer
----@return nil
 function RemoveSavedReal(table, parentKey, childKey) end    -- (native)
 
 
 ---@param table hashtable
 ---@param parentKey integer
 ---@param childKey integer
----@return nil
 function RemoveSavedBoolean(table, parentKey, childKey) end    -- (native)
 
 
 ---@param table hashtable
 ---@param parentKey integer
 ---@param childKey integer
----@return nil
 function RemoveSavedString(table, parentKey, childKey) end    -- (native)
 
 
 ---@param table hashtable
 ---@param parentKey integer
 ---@param childKey integer
----@return nil
 function RemoveSavedHandle(table, parentKey, childKey) end    -- (native)
 
 
 ---@param table hashtable
----@return nil
 function FlushParentHashtable(table) end    -- (native)
 
 
 ---@param table hashtable
 ---@param parentKey integer
----@return nil
 function FlushChildHashtable(table, parentKey) end    -- (native)
 -- ============================================================================
 --  Randomization API
@@ -7134,20 +6887,17 @@ function CreateUnitPool() end    -- (native)
 
 
 ---@param whichPool unitpool
----@return nil
 function DestroyUnitPool(whichPool) end    -- (native)
 
 
 ---@param whichPool unitpool
 ---@param unitId integer
 ---@param weight real
----@return nil
 function UnitPoolAddUnitType(whichPool, unitId, weight) end    -- (native)
 
 
 ---@param whichPool unitpool
 ---@param unitId integer
----@return nil
 function UnitPoolRemoveUnitType(whichPool, unitId) end    -- (native)
 
 
@@ -7164,20 +6914,17 @@ function CreateItemPool() end    -- (native)
 
 
 ---@param whichItemPool itempool
----@return nil
 function DestroyItemPool(whichItemPool) end    -- (native)
 
 
 ---@param whichItemPool itempool
 ---@param itemId integer
 ---@param weight real
----@return nil
 function ItemPoolAddItemType(whichItemPool, itemId, weight) end    -- (native)
 
 
 ---@param whichItemPool itempool
 ---@param itemId integer
----@return nil
 function ItemPoolRemoveItemType(whichItemPool, itemId) end    -- (native)
 
 
@@ -7208,7 +6955,6 @@ function ChooseRandomItemEx(whichType, level) end    -- (native)
 
 
 ---@param seed integer
----@return nil
 function SetRandomSeed(seed) end    -- (native)
 -- ============================================================================
 --  Visual API
@@ -7218,10 +6964,7 @@ function SetRandomSeed(seed) end    -- (native)
 ---@param c real
 ---@param d real
 ---@param e real
----@return nil
 function SetTerrainFog(a, b, c, d, e) end    -- (native)
-
----@return nil
 function ResetTerrainFog() end    -- (native)
 
 
@@ -7230,7 +6973,6 @@ function ResetTerrainFog() end    -- (native)
 ---@param c real
 ---@param d real
 ---@param e real
----@return nil
 function SetUnitFog(a, b, c, d, e) end    -- (native)
 
 
@@ -7241,7 +6983,6 @@ function SetUnitFog(a, b, c, d, e) end    -- (native)
 ---@param red real
 ---@param green real
 ---@param blue real
----@return nil
 function SetTerrainFogEx(style, zstart, zend, density, red, green, blue) end    -- (native)
 
 
@@ -7249,7 +6990,6 @@ function SetTerrainFogEx(style, zstart, zend, density, red, green, blue) end    
 ---@param x real
 ---@param y real
 ---@param message string
----@return nil
 function DisplayTextToPlayer(toPlayer, x, y, message) end    -- (native)
 
 
@@ -7258,7 +6998,6 @@ function DisplayTextToPlayer(toPlayer, x, y, message) end    -- (native)
 ---@param y real
 ---@param duration real
 ---@param message string
----@return nil
 function DisplayTimedTextToPlayer(toPlayer, x, y, duration, message) end    -- (native)
 
 
@@ -7267,46 +7006,36 @@ function DisplayTimedTextToPlayer(toPlayer, x, y, duration, message) end    -- (
 ---@param y real
 ---@param duration real
 ---@param message string
----@return nil
 function DisplayTimedTextFromPlayer(toPlayer, x, y, duration, message) end    -- (native)
-
----@return nil
 function ClearTextMessages() end    -- (native)
 
 
 ---@param terrainDNCFile string
 ---@param unitDNCFile string
----@return nil
 function SetDayNightModels(terrainDNCFile, unitDNCFile) end    -- (native)
 
 
 ---@param portraitDNCFile string
----@return nil
 function SetPortraitLight(portraitDNCFile) end    -- (native)
 
 
 ---@param skyModelFile string
----@return nil
 function SetSkyModel(skyModelFile) end    -- (native)
 
 
 ---@param b boolean
----@return nil
 function EnableUserControl(b) end    -- (native)
 
 
 ---@param b boolean
----@return nil
 function EnableUserUI(b) end    -- (native)
 
 
 ---@param b boolean
----@return nil
 function SuspendTimeOfDay(b) end    -- (native)
 
 
 ---@param r real
----@return nil
 function SetTimeOfDayScale(r) end    -- (native)
 
 ---@return real
@@ -7315,12 +7044,10 @@ function GetTimeOfDayScale() end    -- (native)
 
 ---@param flag boolean
 ---@param fadeDuration real
----@return nil
 function ShowInterface(flag, fadeDuration) end    -- (native)
 
 
 ---@param flag boolean
----@return nil
 function PauseGame(flag) end    -- (native)
 
 
@@ -7329,7 +7056,6 @@ function PauseGame(flag) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function UnitAddIndicator(whichUnit, red, green, blue, alpha) end    -- (native)
 
 
@@ -7338,14 +7064,12 @@ function UnitAddIndicator(whichUnit, red, green, blue, alpha) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function AddIndicator(whichWidget, red, green, blue, alpha) end    -- (native)
 
 
 ---@param x real
 ---@param y real
 ---@param duration real
----@return nil
 function PingMinimap(x, y, duration) end    -- (native)
 
 
@@ -7356,7 +7080,6 @@ function PingMinimap(x, y, duration) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param extraEffects boolean
----@return nil
 function PingMinimapEx(x, y, duration, red, green, blue, extraEffects) end    -- (native)
 
 
@@ -7397,70 +7120,54 @@ function SkinManagerGetLocalPath(key) end    -- (native)
 
 
 ---@param pingId minimapicon
----@return nil
 function DestroyMinimapIcon(pingId) end    -- (native)
 
 
 ---@param whichMinimapIcon minimapicon
 ---@param visible boolean
----@return nil
 function SetMinimapIconVisible(whichMinimapIcon, visible) end    -- (native)
 
 
 ---@param whichMinimapIcon minimapicon
 ---@param doDestroy boolean
----@return nil
 function SetMinimapIconOrphanDestroy(whichMinimapIcon, doDestroy) end    -- (native)
 
 
 ---@param flag boolean
----@return nil
 function EnableOcclusion(flag) end    -- (native)
 
 
 ---@param introText string
----@return nil
 function SetIntroShotText(introText) end    -- (native)
 
 
 ---@param introModelPath string
----@return nil
 function SetIntroShotModel(introModelPath) end    -- (native)
 
 
 ---@param b boolean
----@return nil
 function EnableWorldFogBoundary(b) end    -- (native)
 
 
 ---@param modelName string
----@return nil
 function PlayModelCinematic(modelName) end    -- (native)
 
 
 ---@param movieName string
----@return nil
 function PlayCinematic(movieName) end    -- (native)
 
 
 ---@param key string
----@return nil
 function ForceUIKey(key) end    -- (native)
-
----@return nil
 function ForceUICancel() end    -- (native)
-
----@return nil
 function DisplayLoadDialog() end    -- (native)
 
 
 ---@param iconPath string
----@return nil
 function SetAltMinimapIcon(iconPath) end    -- (native)
 
 
 ---@param flag boolean
----@return nil
 function DisableRestartMission(flag) end    -- (native)
 
 ---@return texttag
@@ -7468,14 +7175,12 @@ function CreateTextTag() end    -- (native)
 
 
 ---@param t texttag
----@return nil
 function DestroyTextTag(t) end    -- (native)
 
 
 ---@param t texttag
 ---@param s string
 ---@param height real
----@return nil
 function SetTextTagText(t, s, height) end    -- (native)
 
 
@@ -7483,14 +7188,12 @@ function SetTextTagText(t, s, height) end    -- (native)
 ---@param x real
 ---@param y real
 ---@param heightOffset real
----@return nil
 function SetTextTagPos(t, x, y, heightOffset) end    -- (native)
 
 
 ---@param t texttag
 ---@param whichUnit unit
 ---@param heightOffset real
----@return nil
 function SetTextTagPosUnit(t, whichUnit, heightOffset) end    -- (native)
 
 
@@ -7499,55 +7202,46 @@ function SetTextTagPosUnit(t, whichUnit, heightOffset) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function SetTextTagColor(t, red, green, blue, alpha) end    -- (native)
 
 
 ---@param t texttag
 ---@param xvel real
 ---@param yvel real
----@return nil
 function SetTextTagVelocity(t, xvel, yvel) end    -- (native)
 
 
 ---@param t texttag
 ---@param flag boolean
----@return nil
 function SetTextTagVisibility(t, flag) end    -- (native)
 
 
 ---@param t texttag
 ---@param flag boolean
----@return nil
 function SetTextTagSuspended(t, flag) end    -- (native)
 
 
 ---@param t texttag
 ---@param flag boolean
----@return nil
 function SetTextTagPermanent(t, flag) end    -- (native)
 
 
 ---@param t texttag
 ---@param age real
----@return nil
 function SetTextTagAge(t, age) end    -- (native)
 
 
 ---@param t texttag
 ---@param lifespan real
----@return nil
 function SetTextTagLifespan(t, lifespan) end    -- (native)
 
 
 ---@param t texttag
 ---@param fadepoint real
----@return nil
 function SetTextTagFadepoint(t, fadepoint) end    -- (native)
 
 
 ---@param reserved integer
----@return nil
 function SetReservedLocalHeroButtons(reserved) end    -- (native)
 
 ---@return integer
@@ -7555,7 +7249,6 @@ function GetAllyColorFilterState() end    -- (native)
 
 
 ---@param state integer
----@return nil
 function SetAllyColorFilterState(state) end    -- (native)
 
 ---@return boolean
@@ -7563,31 +7256,26 @@ function GetCreepCampFilterState() end    -- (native)
 
 
 ---@param state boolean
----@return nil
 function SetCreepCampFilterState(state) end    -- (native)
 
 
 ---@param enableAlly boolean
 ---@param enableCreep boolean
----@return nil
 function EnableMinimapFilterButtons(enableAlly, enableCreep) end    -- (native)
 
 
 ---@param state boolean
 ---@param ui boolean
----@return nil
 function EnableDragSelect(state, ui) end    -- (native)
 
 
 ---@param state boolean
 ---@param ui boolean
----@return nil
 function EnablePreSelect(state, ui) end    -- (native)
 
 
 ---@param state boolean
 ---@param ui boolean
----@return nil
 function EnableSelect(state, ui) end    -- (native)
 -- ============================================================================
 --  Trackable API
@@ -7605,55 +7293,46 @@ function CreateQuest() end    -- (native)
 
 
 ---@param whichQuest quest
----@return nil
 function DestroyQuest(whichQuest) end    -- (native)
 
 
 ---@param whichQuest quest
 ---@param title string
----@return nil
 function QuestSetTitle(whichQuest, title) end    -- (native)
 
 
 ---@param whichQuest quest
 ---@param description string
----@return nil
 function QuestSetDescription(whichQuest, description) end    -- (native)
 
 
 ---@param whichQuest quest
 ---@param iconPath string
----@return nil
 function QuestSetIconPath(whichQuest, iconPath) end    -- (native)
 
 
 ---@param whichQuest quest
 ---@param required boolean
----@return nil
 function QuestSetRequired(whichQuest, required) end    -- (native)
 
 
 ---@param whichQuest quest
 ---@param completed boolean
----@return nil
 function QuestSetCompleted(whichQuest, completed) end    -- (native)
 
 
 ---@param whichQuest quest
 ---@param discovered boolean
----@return nil
 function QuestSetDiscovered(whichQuest, discovered) end    -- (native)
 
 
 ---@param whichQuest quest
 ---@param failed boolean
----@return nil
 function QuestSetFailed(whichQuest, failed) end    -- (native)
 
 
 ---@param whichQuest quest
 ---@param enabled boolean
----@return nil
 function QuestSetEnabled(whichQuest, enabled) end    -- (native)
 
 
@@ -7689,13 +7368,11 @@ function QuestCreateItem(whichQuest) end    -- (native)
 
 ---@param whichQuestItem questitem
 ---@param description string
----@return nil
 function QuestItemSetDescription(whichQuestItem, description) end    -- (native)
 
 
 ---@param whichQuestItem questitem
 ---@param completed boolean
----@return nil
 function QuestItemSetCompleted(whichQuestItem, completed) end    -- (native)
 
 
@@ -7708,19 +7385,13 @@ function CreateDefeatCondition() end    -- (native)
 
 
 ---@param whichCondition defeatcondition
----@return nil
 function DestroyDefeatCondition(whichCondition) end    -- (native)
 
 
 ---@param whichCondition defeatcondition
 ---@param description string
----@return nil
 function DefeatConditionSetDescription(whichCondition, description) end    -- (native)
-
----@return nil
 function FlashQuestDialogButton() end    -- (native)
-
----@return nil
 function ForceQuestDialogUpdate() end    -- (native)
 -- ============================================================================
 --  Timer Dialog API
@@ -7731,13 +7402,11 @@ function CreateTimerDialog(t) end    -- (native)
 
 
 ---@param whichDialog timerdialog
----@return nil
 function DestroyTimerDialog(whichDialog) end    -- (native)
 
 
 ---@param whichDialog timerdialog
 ---@param title string
----@return nil
 function TimerDialogSetTitle(whichDialog, title) end    -- (native)
 
 
@@ -7746,7 +7415,6 @@ function TimerDialogSetTitle(whichDialog, title) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function TimerDialogSetTitleColor(whichDialog, red, green, blue, alpha) end    -- (native)
 
 
@@ -7755,19 +7423,16 @@ function TimerDialogSetTitleColor(whichDialog, red, green, blue, alpha) end    -
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function TimerDialogSetTimeColor(whichDialog, red, green, blue, alpha) end    -- (native)
 
 
 ---@param whichDialog timerdialog
 ---@param speedMultFactor real
----@return nil
 function TimerDialogSetSpeed(whichDialog, speedMultFactor) end    -- (native)
 
 
 ---@param whichDialog timerdialog
 ---@param display boolean
----@return nil
 function TimerDialogDisplay(whichDialog, display) end    -- (native)
 
 
@@ -7778,7 +7443,6 @@ function IsTimerDialogDisplayed(whichDialog) end    -- (native)
 
 ---@param whichDialog timerdialog
 ---@param timeRemaining real
----@return nil
 function TimerDialogSetRealTimeRemaining(whichDialog, timeRemaining) end    -- (native)
 -- ============================================================================
 --  Leaderboard API
@@ -7788,13 +7452,11 @@ function CreateLeaderboard() end    -- (native)
 
 
 ---@param lb leaderboard
----@return nil
 function DestroyLeaderboard(lb) end    -- (native)
 
 
 ---@param lb leaderboard
 ---@param show boolean
----@return nil
 function LeaderboardDisplay(lb, show) end    -- (native)
 
 
@@ -7810,7 +7472,6 @@ function LeaderboardGetItemCount(lb) end    -- (native)
 
 ---@param lb leaderboard
 ---@param count integer
----@return nil
 function LeaderboardSetSizeByItemCount(lb, count) end    -- (native)
 
 
@@ -7818,42 +7479,35 @@ function LeaderboardSetSizeByItemCount(lb, count) end    -- (native)
 ---@param label string
 ---@param value integer
 ---@param p player
----@return nil
 function LeaderboardAddItem(lb, label, value, p) end    -- (native)
 
 
 ---@param lb leaderboard
 ---@param index integer
----@return nil
 function LeaderboardRemoveItem(lb, index) end    -- (native)
 
 
 ---@param lb leaderboard
 ---@param p player
----@return nil
 function LeaderboardRemovePlayerItem(lb, p) end    -- (native)
 
 
 ---@param lb leaderboard
----@return nil
 function LeaderboardClear(lb) end    -- (native)
 
 
 ---@param lb leaderboard
 ---@param ascending boolean
----@return nil
 function LeaderboardSortItemsByValue(lb, ascending) end    -- (native)
 
 
 ---@param lb leaderboard
 ---@param ascending boolean
----@return nil
 function LeaderboardSortItemsByPlayer(lb, ascending) end    -- (native)
 
 
 ---@param lb leaderboard
 ---@param ascending boolean
----@return nil
 function LeaderboardSortItemsByLabel(lb, ascending) end    -- (native)
 
 
@@ -7871,7 +7525,6 @@ function LeaderboardGetPlayerIndex(lb, p) end    -- (native)
 
 ---@param lb leaderboard
 ---@param label string
----@return nil
 function LeaderboardSetLabel(lb, label) end    -- (native)
 
 
@@ -7882,7 +7535,6 @@ function LeaderboardGetLabelText(lb) end    -- (native)
 
 ---@param toPlayer player
 ---@param lb leaderboard
----@return nil
 function PlayerSetLeaderboard(toPlayer, lb) end    -- (native)
 
 
@@ -7896,7 +7548,6 @@ function PlayerGetLeaderboard(toPlayer) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function LeaderboardSetLabelColor(lb, red, green, blue, alpha) end    -- (native)
 
 
@@ -7905,7 +7556,6 @@ function LeaderboardSetLabelColor(lb, red, green, blue, alpha) end    -- (native
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function LeaderboardSetValueColor(lb, red, green, blue, alpha) end    -- (native)
 
 
@@ -7914,21 +7564,18 @@ function LeaderboardSetValueColor(lb, red, green, blue, alpha) end    -- (native
 ---@param showNames boolean
 ---@param showValues boolean
 ---@param showIcons boolean
----@return nil
 function LeaderboardSetStyle(lb, showLabel, showNames, showValues, showIcons) end    -- (native)
 
 
 ---@param lb leaderboard
 ---@param whichItem integer
 ---@param val integer
----@return nil
 function LeaderboardSetItemValue(lb, whichItem, val) end    -- (native)
 
 
 ---@param lb leaderboard
 ---@param whichItem integer
 ---@param val string
----@return nil
 function LeaderboardSetItemLabel(lb, whichItem, val) end    -- (native)
 
 
@@ -7937,7 +7584,6 @@ function LeaderboardSetItemLabel(lb, whichItem, val) end    -- (native)
 ---@param showLabel boolean
 ---@param showValue boolean
 ---@param showIcon boolean
----@return nil
 function LeaderboardSetItemStyle(lb, whichItem, showLabel, showValue, showIcon) end    -- (native)
 
 
@@ -7947,7 +7593,6 @@ function LeaderboardSetItemStyle(lb, whichItem, showLabel, showValue, showIcon) 
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function LeaderboardSetItemLabelColor(lb, whichItem, red, green, blue, alpha) end    -- (native)
 
 
@@ -7957,7 +7602,6 @@ function LeaderboardSetItemLabelColor(lb, whichItem, red, green, blue, alpha) en
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function LeaderboardSetItemValueColor(lb, whichItem, red, green, blue, alpha) end    -- (native)
 -- ============================================================================
 --  Multiboard API
@@ -7968,13 +7612,11 @@ function CreateMultiboard() end    -- (native)
 
 
 ---@param lb multiboard
----@return nil
 function DestroyMultiboard(lb) end    -- (native)
 
 
 ---@param lb multiboard
 ---@param show boolean
----@return nil
 function MultiboardDisplay(lb, show) end    -- (native)
 
 
@@ -7985,7 +7627,6 @@ function IsMultiboardDisplayed(lb) end    -- (native)
 
 ---@param lb multiboard
 ---@param minimize boolean
----@return nil
 function MultiboardMinimize(lb, minimize) end    -- (native)
 
 
@@ -7995,13 +7636,11 @@ function IsMultiboardMinimized(lb) end    -- (native)
 
 
 ---@param lb multiboard
----@return nil
 function MultiboardClear(lb) end    -- (native)
 
 
 ---@param lb multiboard
 ---@param label string
----@return nil
 function MultiboardSetTitleText(lb, label) end    -- (native)
 
 
@@ -8015,7 +7654,6 @@ function MultiboardGetTitleText(lb) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function MultiboardSetTitleTextColor(lb, red, green, blue, alpha) end    -- (native)
 
 
@@ -8031,26 +7669,22 @@ function MultiboardGetColumnCount(lb) end    -- (native)
 
 ---@param lb multiboard
 ---@param count integer
----@return nil
 function MultiboardSetColumnCount(lb, count) end    -- (native)
 
 
 ---@param lb multiboard
 ---@param count integer
----@return nil
 function MultiboardSetRowCount(lb, count) end    -- (native)
 --  broadcast settings to all items
 
 ---@param lb multiboard
 ---@param showValues boolean
 ---@param showIcons boolean
----@return nil
 function MultiboardSetItemsStyle(lb, showValues, showIcons) end    -- (native)
 
 
 ---@param lb multiboard
 ---@param value string
----@return nil
 function MultiboardSetItemsValue(lb, value) end    -- (native)
 
 
@@ -8059,19 +7693,16 @@ function MultiboardSetItemsValue(lb, value) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function MultiboardSetItemsValueColor(lb, red, green, blue, alpha) end    -- (native)
 
 
 ---@param lb multiboard
 ---@param width real
----@return nil
 function MultiboardSetItemsWidth(lb, width) end    -- (native)
 
 
 ---@param lb multiboard
 ---@param iconPath string
----@return nil
 function MultiboardSetItemsIcon(lb, iconPath) end    -- (native)
 --  funcs for modifying individual items
 
@@ -8083,20 +7714,17 @@ function MultiboardGetItem(lb, row, column) end    -- (native)
 
 
 ---@param mbi multiboarditem
----@return nil
 function MultiboardReleaseItem(mbi) end    -- (native)
 
 
 ---@param mbi multiboarditem
 ---@param showValue boolean
 ---@param showIcon boolean
----@return nil
 function MultiboardSetItemStyle(mbi, showValue, showIcon) end    -- (native)
 
 
 ---@param mbi multiboarditem
 ---@param val string
----@return nil
 function MultiboardSetItemValue(mbi, val) end    -- (native)
 
 
@@ -8105,39 +7733,33 @@ function MultiboardSetItemValue(mbi, val) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function MultiboardSetItemValueColor(mbi, red, green, blue, alpha) end    -- (native)
 
 
 ---@param mbi multiboarditem
 ---@param width real
----@return nil
 function MultiboardSetItemWidth(mbi, width) end    -- (native)
 
 
 ---@param mbi multiboarditem
 ---@param iconFileName string
----@return nil
 function MultiboardSetItemIcon(mbi, iconFileName) end    -- (native)
 --  meant to unequivocally suspend display of existing and
 --  subsequently displayed multiboards
 --
 
 ---@param flag boolean
----@return nil
 function MultiboardSuppressDisplay(flag) end    -- (native)
 -- ============================================================================
 --  Camera API
 
 ---@param x real
 ---@param y real
----@return nil
 function SetCameraPosition(x, y) end    -- (native)
 
 
 ---@param x real
 ---@param y real
----@return nil
 function SetCameraQuickPosition(x, y) end    -- (native)
 
 
@@ -8149,35 +7771,28 @@ function SetCameraQuickPosition(x, y) end    -- (native)
 ---@param y3 real
 ---@param x4 real
 ---@param y4 real
----@return nil
 function SetCameraBounds(x1, y1, x2, y2, x3, y3, x4, y4) end    -- (native)
-
----@return nil
 function StopCamera() end    -- (native)
 
 
 ---@param duration real
----@return nil
 function ResetToGameCamera(duration) end    -- (native)
 
 
 ---@param x real
 ---@param y real
----@return nil
 function PanCameraTo(x, y) end    -- (native)
 
 
 ---@param x real
 ---@param y real
 ---@param duration real
----@return nil
 function PanCameraToTimed(x, y, duration) end    -- (native)
 
 
 ---@param x real
 ---@param y real
 ---@param zOffsetDest real
----@return nil
 function PanCameraToWithZ(x, y, zOffsetDest) end    -- (native)
 
 
@@ -8185,12 +7800,10 @@ function PanCameraToWithZ(x, y, zOffsetDest) end    -- (native)
 ---@param y real
 ---@param zOffsetDest real
 ---@param duration real
----@return nil
 function PanCameraToTimedWithZ(x, y, zOffsetDest, duration) end    -- (native)
 
 
 ---@param cameraModelFile string
----@return nil
 function SetCinematicCamera(cameraModelFile) end    -- (native)
 
 
@@ -8198,21 +7811,18 @@ function SetCinematicCamera(cameraModelFile) end    -- (native)
 ---@param y real
 ---@param radiansToSweep real
 ---@param duration real
----@return nil
 function SetCameraRotateMode(x, y, radiansToSweep, duration) end    -- (native)
 
 
 ---@param whichField camerafield
 ---@param value real
 ---@param duration real
----@return nil
 function SetCameraField(whichField, value, duration) end    -- (native)
 
 
 ---@param whichField camerafield
 ---@param offset real
 ---@param duration real
----@return nil
 function AdjustCameraField(whichField, offset, duration) end    -- (native)
 
 
@@ -8220,14 +7830,12 @@ function AdjustCameraField(whichField, offset, duration) end    -- (native)
 ---@param xoffset real
 ---@param yoffset real
 ---@param inheritOrientation boolean
----@return nil
 function SetCameraTargetController(whichUnit, xoffset, yoffset, inheritOrientation) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param xoffset real
 ---@param yoffset real
----@return nil
 function SetCameraOrientController(whichUnit, xoffset, yoffset) end    -- (native)
 
 ---@return camerasetup
@@ -8238,7 +7846,6 @@ function CreateCameraSetup() end    -- (native)
 ---@param whichField camerafield
 ---@param value real
 ---@param duration real
----@return nil
 function CameraSetupSetField(whichSetup, whichField, value, duration) end    -- (native)
 
 
@@ -8252,7 +7859,6 @@ function CameraSetupGetField(whichSetup, whichField) end    -- (native)
 ---@param x real
 ---@param y real
 ---@param duration real
----@return nil
 function CameraSetupSetDestPosition(whichSetup, x, y, duration) end    -- (native)
 
 
@@ -8274,33 +7880,28 @@ function CameraSetupGetDestPositionY(whichSetup) end    -- (native)
 ---@param whichSetup camerasetup
 ---@param doPan boolean
 ---@param panTimed boolean
----@return nil
 function CameraSetupApply(whichSetup, doPan, panTimed) end    -- (native)
 
 
 ---@param whichSetup camerasetup
 ---@param zDestOffset real
----@return nil
 function CameraSetupApplyWithZ(whichSetup, zDestOffset) end    -- (native)
 
 
 ---@param whichSetup camerasetup
 ---@param doPan boolean
 ---@param forceDuration real
----@return nil
 function CameraSetupApplyForceDuration(whichSetup, doPan, forceDuration) end    -- (native)
 
 
 ---@param whichSetup camerasetup
 ---@param zDestOffset real
 ---@param forceDuration real
----@return nil
 function CameraSetupApplyForceDurationWithZ(whichSetup, zDestOffset, forceDuration) end    -- (native)
 
 
 ---@param whichSetup camerasetup
 ---@param label string
----@return nil
 function BlzCameraSetupSetLabel(whichSetup, label) end    -- (native)
 
 
@@ -8311,57 +7912,47 @@ function BlzCameraSetupGetLabel(whichSetup) end    -- (native)
 
 ---@param mag real
 ---@param velocity real
----@return nil
 function CameraSetTargetNoise(mag, velocity) end    -- (native)
 
 
 ---@param mag real
 ---@param velocity real
----@return nil
 function CameraSetSourceNoise(mag, velocity) end    -- (native)
 
 
 ---@param mag real
 ---@param velocity real
 ---@param vertOnly boolean
----@return nil
 function CameraSetTargetNoiseEx(mag, velocity, vertOnly) end    -- (native)
 
 
 ---@param mag real
 ---@param velocity real
 ---@param vertOnly boolean
----@return nil
 function CameraSetSourceNoiseEx(mag, velocity, vertOnly) end    -- (native)
 
 
 ---@param factor real
----@return nil
 function CameraSetSmoothingFactor(factor) end    -- (native)
 
 
 ---@param distance real
----@return nil
 function CameraSetFocalDistance(distance) end    -- (native)
 
 
 ---@param scale real
----@return nil
 function CameraSetDepthOfFieldScale(scale) end    -- (native)
 
 
 ---@param filename string
----@return nil
 function SetCineFilterTexture(filename) end    -- (native)
 
 
 ---@param whichMode blendmode
----@return nil
 function SetCineFilterBlendMode(whichMode) end    -- (native)
 
 
 ---@param whichFlags texmapflags
----@return nil
 function SetCineFilterTexMapFlags(whichFlags) end    -- (native)
 
 
@@ -8369,7 +7960,6 @@ function SetCineFilterTexMapFlags(whichFlags) end    -- (native)
 ---@param minv real
 ---@param maxu real
 ---@param maxv real
----@return nil
 function SetCineFilterStartUV(minu, minv, maxu, maxv) end    -- (native)
 
 
@@ -8377,7 +7967,6 @@ function SetCineFilterStartUV(minu, minv, maxu, maxv) end    -- (native)
 ---@param minv real
 ---@param maxu real
 ---@param maxv real
----@return nil
 function SetCineFilterEndUV(minu, minv, maxu, maxv) end    -- (native)
 
 
@@ -8385,7 +7974,6 @@ function SetCineFilterEndUV(minu, minv, maxu, maxv) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function SetCineFilterStartColor(red, green, blue, alpha) end    -- (native)
 
 
@@ -8393,17 +7981,14 @@ function SetCineFilterStartColor(red, green, blue, alpha) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function SetCineFilterEndColor(red, green, blue, alpha) end    -- (native)
 
 
 ---@param duration real
----@return nil
 function SetCineFilterDuration(duration) end    -- (native)
 
 
 ---@param flag boolean
----@return nil
 function DisplayCineFilter(flag) end    -- (native)
 
 ---@return boolean
@@ -8416,20 +8001,15 @@ function IsCineFilterDisplayed() end    -- (native)
 ---@param text string
 ---@param sceneDuration real
 ---@param voiceoverDuration real
----@return nil
 function SetCinematicScene(portraitUnitId, color, speakerTitle, text, sceneDuration, voiceoverDuration) end    -- (native)
-
----@return nil
 function EndCinematicScene() end    -- (native)
 
 
 ---@param flag boolean
----@return nil
 function ForceCinematicSubtitles(flag) end    -- (native)
 
 
 ---@param cinematicAudio boolean
----@return nil
 function SetCinematicAudio(cinematicAudio) end    -- (native)
 
 
@@ -8482,7 +8062,6 @@ function GetCameraEyePositionLoc() end    -- (native)
 --
 
 ---@param environmentName string
----@return nil
 function NewSoundEnvironment(environmentName) end    -- (native)
 
 
@@ -8527,44 +8106,37 @@ function CreateMIDISound(soundLabel, fadeInRate, fadeOutRate) end    -- (native)
 
 ---@param soundHandle sound
 ---@param soundLabel string
----@return nil
 function SetSoundParamsFromLabel(soundHandle, soundLabel) end    -- (native)
 
 
 ---@param soundHandle sound
 ---@param cutoff real
----@return nil
 function SetSoundDistanceCutoff(soundHandle, cutoff) end    -- (native)
 
 
 ---@param soundHandle sound
 ---@param channel integer
----@return nil
 function SetSoundChannel(soundHandle, channel) end    -- (native)
 
 
 ---@param soundHandle sound
 ---@param volume integer
----@return nil
 function SetSoundVolume(soundHandle, volume) end    -- (native)
 
 
 ---@param soundHandle sound
 ---@param pitch real
----@return nil
 function SetSoundPitch(soundHandle, pitch) end    -- (native)
 --  the following method must be called immediately after calling "StartSound"
 
 ---@param soundHandle sound
 ---@param millisecs integer
----@return nil
 function SetSoundPlayPosition(soundHandle, millisecs) end    -- (native)
 --  these calls are only valid if the sound was created with 3d enabled
 
 ---@param soundHandle sound
 ---@param minDist real
 ---@param maxDist real
----@return nil
 function SetSoundDistances(soundHandle, minDist, maxDist) end    -- (native)
 
 
@@ -8572,7 +8144,6 @@ function SetSoundDistances(soundHandle, minDist, maxDist) end    -- (native)
 ---@param inside real
 ---@param outside real
 ---@param outsideVolume integer
----@return nil
 function SetSoundConeAngles(soundHandle, inside, outside, outsideVolume) end    -- (native)
 
 
@@ -8580,7 +8151,6 @@ function SetSoundConeAngles(soundHandle, inside, outside, outsideVolume) end    
 ---@param x real
 ---@param y real
 ---@param z real
----@return nil
 function SetSoundConeOrientation(soundHandle, x, y, z) end    -- (native)
 
 
@@ -8588,7 +8158,6 @@ function SetSoundConeOrientation(soundHandle, x, y, z) end    -- (native)
 ---@param x real
 ---@param y real
 ---@param z real
----@return nil
 function SetSoundPosition(soundHandle, x, y, z) end    -- (native)
 
 
@@ -8596,95 +8165,78 @@ function SetSoundPosition(soundHandle, x, y, z) end    -- (native)
 ---@param x real
 ---@param y real
 ---@param z real
----@return nil
 function SetSoundVelocity(soundHandle, x, y, z) end    -- (native)
 
 
 ---@param soundHandle sound
 ---@param whichUnit unit
----@return nil
 function AttachSoundToUnit(soundHandle, whichUnit) end    -- (native)
 
 
 ---@param soundHandle sound
----@return nil
 function StartSound(soundHandle) end    -- (native)
 
 
 ---@param soundHandle sound
 ---@param killWhenDone boolean
 ---@param fadeOut boolean
----@return nil
 function StopSound(soundHandle, killWhenDone, fadeOut) end    -- (native)
 
 
 ---@param soundHandle sound
----@return nil
 function KillSoundWhenDone(soundHandle) end    -- (native)
 --  Music Interface. Note that if music is disabled, these calls do nothing
 
 ---@param musicName string
 ---@param random boolean
 ---@param index integer
----@return nil
 function SetMapMusic(musicName, random, index) end    -- (native)
-
----@return nil
 function ClearMapMusic() end    -- (native)
 
 
 ---@param musicName string
----@return nil
 function PlayMusic(musicName) end    -- (native)
 
 
 ---@param musicName string
 ---@param frommsecs integer
 ---@param fadeinmsecs integer
----@return nil
 function PlayMusicEx(musicName, frommsecs, fadeinmsecs) end    -- (native)
 
 
 ---@param fadeOut boolean
----@return nil
 function StopMusic(fadeOut) end    -- (native)
-
----@return nil
 function ResumeMusic() end    -- (native)
 
 
 ---@param musicFileName string
----@return nil
 function PlayThematicMusic(musicFileName) end    -- (native)
 
 
 ---@param musicFileName string
 ---@param frommsecs integer
----@return nil
 function PlayThematicMusicEx(musicFileName, frommsecs) end    -- (native)
-
----@return nil
 function EndThematicMusic() end    -- (native)
 
 
 ---@param volume integer
----@return nil
 function SetMusicVolume(volume) end    -- (native)
 
 
 ---@param millisecs integer
----@return nil
 function SetMusicPlayPosition(millisecs) end    -- (native)
 
 
+---@param volume integer
+function SetThematicMusicVolume(volume) end    -- (native)
+
+
 ---@param millisecs integer
----@return nil
 function SetThematicMusicPlayPosition(millisecs) end    -- (native)
 --  other music and sound calls
 
 ---@param soundHandle sound
 ---@param duration integer
----@return nil
 function SetSoundDuration(soundHandle, duration) end    -- (native)
 
 
@@ -8700,10 +8252,7 @@ function GetSoundFileDuration(musicFileName) end    -- (native)
 
 ---@param vgroup volumegroup
 ---@param scale real
----@return nil
 function VolumeGroupSetVolume(vgroup, scale) end    -- (native)
-
----@return nil
 function VolumeGroupReset() end    -- (native)
 
 
@@ -8721,7 +8270,6 @@ function GetSoundIsLoading(soundHandle) end    -- (native)
 ---@param byPosition boolean
 ---@param rectwidth real
 ---@param rectheight real
----@return nil
 function RegisterStackedSound(soundHandle, byPosition, rectwidth, rectheight) end    -- (native)
 
 
@@ -8729,7 +8277,6 @@ function RegisterStackedSound(soundHandle, byPosition, rectwidth, rectheight) en
 ---@param byPosition boolean
 ---@param rectwidth real
 ---@param rectheight real
----@return nil
 function UnregisterStackedSound(soundHandle, byPosition, rectwidth, rectheight) end    -- (native)
 
 
@@ -8782,13 +8329,11 @@ function AddWeatherEffect(where, effectID) end    -- (native)
 
 
 ---@param whichEffect weathereffect
----@return nil
 function RemoveWeatherEffect(whichEffect) end    -- (native)
 
 
 ---@param whichEffect weathereffect
 ---@param enable boolean
----@return nil
 function EnableWeatherEffect(whichEffect, enable) end    -- (native)
 
 
@@ -8843,10 +8388,7 @@ function TerrainDeformRandom(x, y, radius, minDelta, maxDelta, duration, updateI
 
 ---@param deformation terraindeformation
 ---@param duration integer
----@return nil
 function TerrainDeformStop(deformation, duration) end    -- (native)
-
----@return nil
 function TerrainDeformStopAll() end    -- (native)
 
 
@@ -8871,7 +8413,6 @@ function AddSpecialEffectTarget(modelName, targetWidget, attachPointName) end   
 
 
 ---@param whichEffect effect
----@return nil
 function DestroyEffect(whichEffect) end    -- (native)
 
 
@@ -9037,12 +8578,10 @@ function GetTerrainCliffLevel(x, y) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function SetWaterBaseColor(red, green, blue, alpha) end    -- (native)
 
 
 ---@param val boolean
----@return nil
 function SetWaterDeforms(val) end    -- (native)
 
 
@@ -9064,7 +8603,6 @@ function GetTerrainVariance(x, y) end    -- (native)
 ---@param variation integer
 ---@param area integer
 ---@param shape integer
----@return nil
 function SetTerrainType(x, y, terrainType, variation, area, shape) end    -- (native)
 
 
@@ -9079,7 +8617,6 @@ function IsTerrainPathable(x, y, t) end    -- (native)
 ---@param y real
 ---@param t pathingtype
 ---@param flag boolean
----@return nil
 function SetTerrainPathable(x, y, t, flag) end    -- (native)
 -- ============================================================================
 --  Image API
@@ -9101,20 +8638,17 @@ function CreateImage(file, sizeX, sizeY, sizeZ, posX, posY, posZ, originX, origi
 
 
 ---@param whichImage image
----@return nil
 function DestroyImage(whichImage) end    -- (native)
 
 
 ---@param whichImage image
 ---@param flag boolean
----@return nil
 function ShowImage(whichImage, flag) end    -- (native)
 
 
 ---@param whichImage image
 ---@param flag boolean
 ---@param height real
----@return nil
 function SetImageConstantHeight(whichImage, flag, height) end    -- (native)
 
 
@@ -9122,7 +8656,6 @@ function SetImageConstantHeight(whichImage, flag, height) end    -- (native)
 ---@param x real
 ---@param y real
 ---@param z real
----@return nil
 function SetImagePosition(whichImage, x, y, z) end    -- (native)
 
 
@@ -9131,32 +8664,27 @@ function SetImagePosition(whichImage, x, y, z) end    -- (native)
 ---@param green integer
 ---@param blue integer
 ---@param alpha integer
----@return nil
 function SetImageColor(whichImage, red, green, blue, alpha) end    -- (native)
 
 
 ---@param whichImage image
 ---@param flag boolean
----@return nil
 function SetImageRender(whichImage, flag) end    -- (native)
 
 
 ---@param whichImage image
 ---@param flag boolean
----@return nil
 function SetImageRenderAlways(whichImage, flag) end    -- (native)
 
 
 ---@param whichImage image
 ---@param flag boolean
 ---@param useWaterAlpha boolean
----@return nil
 function SetImageAboveWater(whichImage, flag, useWaterAlpha) end    -- (native)
 
 
 ---@param whichImage image
 ---@param imageType integer
----@return nil
 function SetImageType(whichImage, imageType) end    -- (native)
 -- ============================================================================
 --  Ubersplat API
@@ -9176,35 +8704,29 @@ function CreateUbersplat(x, y, name, red, green, blue, alpha, forcePaused, noBir
 
 
 ---@param whichSplat ubersplat
----@return nil
 function DestroyUbersplat(whichSplat) end    -- (native)
 
 
 ---@param whichSplat ubersplat
----@return nil
 function ResetUbersplat(whichSplat) end    -- (native)
 
 
 ---@param whichSplat ubersplat
----@return nil
 function FinishUbersplat(whichSplat) end    -- (native)
 
 
 ---@param whichSplat ubersplat
 ---@param flag boolean
----@return nil
 function ShowUbersplat(whichSplat, flag) end    -- (native)
 
 
 ---@param whichSplat ubersplat
 ---@param flag boolean
----@return nil
 function SetUbersplatRender(whichSplat, flag) end    -- (native)
 
 
 ---@param whichSplat ubersplat
 ---@param flag boolean
----@return nil
 function SetUbersplatRenderAlways(whichSplat, flag) end    -- (native)
 -- ============================================================================
 --  Blight API
@@ -9215,14 +8737,12 @@ function SetUbersplatRenderAlways(whichSplat, flag) end    -- (native)
 ---@param y real
 ---@param radius real
 ---@param addBlight boolean
----@return nil
 function SetBlight(whichPlayer, x, y, radius, addBlight) end    -- (native)
 
 
 ---@param whichPlayer player
 ---@param r rect
 ---@param addBlight boolean
----@return nil
 function SetBlightRect(whichPlayer, r, addBlight) end    -- (native)
 
 
@@ -9230,7 +8750,6 @@ function SetBlightRect(whichPlayer, r, addBlight) end    -- (native)
 ---@param x real
 ---@param y real
 ---@param addBlight boolean
----@return nil
 function SetBlightPoint(whichPlayer, x, y, addBlight) end    -- (native)
 
 
@@ -9238,7 +8757,6 @@ function SetBlightPoint(whichPlayer, x, y, addBlight) end    -- (native)
 ---@param whichLocation location
 ---@param radius real
 ---@param addBlight boolean
----@return nil
 function SetBlightLoc(whichPlayer, whichLocation, radius, addBlight) end    -- (native)
 
 
@@ -9265,7 +8783,6 @@ function IsPointBlighted(x, y) end    -- (native)
 ---@param nearestOnly boolean
 ---@param animName string
 ---@param animRandom boolean
----@return nil
 function SetDoodadAnimation(x, y, radius, doodadID, nearestOnly, animName, animRandom) end    -- (native)
 
 
@@ -9273,7 +8790,6 @@ function SetDoodadAnimation(x, y, radius, doodadID, nearestOnly, animName, animR
 ---@param doodadID integer
 ---@param animName string
 ---@param animRandom boolean
----@return nil
 function SetDoodadAnimationRect(r, doodadID, animName, animRandom) end    -- (native)
 -- ============================================================================
 --  Computer AI interface
@@ -9281,26 +8797,22 @@ function SetDoodadAnimationRect(r, doodadID, animName, animRandom) end    -- (na
 
 ---@param num player
 ---@param script string
----@return nil
 function StartMeleeAI(num, script) end    -- (native)
 
 
 ---@param num player
 ---@param script string
----@return nil
 function StartCampaignAI(num, script) end    -- (native)
 
 
 ---@param num player
 ---@param command integer
 ---@param data integer
----@return nil
 function CommandAI(num, command, data) end    -- (native)
 
 
 ---@param p player
 ---@param pause boolean
----@return nil
 function PauseCompAI(p, pause) end    -- (native)
 
 
@@ -9310,22 +8822,18 @@ function GetAIDifficulty(num) end    -- (native)
 
 
 ---@param hUnit unit
----@return nil
 function RemoveGuardPosition(hUnit) end    -- (native)
 
 
 ---@param hUnit unit
----@return nil
 function RecycleGuardPosition(hUnit) end    -- (native)
 
 
 ---@param num player
----@return nil
 function RemoveAllGuardPositions(num) end    -- (native)
 -- ============================================================================
 
 ---@param cheatStr string
----@return nil
 function Cheat(cheatStr) end    -- (native)
 
 ---@return boolean
@@ -9336,60 +8844,39 @@ function IsNoDefeatCheat() end    -- (native)
 
 
 ---@param filename string
----@return nil
 function Preload(filename) end    -- (native)
 
 
 ---@param timeout real
----@return nil
 function PreloadEnd(timeout) end    -- (native)
-
----@return nil
 function PreloadStart() end    -- (native)
-
----@return nil
 function PreloadRefresh() end    -- (native)
-
----@return nil
 function PreloadEndEx() end    -- (native)
-
----@return nil
 function PreloadGenClear() end    -- (native)
-
----@return nil
 function PreloadGenStart() end    -- (native)
 
 
 ---@param filename string
----@return nil
 function PreloadGenEnd(filename) end    -- (native)
 
 
 ---@param filename string
----@return nil
 function Preloader(filename) end    -- (native)
 -- ============================================================================
 -- Machinima API
 -- ============================================================================
 
 ---@param enable boolean
----@return nil
 function BlzHideCinematicPanels(enable) end    -- (native)
 --  Automation Test
 
 ---@param testType string
----@return nil
 function AutomationSetTestType(testType) end    -- (native)
 
 
 ---@param testName string
----@return nil
 function AutomationTestStart(testName) end    -- (native)
-
----@return nil
 function AutomationTestEnd() end    -- (native)
-
----@return nil
 function AutomationTestingFinished() end    -- (native)
 --  JAPI Functions
 ---@return real
@@ -9408,42 +8895,36 @@ function BlzGetTriggerPlayerMouseButton() end    -- (native)
 ---@param abilCode integer
 ---@param tooltip string
 ---@param level integer
----@return nil
 function BlzSetAbilityTooltip(abilCode, tooltip, level) end    -- (native)
 
 
 ---@param abilCode integer
 ---@param tooltip string
 ---@param level integer
----@return nil
 function BlzSetAbilityActivatedTooltip(abilCode, tooltip, level) end    -- (native)
 
 
 ---@param abilCode integer
 ---@param extendedTooltip string
 ---@param level integer
----@return nil
 function BlzSetAbilityExtendedTooltip(abilCode, extendedTooltip, level) end    -- (native)
 
 
 ---@param abilCode integer
 ---@param extendedTooltip string
 ---@param level integer
----@return nil
 function BlzSetAbilityActivatedExtendedTooltip(abilCode, extendedTooltip, level) end    -- (native)
 
 
 ---@param abilCode integer
 ---@param researchTooltip string
 ---@param level integer
----@return nil
 function BlzSetAbilityResearchTooltip(abilCode, researchTooltip, level) end    -- (native)
 
 
 ---@param abilCode integer
 ---@param researchExtendedTooltip string
 ---@param level integer
----@return nil
 function BlzSetAbilityResearchExtendedTooltip(abilCode, researchExtendedTooltip, level) end    -- (native)
 
 
@@ -9485,7 +8966,6 @@ function BlzGetAbilityResearchExtendedTooltip(abilCode, level) end    -- (native
 
 ---@param abilCode integer
 ---@param iconPath string
----@return nil
 function BlzSetAbilityIcon(abilCode, iconPath) end    -- (native)
 
 
@@ -9496,7 +8976,6 @@ function BlzGetAbilityIcon(abilCode) end    -- (native)
 
 ---@param abilCode integer
 ---@param iconPath string
----@return nil
 function BlzSetAbilityActivatedIcon(abilCode, iconPath) end    -- (native)
 
 
@@ -9517,13 +8996,11 @@ function BlzGetAbilityPosY(abilCode) end    -- (native)
 
 ---@param abilCode integer
 ---@param x integer
----@return nil
 function BlzSetAbilityPosX(abilCode, x) end    -- (native)
 
 
 ---@param abilCode integer
 ---@param y integer
----@return nil
 function BlzSetAbilityPosY(abilCode, y) end    -- (native)
 
 
@@ -9539,13 +9016,11 @@ function BlzGetAbilityActivatedPosY(abilCode) end    -- (native)
 
 ---@param abilCode integer
 ---@param x integer
----@return nil
 function BlzSetAbilityActivatedPosX(abilCode, x) end    -- (native)
 
 
 ---@param abilCode integer
 ---@param y integer
----@return nil
 function BlzSetAbilityActivatedPosY(abilCode, y) end    -- (native)
 
 
@@ -9556,7 +9031,6 @@ function BlzGetUnitMaxHP(whichUnit) end    -- (native)
 
 ---@param whichUnit unit
 ---@param hp integer
----@return nil
 function BlzSetUnitMaxHP(whichUnit, hp) end    -- (native)
 
 
@@ -9567,19 +9041,16 @@ function BlzGetUnitMaxMana(whichUnit) end    -- (native)
 
 ---@param whichUnit unit
 ---@param mana integer
----@return nil
 function BlzSetUnitMaxMana(whichUnit, mana) end    -- (native)
 
 
 ---@param whichItem item
 ---@param name string
----@return nil
 function BlzSetItemName(whichItem, name) end    -- (native)
 
 
 ---@param whichItem item
 ---@param description string
----@return nil
 function BlzSetItemDescription(whichItem, description) end    -- (native)
 
 
@@ -9590,7 +9061,6 @@ function BlzGetItemDescription(whichItem) end    -- (native)
 
 ---@param whichItem item
 ---@param tooltip string
----@return nil
 function BlzSetItemTooltip(whichItem, tooltip) end    -- (native)
 
 
@@ -9601,7 +9071,6 @@ function BlzGetItemTooltip(whichItem) end    -- (native)
 
 ---@param whichItem item
 ---@param extendedTooltip string
----@return nil
 function BlzSetItemExtendedTooltip(whichItem, extendedTooltip) end    -- (native)
 
 
@@ -9612,7 +9081,6 @@ function BlzGetItemExtendedTooltip(whichItem) end    -- (native)
 
 ---@param whichItem item
 ---@param iconPath string
----@return nil
 function BlzSetItemIconPath(whichItem, iconPath) end    -- (native)
 
 
@@ -9623,13 +9091,11 @@ function BlzGetItemIconPath(whichItem) end    -- (native)
 
 ---@param whichUnit unit
 ---@param name string
----@return nil
 function BlzSetUnitName(whichUnit, name) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param heroProperName string
----@return nil
 function BlzSetHeroProperName(whichUnit, heroProperName) end    -- (native)
 
 
@@ -9642,7 +9108,6 @@ function BlzGetUnitBaseDamage(whichUnit, weaponIndex) end    -- (native)
 ---@param whichUnit unit
 ---@param baseDamage integer
 ---@param weaponIndex integer
----@return nil
 function BlzSetUnitBaseDamage(whichUnit, baseDamage, weaponIndex) end    -- (native)
 
 
@@ -9655,7 +9120,6 @@ function BlzGetUnitDiceNumber(whichUnit, weaponIndex) end    -- (native)
 ---@param whichUnit unit
 ---@param diceNumber integer
 ---@param weaponIndex integer
----@return nil
 function BlzSetUnitDiceNumber(whichUnit, diceNumber, weaponIndex) end    -- (native)
 
 
@@ -9668,7 +9132,6 @@ function BlzGetUnitDiceSides(whichUnit, weaponIndex) end    -- (native)
 ---@param whichUnit unit
 ---@param diceSides integer
 ---@param weaponIndex integer
----@return nil
 function BlzSetUnitDiceSides(whichUnit, diceSides, weaponIndex) end    -- (native)
 
 
@@ -9681,13 +9144,11 @@ function BlzGetUnitAttackCooldown(whichUnit, weaponIndex) end    -- (native)
 ---@param whichUnit unit
 ---@param cooldown real
 ---@param weaponIndex integer
----@return nil
 function BlzSetUnitAttackCooldown(whichUnit, cooldown, weaponIndex) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param whichPlayer player
----@return nil
 function BlzSetSpecialEffectColorByPlayer(whichEffect, whichPlayer) end    -- (native)
 
 
@@ -9695,19 +9156,16 @@ function BlzSetSpecialEffectColorByPlayer(whichEffect, whichPlayer) end    -- (n
 ---@param r integer
 ---@param g integer
 ---@param b integer
----@return nil
 function BlzSetSpecialEffectColor(whichEffect, r, g, b) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param alpha integer
----@return nil
 function BlzSetSpecialEffectAlpha(whichEffect, alpha) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param scale real
----@return nil
 function BlzSetSpecialEffectScale(whichEffect, scale) end    -- (native)
 
 
@@ -9715,25 +9173,21 @@ function BlzSetSpecialEffectScale(whichEffect, scale) end    -- (native)
 ---@param x real
 ---@param y real
 ---@param z real
----@return nil
 function BlzSetSpecialEffectPosition(whichEffect, x, y, z) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param height real
----@return nil
 function BlzSetSpecialEffectHeight(whichEffect, height) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param timeScale real
----@return nil
 function BlzSetSpecialEffectTimeScale(whichEffect, timeScale) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param time real
----@return nil
 function BlzSetSpecialEffectTime(whichEffect, time) end    -- (native)
 
 
@@ -9741,49 +9195,41 @@ function BlzSetSpecialEffectTime(whichEffect, time) end    -- (native)
 ---@param yaw real
 ---@param pitch real
 ---@param roll real
----@return nil
 function BlzSetSpecialEffectOrientation(whichEffect, yaw, pitch, roll) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param yaw real
----@return nil
 function BlzSetSpecialEffectYaw(whichEffect, yaw) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param pitch real
----@return nil
 function BlzSetSpecialEffectPitch(whichEffect, pitch) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param roll real
----@return nil
 function BlzSetSpecialEffectRoll(whichEffect, roll) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param x real
----@return nil
 function BlzSetSpecialEffectX(whichEffect, x) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param y real
----@return nil
 function BlzSetSpecialEffectY(whichEffect, y) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param z real
----@return nil
 function BlzSetSpecialEffectZ(whichEffect, z) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param loc location
----@return nil
 function BlzSetSpecialEffectPositionLoc(whichEffect, loc) end    -- (native)
 
 
@@ -9803,32 +9249,27 @@ function BlzGetLocalSpecialEffectZ(whichEffect) end    -- (native)
 
 
 ---@param whichEffect effect
----@return nil
 function BlzSpecialEffectClearSubAnimations(whichEffect) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param whichSubAnim subanimtype
----@return nil
 function BlzSpecialEffectRemoveSubAnimation(whichEffect, whichSubAnim) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param whichSubAnim subanimtype
----@return nil
 function BlzSpecialEffectAddSubAnimation(whichEffect, whichSubAnim) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param whichAnim animtype
----@return nil
 function BlzPlaySpecialEffect(whichEffect, whichAnim) end    -- (native)
 
 
 ---@param whichEffect effect
 ---@param whichAnim animtype
 ---@param timeScale real
----@return nil
 function BlzPlaySpecialEffectWithTimeScale(whichEffect, whichAnim, timeScale) end    -- (native)
 
 
@@ -9844,14 +9285,12 @@ function BlzGetUnitArmor(whichUnit) end    -- (native)
 
 ---@param whichUnit unit
 ---@param armorAmount real
----@return nil
 function BlzSetUnitArmor(whichUnit, armorAmount) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param abilId integer
 ---@param flag boolean
----@return nil
 function BlzUnitHideAbility(whichUnit, abilId, flag) end    -- (native)
 
 
@@ -9859,12 +9298,10 @@ function BlzUnitHideAbility(whichUnit, abilId, flag) end    -- (native)
 ---@param abilId integer
 ---@param flag boolean
 ---@param hideUI boolean
----@return nil
 function BlzUnitDisableAbility(whichUnit, abilId, flag, hideUI) end    -- (native)
 
 
 ---@param whichUnit unit
----@return nil
 function BlzUnitCancelTimedLife(whichUnit) end    -- (native)
 
 
@@ -9879,7 +9316,6 @@ function BlzIsUnitInvulnerable(whichUnit) end    -- (native)
 
 
 ---@param whichUnit unit
----@return nil
 function BlzUnitInterruptAttack(whichUnit) end    -- (native)
 
 
@@ -9904,7 +9340,6 @@ function BlzGetAbilityCooldown(abilId, level) end    -- (native)
 ---@param abilId integer
 ---@param level integer
 ---@param cooldown real
----@return nil
 function BlzSetUnitAbilityCooldown(whichUnit, abilId, level, cooldown) end    -- (native)
 
 
@@ -9923,14 +9358,12 @@ function BlzGetUnitAbilityCooldownRemaining(whichUnit, abilId) end    -- (native
 
 ---@param whichUnit unit
 ---@param abilCode integer
----@return nil
 function BlzEndUnitAbilityCooldown(whichUnit, abilCode) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param abilCode integer
 ---@param cooldown real
----@return nil
 function BlzStartUnitAbilityCooldown(whichUnit, abilCode, cooldown) end    -- (native)
 
 
@@ -9945,7 +9378,6 @@ function BlzGetUnitAbilityManaCost(whichUnit, abilId, level) end    -- (native)
 ---@param abilId integer
 ---@param level integer
 ---@param manaCost integer
----@return nil
 function BlzSetUnitAbilityManaCost(whichUnit, abilId, level, manaCost) end    -- (native)
 
 
@@ -9957,12 +9389,10 @@ function BlzGetLocalUnitZ(whichUnit) end    -- (native)
 ---@param whichPlayer player
 ---@param techid integer
 ---@param levels integer
----@return nil
 function BlzDecPlayerTechResearched(whichPlayer, techid, levels) end    -- (native)
 
 
 ---@param damage real
----@return nil
 function BlzSetEventDamage(damage) end    -- (native)
 
 ---@return unit
@@ -10051,7 +9481,6 @@ function BlzGetUnitZ(whichUnit) end    -- (native)
 
 ---@param enableSelection boolean
 ---@param enableSelectionCircle boolean
----@return nil
 function BlzEnableSelections(enableSelection, enableSelectionCircle) end    -- (native)
 
 ---@return boolean
@@ -10067,12 +9496,10 @@ function BlzIsSelectionCircleEnabled() end    -- (native)
 ---@param easeInDuration real
 ---@param easeOutDuration real
 ---@param smoothFactor real
----@return nil
 function BlzCameraSetupApplyForceDurationSmooth(whichSetup, doPan, forcedDuration, easeInDuration, easeOutDuration, smoothFactor) end    -- (native)
 
 
 ---@param enable boolean
----@return nil
 function BlzEnableTargetIndicator(enable) end    -- (native)
 
 ---@return boolean
@@ -10080,26 +9507,20 @@ function BlzIsTargetIndicatorEnabled() end    -- (native)
 
 
 ---@param show boolean
----@return nil
 function BlzShowTerrain(show) end    -- (native)
 
 
 ---@param show boolean
----@return nil
 function BlzShowSkyBox(show) end    -- (native)
 
 
 ---@param fps integer
----@return nil
 function BlzStartRecording(fps) end    -- (native)
-
----@return nil
 function BlzEndRecording() end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param show boolean
----@return nil
 function BlzShowUnitTeamGlow(whichUnit, show) end    -- (native)
 
 
@@ -10110,12 +9531,10 @@ function BlzGetOriginFrame(frameType, index) end    -- (native)
 
 
 ---@param enable boolean
----@return nil
 function BlzEnableUIAutoPosition(enable) end    -- (native)
 
 
 ---@param enable boolean
----@return nil
 function BlzHideOriginFrames(enable) end    -- (native)
 
 
@@ -10157,7 +9576,6 @@ function BlzCreateFrameByType(typeName, name, owner, inherits, createContext) en
 
 
 ---@param frame framehandle
----@return nil
 function BlzDestroyFrame(frame) end    -- (native)
 
 
@@ -10167,7 +9585,6 @@ function BlzDestroyFrame(frame) end    -- (native)
 ---@param relativePoint framepointtype
 ---@param x real
 ---@param y real
----@return nil
 function BlzFrameSetPoint(frame, point, relative, relativePoint, x, y) end    -- (native)
 
 
@@ -10175,24 +9592,20 @@ function BlzFrameSetPoint(frame, point, relative, relativePoint, x, y) end    --
 ---@param point framepointtype
 ---@param x real
 ---@param y real
----@return nil
 function BlzFrameSetAbsPoint(frame, point, x, y) end    -- (native)
 
 
 ---@param frame framehandle
----@return nil
 function BlzFrameClearAllPoints(frame) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param relative framehandle
----@return nil
 function BlzFrameSetAllPoints(frame, relative) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param visible boolean
----@return nil
 function BlzFrameSetVisible(frame, visible) end    -- (native)
 
 
@@ -10213,13 +9626,11 @@ function BlzFrameGetName(frame) end    -- (native)
 
 
 ---@param frame framehandle
----@return nil
 function BlzFrameClick(frame) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param text string
----@return nil
 function BlzFrameSetText(frame, text) end    -- (native)
 
 
@@ -10230,13 +9641,11 @@ function BlzFrameGetText(frame) end    -- (native)
 
 ---@param frame framehandle
 ---@param text string
----@return nil
 function BlzFrameAddText(frame, text) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param size integer
----@return nil
 function BlzFrameSetTextSizeLimit(frame, size) end    -- (native)
 
 
@@ -10247,26 +9656,22 @@ function BlzFrameGetTextSizeLimit(frame) end    -- (native)
 
 ---@param frame framehandle
 ---@param color integer
----@return nil
 function BlzFrameSetTextColor(frame, color) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param flag boolean
----@return nil
 function BlzFrameSetFocus(frame, flag) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param modelFile string
 ---@param cameraIndex integer
----@return nil
 function BlzFrameSetModel(frame, modelFile, cameraIndex) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param enabled boolean
----@return nil
 function BlzFrameSetEnable(frame, enabled) end    -- (native)
 
 
@@ -10277,7 +9682,6 @@ function BlzFrameGetEnable(frame) end    -- (native)
 
 ---@param frame framehandle
 ---@param alpha integer
----@return nil
 function BlzFrameSetAlpha(frame, alpha) end    -- (native)
 
 
@@ -10289,7 +9693,6 @@ function BlzFrameGetAlpha(frame) end    -- (native)
 ---@param frame framehandle
 ---@param primaryProp integer
 ---@param flags integer
----@return nil
 function BlzFrameSetSpriteAnimate(frame, primaryProp, flags) end    -- (native)
 
 
@@ -10297,31 +9700,26 @@ function BlzFrameSetSpriteAnimate(frame, primaryProp, flags) end    -- (native)
 ---@param texFile string
 ---@param flag integer
 ---@param blend boolean
----@return nil
 function BlzFrameSetTexture(frame, texFile, flag, blend) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param scale real
----@return nil
 function BlzFrameSetScale(frame, scale) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param tooltip framehandle
----@return nil
 function BlzFrameSetTooltip(frame, tooltip) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param enable boolean
----@return nil
 function BlzFrameCageMouse(frame, enable) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param value real
----@return nil
 function BlzFrameSetValue(frame, value) end    -- (native)
 
 
@@ -10333,38 +9731,32 @@ function BlzFrameGetValue(frame) end    -- (native)
 ---@param frame framehandle
 ---@param minValue real
 ---@param maxValue real
----@return nil
 function BlzFrameSetMinMaxValue(frame, minValue, maxValue) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param stepSize real
----@return nil
 function BlzFrameSetStepSize(frame, stepSize) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param width real
 ---@param height real
----@return nil
 function BlzFrameSetSize(frame, width, height) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param color integer
----@return nil
 function BlzFrameSetVertexColor(frame, color) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param level integer
----@return nil
 function BlzFrameSetLevel(frame, level) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param parent framehandle
----@return nil
 function BlzFrameSetParent(frame, parent) end    -- (native)
 
 
@@ -10387,15 +9779,24 @@ function BlzFrameGetWidth(frame) end    -- (native)
 ---@param fileName string
 ---@param height real
 ---@param flags integer
----@return nil
 function BlzFrameSetFont(frame, fileName, height, flags) end    -- (native)
 
 
 ---@param frame framehandle
 ---@param vert textaligntype
 ---@param horz textaligntype
----@return nil
 function BlzFrameSetTextAlignment(frame, vert, horz) end    -- (native)
+
+
+---@param frame framehandle
+---@return integer
+function BlzFrameGetChildrenCount(frame) end    -- (native)
+
+
+---@param frame framehandle
+---@param index integer
+---@return framehandle
+function BlzFrameGetChild(frame, index) end    -- (native)
 
 
 ---@param whichTrigger trigger
@@ -10456,13 +9857,11 @@ function BlzGetTriggerPlayerIsKeyDown() end    -- (native)
 
 
 ---@param enable boolean
----@return nil
 function BlzEnableCursor(enable) end    -- (native)
 
 
 ---@param x integer
 ---@param y integer
----@return nil
 function BlzSetMousePos(x, y) end    -- (native)
 
 ---@return integer
@@ -10495,12 +9894,10 @@ function BlzGetSpecialEffectScale(whichEffect) end    -- (native)
 ---@param x real
 ---@param y real
 ---@param z real
----@return nil
 function BlzSetSpecialEffectMatrixScale(whichEffect, x, y, z) end    -- (native)
 
 
 ---@param whichEffect effect
----@return nil
 function BlzResetSpecialEffectMatrix(whichEffect) end    -- (native)
 
 
@@ -10519,20 +9916,17 @@ function BlzGetUnitAbilityByIndex(whichUnit, index) end    -- (native)
 ---@param whichPlayer player
 ---@param recipient integer
 ---@param message string
----@return nil
 function BlzDisplayChatMessage(whichPlayer, recipient, message) end    -- (native)
 
 
 ---@param whichUnit unit
 ---@param flag boolean
----@return nil
 function BlzPauseUnitEx(whichUnit, flag) end    -- (native)
 --  native BlzFourCC2S                                 takes integer value returns string
 --  native BlzS2FourCC                                 takes string value returns integer
 
 ---@param whichUnit unit
 ---@param facingAngle real
----@return nil
 function BlzSetUnitFacingEx(whichUnit, facingAngle) end    -- (native)
 
 
@@ -10553,7 +9947,6 @@ function CreateLearnCommandButtonEffect(abilityId) end    -- (native)
 
 
 ---@param whichEffect commandbuttoneffect
----@return nil
 function DestroyCommandButtonEffect(whichEffect) end    -- (native)
 --  Bit Operations
 
@@ -11020,13 +10413,11 @@ function BlzGetItemSkin(whichItem) end    -- (native)
 
 ---@param whichUnit unit
 ---@param skinId integer
----@return nil
 function BlzSetUnitSkin(whichUnit, skinId) end    -- (native)
 
 
 ---@param whichItem item
 ---@param skinId integer
----@return nil
 function BlzSetItemSkin(whichItem, skinId) end    -- (native)
 --  native BlzSetDestructableSkin                         takes destructable whichDestructable, integer skinId returns nothing
 
