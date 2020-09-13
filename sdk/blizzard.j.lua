@@ -2622,7 +2622,7 @@ function GetLastCreatedUbersplat()
 	return bj_lastCreatedUbersplat
 end
 -- ============================================================================
----@return minimapicon
+---@return
 function GetLastCreatedMinimapIcon()
 	return bj_lastCreatedMinimapIcon
 end
@@ -2634,7 +2634,7 @@ end
 ---@param blue integer
 ---@param pingPath string
 ---@param fogVisibility fogstate
----@return minimapicon
+---@return
 function CreateMinimapIconOnUnitBJ(whichUnit, red, green, blue, pingPath, fogVisibility)
 	bj_lastCreatedMinimapIcon = CreateMinimapIconOnUnit(whichUnit, red, green, blue, pingPath, fogVisibility)
 	return bj_lastCreatedMinimapIcon
@@ -2647,7 +2647,7 @@ end
 ---@param blue integer
 ---@param pingPath string
 ---@param fogVisibility fogstate
----@return minimapicon
+---@return
 function CreateMinimapIconAtLocBJ(where, red, green, blue, pingPath, fogVisibility)
 	bj_lastCreatedMinimapIcon = CreateMinimapIconAtLoc(where, red, green, blue, pingPath, fogVisibility)
 	return bj_lastCreatedMinimapIcon
@@ -2661,7 +2661,7 @@ end
 ---@param blue integer
 ---@param pingPath string
 ---@param fogVisibility fogstate
----@return minimapicon
+---@return
 function CreateMinimapIconBJ(x, y, red, green, blue, pingPath, fogVisibility)
 	bj_lastCreatedMinimapIcon = CreateMinimapIcon(x, y, red, green, blue, pingPath, fogVisibility)
 	return bj_lastCreatedMinimapIcon
@@ -2972,6 +2972,12 @@ function SetMusicVolumeBJ(volumePercent)
 end
 -- ===========================================================================
 
+---@param volumePercent real
+function SetThematicMusicVolumeBJ(volumePercent)
+	SetThematicMusicVolume(PercentToInt(volumePercent, 127))
+end
+-- ===========================================================================
+
 ---@param soundHandle sound
 ---@return real
 function GetSoundDurationBJ(soundHandle)
@@ -3242,7 +3248,7 @@ end
 
 ---@param abilityId integer
 ---@param order string
----@return commandbuttoneffect
+---@return
 function CreateCommandButtonEffectBJ(abilityId, order)
 	bj_lastCreatedCommandButtonEffect = CreateCommandButtonEffect(abilityId, order)
 	return bj_lastCreatedCommandButtonEffect
@@ -3250,7 +3256,7 @@ end
 -- ===========================================================================
 
 ---@param unitId integer
----@return commandbuttoneffect
+---@return
 function CreateTrainCommandButtonEffectBJ(unitId)
 	bj_lastCreatedCommandButtonEffect = CreateCommandButtonEffect(FourCC('Aque'), UnitId2String(unitId))
 	return bj_lastCreatedCommandButtonEffect
@@ -3258,7 +3264,7 @@ end
 -- ===========================================================================
 
 ---@param techId integer
----@return commandbuttoneffect
+---@return
 function CreateUpgradeCommandButtonEffectBJ(techId)
 	bj_lastCreatedCommandButtonEffect = CreateUpgradeCommandButtonEffect(techId)
 	return bj_lastCreatedCommandButtonEffect
@@ -3266,7 +3272,7 @@ end
 -- ===========================================================================
 
 ---@param order string
----@return commandbuttoneffect
+---@return
 function CreateCommonCommandButtonEffectBJ(order)
 	bj_lastCreatedCommandButtonEffect = CreateCommandButtonEffect(0, order)
 	return bj_lastCreatedCommandButtonEffect
@@ -3274,7 +3280,7 @@ end
 -- ===========================================================================
 
 ---@param abilityId integer
----@return commandbuttoneffect
+---@return
 function CreateLearnCommandButtonEffectBJ(abilityId)
 	bj_lastCreatedCommandButtonEffect = CreateLearnCommandButtonEffect(abilityId)
 	return bj_lastCreatedCommandButtonEffect
@@ -3282,7 +3288,7 @@ end
 -- ===========================================================================
 
 ---@param unitId integer
----@return commandbuttoneffect
+---@return
 function CreateBuildCommandButtonEffectBJ(unitId)
 	local r = GetPlayerRace(GetLocalPlayer())
 	local abilityId
@@ -3301,7 +3307,7 @@ function CreateBuildCommandButtonEffectBJ(unitId)
 	return bj_lastCreatedCommandButtonEffect
 end
 -- ===========================================================================
----@return commandbuttoneffect
+---@return
 function GetLastCreatedCommandButtonEffectBJ()
 	return bj_lastCreatedCommandButtonEffect
 end
@@ -4426,8 +4432,8 @@ end
 ---@param loc location
 ---@return boolean
 function IssueHauntOrderAtLocBJ(whichPeon, loc)
-	local g        = nil
-	local goldMine = nil
+	local g
+	local goldMine
 	
 	--  Search for a gold mine within a 1-cell radius of the specified location.
 	g              = CreateGroup()
@@ -5327,7 +5333,7 @@ end
 ---@param facing real
 ---@param open boolean
 function ChangeElevatorWallBlocker(x, y, facing, open)
-	local blocker          = nil
+	local blocker
 	local findThreshold    = 32
 	local nudgeLength      = 4.25 * bj_CELLWIDTH
 	local nudgeWidth       = 1.25 * bj_CELLWIDTH
@@ -7394,7 +7400,7 @@ function MultiboardSetItemStyleBJ(mb, col, row, showValue, showIcon)
 	local curCol  = 0
 	local numRows = MultiboardGetRowCount(mb)
 	local numCols = MultiboardGetColumnCount(mb)
-	local mbitem  = nil
+	local mbitem
 	
 	--  Loop over rows, using 1-based index
 	while true do
@@ -7430,7 +7436,7 @@ function MultiboardSetItemValueBJ(mb, col, row, val)
 	local curCol  = 0
 	local numRows = MultiboardGetRowCount(mb)
 	local numCols = MultiboardGetColumnCount(mb)
-	local mbitem  = nil
+	local mbitem
 	
 	--  Loop over rows, using 1-based index
 	while true do
@@ -7469,7 +7475,7 @@ function MultiboardSetItemColorBJ(mb, col, row, red, green, blue, transparency)
 	local curCol  = 0
 	local numRows = MultiboardGetRowCount(mb)
 	local numCols = MultiboardGetColumnCount(mb)
-	local mbitem  = nil
+	local mbitem
 	
 	--  Loop over rows, using 1-based index
 	while true do
@@ -7505,7 +7511,7 @@ function MultiboardSetItemWidthBJ(mb, col, row, width)
 	local curCol  = 0
 	local numRows = MultiboardGetRowCount(mb)
 	local numCols = MultiboardGetColumnCount(mb)
-	local mbitem  = nil
+	local mbitem
 	
 	--  Loop over rows, using 1-based index
 	while true do
@@ -7541,7 +7547,7 @@ function MultiboardSetItemIconBJ(mb, col, row, iconFileName)
 	local curCol  = 0
 	local numRows = MultiboardGetRowCount(mb)
 	local numCols = MultiboardGetColumnCount(mb)
-	local mbitem  = nil
+	local mbitem
 	
 	--  Loop over rows, using 1-based index
 	while true do
@@ -10507,7 +10513,7 @@ end
 ---@param loc location
 ---@return unit
 function MeleeRandomHeroLoc(p, id1, id2, id3, id4, loc)
-	local hero = nil
+	local hero
 	local roll
 	local pick
 	local v
@@ -10600,7 +10606,7 @@ function MeleeStartingUnitsHuman(whichPlayer, startLoc, doHeroes, doCamera, doPr
 	local heroLoc
 	local peonX
 	local peonY
-	local townHall      = nil
+	local townHall
 	
 	if (doPreload) then
 		Preloader("scripts\\HumanMelee.pld")
