@@ -215,7 +215,7 @@ return function(param)
 					param.game = v.value
 				end
 			end
-			param.game = param.game .. '\\_reail_\\x86_64'
+			param.game = param.game .. '\\_retail_\\x86_64'
 		end
 		
 		local file
