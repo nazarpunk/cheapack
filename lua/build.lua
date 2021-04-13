@@ -182,6 +182,8 @@ return function(param)
 	
 	-- patch war3map.wct
 	local wct     = parseWct(war3mapWctPath)
+	log("Parsed wct")
+
 	local wctFile = assert(io.open(war3mapWctPath, 'wb'))
 	wct[4]        = code:len() + 1
 	wct[5]        = code
@@ -194,6 +196,8 @@ return function(param)
 		end
 	end
 	wctFile:close()
+
+	log("Patched wct")
 	
 	-- replace war3map.lua
 	local luaContent           = fileGetContent(war3mapLuaPath, 'rb')
