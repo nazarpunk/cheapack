@@ -37,16 +37,21 @@ local function fileGetContent(path, mode)
 end
 
 local function tableInsertReadStr(t, file)
-	local out = ''
-	while true do
-		local v = file:read(1)
-		if v == nil then return nil end
-		if v:byte() == 0 then
+	local start = file.counter
+	local stringbyte = string.byte
+	local content = file.content
+
+	for index = start, #content do
+		file.counter = file.counter + 1
+
+		if stringbyte(content, index) == 0 then
+			local out = content:sub(start, index - 1)
 			table.insert(t, out)
 			return out
 		end
-		out = out .. v
 	end
+
+	return nil
 end
 
 local function tableInsertReadInt(t, f)
@@ -59,7 +64,21 @@ end
 
 local function parseWct(path)
 	local out  = {}
-	local file = assert(io.open(path, 'rb'))
+	local content = fileGetContent(path, 'rb')
+	local file = {
+		content = content,
+		counter = 1,
+		read = function(self, num)
+			if self.counter >= #self.content then return nil end
+
+			local result = self.content:sub(self.counter, self.counter + num - 1)
+
+			self.counter = self.counter + num
+			return result
+		end,
+		close = function() end
+	}
+
 	tableInsertReadInt(out, file)
 	tableInsertReadInt(out, file)
 	tableInsertReadStr(out, file)
