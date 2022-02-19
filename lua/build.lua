@@ -185,28 +185,47 @@ return function(param)
 	log("Parsed wct")
 
 	local wctFile = assert(io.open(war3mapWctPath, 'wb'))
-	wct[4]        = code:len() + 1
-	wct[5]        = code
-	for i = 1, #wct do
-		local data = wct[i]
-		if type(data) == 'number' then
-			wctFile:write(('<I4'):pack(data))
-		elseif type(data) == 'string' then
-			wctFile:write(data .. '\0')
+	do
+		-- Escape single '%' for WE, because it incorrectly handles them
+		-- Putting a single % in code will either cause an error or crash on save
+		local codeEscapedWE = (code:gsub("%%", "%%%%"))
+		wct[4]        = codeEscapedWE:len() + 1
+		wct[5]        = codeEscapedWE
+		for i = 1, #wct do
+			local data = wct[i]
+			if type(data) == 'number' then
+				wctFile:write(('<I4'):pack(data))
+			elseif type(data) == 'string' then
+				wctFile:write(data .. '\0')
+			end
 		end
+		wctFile:close()
 	end
-	wctFile:close()
 
 	log("Patched wct")
 	
 	-- replace war3map.lua
 	local luaContent           = fileGetContent(war3mapLuaPath, 'rb')
 	local luaFile              = io.open(war3mapLuaPath, 'wb')
-	local luaContentNew, count = luaContent:gsub(customCodeTag .. '.*' .. customCodeTag, code)
-	if (count == 0) then
-		log(color.yellow .. 'war3map.lua' .. color.reset .. ' не был изменён.\n' .. color.red .. 'Откройте и сохраните карту в редакторе!' .. color.reset)
+	
+	local luaContentNew
+	local tagOpenStart, tagOpenEnd = luaContent:find(customCodeTag, 1, true)
+	
+	-- Find first, last customCodeTag and insert code inbetween
+	if tagOpenStart then
+		local tagCloseStart, tagCloseEnd = luaContent:find(customCodeTag, tagOpenEnd, true)
+		if tagCloseStart then
+			luaContentNew = (luaContent:sub(1, tagOpenStart-1)
+				.. code
+				.. luaContent:sub(tagCloseEnd+1))
+			
+			luaFile:write(luaContentNew)
+		else
+			log(color.yellow .. 'war3map.lua' .. color.reset .. ' не был изменён.\n' .. color.red .. 'Откройте и сохраните карту в редакторе!' .. color.reset)
+		end
 	end
-	luaFile:write(luaContentNew):close()
+	
+	luaFile:close()
 	log(color.cyan .. 'Сборка успешно завершена' .. color.reset)
 	
 	-- param: export
