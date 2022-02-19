@@ -117,14 +117,14 @@ return function(param)
 	if isProcessRun(gameExe) then
 		return log(color.red .. 'Ошибка! Игра запущена\n' .. color.yellow .. gameExe .. color.reset)
 	end
-	
+
 	-- param
 	param = param or {}
 	if type(param) ~= 'table' then param = { param } end
 	param.map      = param.map or 'map.w3x'
 	param.src      = param.src or 'src'
 	param.reforged = not not param.reforged
-	
+
 	-- param: project
 	if param.project == nil then
 		param.project = getProjectDir()
@@ -133,22 +133,22 @@ return function(param)
 	if not isFileExists(param.project) then
 		return log(color.red .. 'Ошибка! Папка с проектом не найдена\n' .. color.yellow .. param.project .. color.reset .. '\n' .. help('project'))
 	end
-	
+
 	-- param: map
 	local mapFolderPath = param.project .. '\\' .. param.map
 	if not isFileExists(mapFolderPath) then
 		return log(color.red .. 'Ошибка! Папка с картой не найдена\n' .. color.yellow .. mapFolderPath .. color.reset .. '\n' .. help('map'))
 	end
-	
+
 	local noFileError    = color.red .. 'Ошибка! Файл не найден\n' .. color.yellow
 	-- war3map.wct
 	local war3mapWctPath = param.project .. '\\' .. param.map .. '\\war3map.wct'
 	if not isFileExists(war3mapWctPath) then return log(noFileError .. war3mapWctPath .. color.reset) end
-	
+
 	-- war3map.lua
 	local war3mapLuaPath = param.project .. '\\' .. param.map .. '\\war3map.lua'
 	if not isFileExists(war3mapWctPath) then return log(noFileError .. war3mapLuaPath .. color.reset) end
-	
+
 	-- param: src
 	log(color.cyan .. 'Начинаем сборку' .. color.reset)
 	local pathlist = {}
@@ -179,7 +179,7 @@ return function(param)
 	if pathlistDublicateLen > 0 then
 		log('Обнаружено ' .. color.red .. pathlistDublicateLen .. color.reset .. ' ' .. declension(pathlistDublicateLen, 'повторное включение', 'повторных включений', 'повторных включений'))
 	end
-	
+
 	-- patch war3map.wct
 	local wct     = parseWct(war3mapWctPath)
 	log("Parsed wct")
@@ -203,14 +203,14 @@ return function(param)
 	end
 
 	log("Patched wct")
-	
+
 	-- replace war3map.lua
 	local luaContent           = fileGetContent(war3mapLuaPath, 'rb')
 	local luaFile              = io.open(war3mapLuaPath, 'wb')
-	
+
 	local luaContentNew
 	local tagOpenStart, tagOpenEnd = luaContent:find(customCodeTag, 1, true)
-	
+
 	-- Find first, last customCodeTag and insert code inbetween
 	if tagOpenStart then
 		local tagCloseStart, tagCloseEnd = luaContent:find(customCodeTag, tagOpenEnd, true)
@@ -218,16 +218,17 @@ return function(param)
 			luaContentNew = (luaContent:sub(1, tagOpenStart-1)
 				.. code
 				.. luaContent:sub(tagCloseEnd+1))
-			
+
 			luaFile:write(luaContentNew)
 		else
+			luaFile:write(luaContent)
 			log(color.yellow .. 'war3map.lua' .. color.reset .. ' не был изменён.\n' .. color.red .. 'Откройте и сохраните карту в редакторе!' .. color.reset)
 		end
 	end
-	
+
 	luaFile:close()
 	log(color.cyan .. 'Сборка успешно завершена' .. color.reset)
-	
+
 	-- param: export
 	if param.export ~= nil then
 		local json         = require 'json'
@@ -238,11 +239,11 @@ return function(param)
 		wctFile = io.open(exportFolder .. '\\war3map.wct.json', 'wb')
 		wctFile:write(json.encode(parseWct(war3mapWctPath))):close()
 	end
-	
+
 	-- param: run
 	param.run = param.run or os.getenv('run') or nil
 	if param.run == 'editor' or param.run == 'game' then
-		
+
 		-- param: game
 		if param.game == nil then
 			local registry = require 'registry'
@@ -259,7 +260,7 @@ return function(param)
 			end
 			param.game = param.game .. '\\_retail_\\x86_64'
 		end
-		
+
 		local file
 		if param.run == 'editor' then
 			file = param.game .. '\\' .. editorExe
