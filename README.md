@@ -60,7 +60,11 @@ require 'build' {
     project = nil,
     map = 'map.w3x',
     src = 'src',
-    run = nil
+    run = nil,
+	options = {
+		language = "ru",
+		consoleColor = true,
+	}
 }
 ```
 ### Параметры сборки
@@ -121,6 +125,21 @@ require 'build' {
 }
 ```
 После сборки открывает карту в редакторе `editor` или в игре `game`. По умолчанию не делает ничего.
+
+
+#### `options`
+```lua
+require 'build' {
+	options = {
+		language = "ru",
+		consoleColor = true,
+	}
+}
+```
+Таблица содержит настройки программы сборки. Можно переключить язык или выключить цвета в консоли.
+
+- `language` = "en"/"ru"
+- `consoleColor` = true/false
 
 ### Примечания
 - Устанавливайте файлам `.lua` режим переноса строки `CRLF`. 
