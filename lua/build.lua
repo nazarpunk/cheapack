@@ -16,7 +16,7 @@ setmetatable(tr, {
 		-- Lookup translation if exists
 		local requested = tbl[locale] and tbl[locale][key]
 		if not requested then
-			-- default to RU/EN
+			-- default to EN/RU
 			requested = tbl.en[key] or tbl.ru[key]
 		end
 		return requested
@@ -158,6 +158,43 @@ end
 print(help('cheapack') .. ' ' .. color.blue .. version .. color.reset)
 
 return function(param)
+	-- param
+	param = param or {}
+	if type(param) ~= 'table' then param = { param } end
+	param.map      = param.map or 'map.w3x'
+	param.src      = param.src or 'src'
+	param.reforged = not not param.reforged
+	
+	-- set options
+	do
+		-- defaults: preserve old behavior for now
+		local optionsDefault = {
+			language = "ru",
+			consoleColor = true
+		}
+		if param.options then
+			-- add missing options to user-supplied table
+			for k, default in pairs(optionsDefault) do
+				if param.options[k] == nil then
+					param.options[k] = default
+				end
+			end
+		else
+			param.options = optionsDefault
+		end
+		
+		-- apply language
+		tr._lang = param.options.language
+		
+		-- apply colors
+		if param.options.consoleColor == false then
+			for name, _ in pairs(color) do
+				-- make all no-op
+				color[name] = ""
+			end
+		end
+	end
+	
 	-- check process
 	if isProcessRun(editorExe) then
 		return log(color.red .. tr'ERROR_EDITOR_OPEN' .. '\n' .. color.yellow .. editorExe .. color.reset)
@@ -165,13 +202,6 @@ return function(param)
 	if isProcessRun(gameExe) then
 		return log(color.red .. tr'ERROR_GAME_OPEN' .. '\n' .. color.yellow .. gameExe .. color.reset)
 	end
-
-	-- param
-	param = param or {}
-	if type(param) ~= 'table' then param = { param } end
-	param.map      = param.map or 'map.w3x'
-	param.src      = param.src or 'src'
-	param.reforged = not not param.reforged
 
 	-- param: project
 	if param.project == nil then
