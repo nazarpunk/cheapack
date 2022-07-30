@@ -5,6 +5,54 @@ local editorExe     = 'World Editor.exe'
 local gameExe       = 'Warcraft III.exe'
 local color         = { black = '\27[30m', red = '\27[31m', green = '\27[32m', yellow = '\27[33m', blue = '\27[34m', magenta = '\27[35m', cyan = '\27[36m', white = '\27[37m', reset = '\27[0m' }
 
+-- Translation table
+-- can be called with a text key like
+-- local text = tr"ERROR_MSG"
+local tr = {}
+setmetatable(tr, {
+	_lang = nil,
+	__call = function(tbl, key)
+		local locale = tbl._lang
+		-- Lookup translation if exists
+		local requested = tbl[locale] and tbl[locale][key]
+		if not requested then
+			-- default to RU/EN
+			requested = tbl.en[key] or tbl.ru[key]
+		end
+		return requested
+	end
+})
+do
+	local t = tr
+	tr.ru, tr.en = {}, {}
+	-- Adds translations to table
+	local function add(textKey, en, ru)
+		assert(t.en[textKey] == nil, 
+			'English translation already exists with key: '.. tostring(textKey))
+		assert(t.ru[textKey] == nil, 
+			'Russian translation already exists with key: '.. tostring(textKey))
+		
+		t.en[textKey] = en
+		t.ru[textKey] = ru
+	end
+	--add(key, en, ru)
+	add('ERROR_EDITOR_OPEN', 'Error! Editor is open', 'Ошибка! Редактор открыт')
+	add('ERROR_GAME_OPEN', 'Error! Game is running', 'Ошибка! Игра запущена')
+	add('DETERMINE_PROJECT_FOLDER', 'Determining project folder', 'Определяем папку проекта')
+	add('ERROR_PROJECT_FOLDER_NOT_FOUND', 'Error! Project folder not found', 'Ошибка! Папка с проектом не найдена')
+	add('ERROR_MAP_FOLDER_NOT_FOUND', 'Error! Map folder not found', 'Ошибка! Папка с картой не найдена')
+	add('ERROR_FILE_NOT_FOUND', 'Error! File not found', 'Ошибка! Файл не найден')
+	add('BUILD_STARTING', 'Starting the build', 'Начинаем сборку')
+	add('IGNORED', 'ignored', 'игнорирован')
+	add('WAS_NOT_CHANGED', 'was not changed.', 'не был изменён.')
+	add('OPEN_AND_SAVE_IN_EDITOR', 'Open and save the map in editor', 'Откройте и сохраните карту в редакторе!')
+	add('BUILD_COMPLETED_SUCCESSFULLY', 'Build completed successfully', 'Сборка успешно завершена')
+	add('STARTING_EDITOR', 'Starting editor', 'Запускаем редактор')
+	add('STARTING_GAME', 'Starting game', 'Запускаем игру')
+	add('REGISTRY_DOESNT_CONTAIN_GAMEPATH', 'Registry key doesn\'t contain path to game', 'Ключ реестра не содержит пути к игре')
+	--add(key, en, ru)
+end
+
 local function log(str)
 	print('[' .. color.white .. os.date('%c') .. color.reset .. '] ' .. str)
 	return false
@@ -112,10 +160,10 @@ print(help('cheapack') .. ' ' .. color.blue .. version .. color.reset)
 return function(param)
 	-- check process
 	if isProcessRun(editorExe) then
-		return log(color.red .. 'Ошибка! Редактор открыт\n' .. color.yellow .. editorExe .. color.reset)
+		return log(color.red .. tr'ERROR_EDITOR_OPEN' .. '\n' .. color.yellow .. editorExe .. color.reset)
 	end
 	if isProcessRun(gameExe) then
-		return log(color.red .. 'Ошибка! Игра запущена\n' .. color.yellow .. gameExe .. color.reset)
+		return log(color.red .. tr'ERROR_GAME_OPEN' .. '\n' .. color.yellow .. gameExe .. color.reset)
 	end
 
 	-- param
@@ -128,19 +176,19 @@ return function(param)
 	-- param: project
 	if param.project == nil then
 		param.project = getProjectDir()
-		log(color.cyan .. 'Определяем папку проекта' .. color.yellow .. '\n' .. param.project .. color.reset .. '\n' .. help('project'))
+		log(color.cyan .. tr'DETERMINE_PROJECT_FOLDER' .. color.yellow .. '\n' .. param.project .. color.reset .. '\n' .. help('project'))
 	end
 	if not isFileExists(param.project) then
-		return log(color.red .. 'Ошибка! Папка с проектом не найдена\n' .. color.yellow .. param.project .. color.reset .. '\n' .. help('project'))
+		return log(color.red .. tr'ERROR_PROJECT_FOLDER_NOT_FOUND'.. '\n' .. color.yellow .. param.project .. color.reset .. '\n' .. help('project'))
 	end
 
 	-- param: map
 	local mapFolderPath = param.project .. '\\' .. param.map
 	if not isFileExists(mapFolderPath) then
-		return log(color.red .. 'Ошибка! Папка с картой не найдена\n' .. color.yellow .. mapFolderPath .. color.reset .. '\n' .. help('map'))
+		return log(color.red .. tr'ERROR_MAP_FOLDER_NOT_FOUND' .. '\n' .. color.yellow .. mapFolderPath .. color.reset .. '\n' .. help('map'))
 	end
 
-	local noFileError    = color.red .. 'Ошибка! Файл не найден\n' .. color.yellow
+	local noFileError    = color.red .. tr'ERROR_FILE_NOT_FOUND' .. '\n' .. color.yellow
 	-- war3map.wct
 	local war3mapWctPath = param.project .. '\\' .. param.map .. '\\war3map.wct'
 	if not isFileExists(war3mapWctPath) then return log(noFileError .. war3mapWctPath .. color.reset) end
@@ -150,7 +198,7 @@ return function(param)
 	if not isFileExists(war3mapWctPath) then return log(noFileError .. war3mapLuaPath .. color.reset) end
 
 	-- param: src
-	log(color.cyan .. 'Начинаем сборку' .. color.reset)
+	log(color.cyan .. tr'BUILD_STARTING' .. color.reset)
 	local pathlist = {}
 	if type(param.src) == 'string' then param.src = { param.src } end
 	for i = 1, #param.src do
@@ -172,7 +220,7 @@ return function(param)
 			print(color.yellow .. path .. color.reset)
 		else
 			pathlistDublicateLen = pathlistDublicateLen + 1
-			print(color.red .. path .. color.white .. ' [игнорирован]' .. color.reset)
+			print(color.red .. path .. color.white .. ' [' .. tr'IGNORED' ..']' .. color.reset)
 		end
 	end
 	code = code .. '\r\n' .. customCodeTag
@@ -222,12 +270,12 @@ return function(param)
 			luaFile:write(luaContentNew)
 		else
 			luaFile:write(luaContent)
-			log(color.yellow .. 'war3map.lua' .. color.reset .. ' не был изменён.\n' .. color.red .. 'Откройте и сохраните карту в редакторе!' .. color.reset)
+			log(color.yellow .. 'war3map.lua' .. color.reset .. ' '.. tr'WAS_NOT_CHANGED' ..' \n' .. color.red .. tr'OPEN_AND_SAVE_IN_EDITOR' .. color.reset)
 		end
 	end
 
 	luaFile:close()
-	log(color.cyan .. 'Сборка успешно завершена' .. color.reset)
+	log(color.cyan .. tr'BUILD_COMPLETED_SUCCESSFULLY' .. color.reset)
 
 	-- param: export
 	if param.export ~= nil then
@@ -250,7 +298,7 @@ return function(param)
 			local key      = [[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III]]
 			local keys     = registry.getkey(key)
 			if keys == nil then
-				log(color.red .. 'Ключ реестра не содержит пути к игре\n' .. color.white .. key .. color.reset)
+				log(color.red .. tr'REGISTRY_DOESNT_CONTAIN_GAMEPATH' .. '\n' .. color.white .. key .. color.reset)
 				return false
 			end
 			for _, v in pairs(keys.values) do
@@ -264,10 +312,10 @@ return function(param)
 		local file
 		if param.run == 'editor' then
 			file = param.game .. '\\' .. editorExe
-			log(color.cyan .. 'Запускаем редактор' .. color.reset)
+			log(color.cyan .. tr'STARTING_EDITOR' .. color.reset)
 		elseif param.run == 'game' then
 			file = param.game .. '\\' .. gameExe
-			log(color.cyan .. 'Запускаем игру' .. color.reset)
+			log(color.cyan .. tr'STARTING_GAME' .. color.reset)
 		end
 		local execute = 'start  "" "' .. file .. '" -launch -loadfile "' .. param.project .. '\\' .. param.map .. '"'
 		if isFileExists(file) then
