@@ -5,6 +5,9 @@ local editorExe     = 'World Editor.exe'
 local gameExe       = 'Warcraft III.exe'
 local color         = { black = '\27[30m', red = '\27[31m', green = '\27[32m', yellow = '\27[33m', blue = '\27[34m', magenta = '\27[35m', cyan = '\27[36m', white = '\27[37m', reset = '\27[0m' }
 
+local COMMAND_START_GAME = 'game'
+local COMMAND_START_EDITOR = 'editor'
+
 -- Translation table
 -- can be called with a text key like
 -- local text = tr"ERROR_MSG"
@@ -88,6 +91,7 @@ local function folderFileList(pathFolder, outTable)
 	-- in case of error, last line is ~= "ok" and first line is an error msg
 	-- Note: for some reason, dir doesn't set %errorlevel%
 	local dirCmd = [[dir "]] .. pathFolder .. [[" /s /b /o:gn 2>&1 && echo ok || echo bad]]
+	local dirErrorIndex = #outTable + 1 -- first line
 	for item in io.popen(dirCmd):lines() do
 		table.insert(outTable, item)
 	end
@@ -96,8 +100,7 @@ local function folderFileList(pathFolder, outTable)
 	if exitCode == "ok" then
 		return outTable
 	else
-		local dirError = table.concat(dirOut, "\n")
-		return false, dirError
+		return false, assert(outTable[dirErrorIndex])
 	end
 end
 
@@ -220,10 +223,10 @@ return function(param)
 	end
 	
 	-- check process
-	if isProcessRun(editorExe) then
+	if param.run == COMMAND_START_EDITOR and isProcessRun(editorExe) then
 		return log(color.red .. tr'ERROR_EDITOR_OPEN' .. '\n' .. color.yellow .. editorExe .. color.reset)
 	end
-	if isProcessRun(gameExe) then
+	if param.run == COMMAND_START_GAME and isProcessRun(gameExe) then
 		return log(color.red .. tr'ERROR_GAME_OPEN' .. '\n' .. color.yellow .. gameExe .. color.reset)
 	end
 
@@ -262,7 +265,7 @@ return function(param)
 		
 		local dirPath = path .. suffix
 		-- add files from directory to pathlist
-		local ok, err folderFileList(dirPath, pathlist)
+		local ok, err = folderFileList(dirPath, pathlist)
 		
 		if not ok then
 			log(string.format(
@@ -353,7 +356,7 @@ return function(param)
 
 	-- param: run
 	param.run = param.run or os.getenv('run') or nil
-	if param.run == 'editor' or param.run == 'game' then
+	if param.run == COMMAND_START_EDITOR or param.run == COMMAND_START_GAME then
 
 		-- param: game
 		if param.game == nil then
@@ -373,10 +376,10 @@ return function(param)
 		end
 
 		local file
-		if param.run == 'editor' then
+		if param.run == COMMAND_START_EDITOR then
 			file = param.game .. '\\' .. editorExe
 			log(color.cyan .. tr'STARTING_EDITOR' .. color.reset)
-		elseif param.run == 'game' then
+		elseif param.run == COMMAND_START_GAME then
 			file = param.game .. '\\' .. gameExe
 			log(color.cyan .. tr'STARTING_GAME' .. color.reset)
 		end
@@ -387,5 +390,7 @@ return function(param)
 		else
 			log(noFileError .. file .. color.reset)
 		end
+	else
+		error("Unknown run parameter='".. tostring(param.run) .."'")
 	end
 end
