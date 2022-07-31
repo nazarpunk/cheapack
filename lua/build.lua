@@ -77,8 +77,32 @@ local function isFileExists(file)
 	return ok
 end
 
+-- returns file list of files in directory
+-- if an error occurs, returns false plus an error message
+-- if outTable was provided, updates that table with entries and returns it
+local function folderFileList(pathFolder, outTable)
+	local outTable = outTable or {}
+	-- /s = display files of folder and all subfolders
+	-- /b = bare
+	-- /o:gn = sort: directories first, sort by name
+	-- in case of error, last line is ~= "ok" and first line is an error msg
+	-- Note: for some reason, dir doesn't set %errorlevel%
+	local dirCmd = [[dir "]] .. pathFolder .. [[" /s /b /o:gn 2>&1 && echo ok || echo bad]]
+	for item in io.popen(dirCmd):lines() do
+		table.insert(outTable, item)
+	end
+	
+	local exitCode = table.remove(outTable)
+	if exitCode == "ok" then
+		return outTable
+	else
+		local dirError = table.concat(dirOut, "\n")
+		return false, dirError
+	end
+end
+
 local function fileGetContent(path, mode)
-	local file    = assert(io.open(path, mode))
+	local file, err    = io.open(path, mode)
 	local content = file:read '*a'
 	file:close()
 	return content
@@ -235,8 +259,17 @@ return function(param)
 		local suffix = param.src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
 		local path   = param.project .. '\\' .. param.src[i]
 		if not isFileExists(path) then return log(noFileError .. path .. color.reset) end
-		for dir in io.popen([[dir "]] .. path .. suffix .. [[" /s /b /o:gn]]):lines() do
-			table.insert(pathlist, dir)
+		
+		local dirPath = path .. suffix
+		-- add files from directory to pathlist
+		local ok, err folderFileList(dirPath, pathlist)
+		
+		if not ok then
+			log(string.format(
+				"%sdir exited with error: '%s' for '%s'%s",
+				color.red, err, dirPath, color.reset
+			))
+			os.exit(2)
 		end
 	end
 	local code                 = customCodeTag
