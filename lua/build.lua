@@ -90,7 +90,7 @@ local function folderFileList(pathFolder, outTable)
 	-- /o:gn = sort: directories first, sort by name
 	-- in case of error, last line is ~= "ok" and first line is an error msg
 	-- Note: for some reason, dir doesn't set %errorlevel%
-	local dirCmd = [[dir "]] .. pathFolder .. [[" /s /b /o:gn 2>&1 && echo ok || echo bad]]
+	local dirCmd = [[dir "]] .. pathFolder .. [[" /s /b /o:gn 2>&1 && echo ok|| echo bad]]
 	local dirErrorIndex = #outTable + 1 -- first line
 	for item in io.popen(dirCmd):lines() do
 		table.insert(outTable, item)
@@ -260,7 +260,7 @@ return function(param)
 	if type(param.src) == 'string' then param.src = { param.src } end
 	for i = 1, #param.src do
 		local suffix = param.src[i]:sub(-4):lower() == '.lua' and '' or '\\*.lua'
-		local path   = param.project .. '\\' .. param.src[i]
+		local path   = ((param.project .. '\\' .. param.src[i]):gsub("[\\/]+$", ""))
 		if not isFileExists(path) then return log(noFileError .. path .. color.reset) end
 		
 		local dirPath = path .. suffix
@@ -275,6 +275,7 @@ return function(param)
 			os.exit(2)
 		end
 	end
+	
 	local code                 = customCodeTag
 	local pathlistDublicate    = {}
 	local pathlistDublicateLen = 0
