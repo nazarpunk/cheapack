@@ -76,10 +76,11 @@ require 'build' {
     map = 'map.w3x',
     src = 'src',
     run = nil,
-	options = {
-		language = "ru",
-		consoleColor = true,
-	}
+    syntaxCheck = false,
+    options = {
+        language = "ru",
+        consoleColor = true,
+    }
 }
 ```
 ### Параметры сборки / Build parameters
@@ -153,6 +154,17 @@ require 'build' {
 🇷🇺 После сборки открывает карту в редакторе `editor` или в игре `game`. По умолчанию не делает ничего.
 
 🇬🇧 After building, it'll launch the map in `editor` or in the `game`. By default it doesn't do anything.
+
+#### `syntaxCheck`
+
+```lua
+require 'build' {
+    syntaxCheck = true
+}
+```
+🇷🇺 Перед запуском проверяет синтаксис кода карты `war3map.lua` на ошибки. Использует `luac`, которая устанавливается вместе с обычной `lua`. Если не её нету, установи полноценную сборку Lua.
+
+🇬🇧 Check map's code `war3map.lua` for syntax errors before launch. Uses `luac`, that's usually installed together with `lua`. If it's not found, install a complete Lua distribution.
 
 #### `options`
 ```lua

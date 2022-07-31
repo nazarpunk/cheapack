@@ -53,6 +53,9 @@ do
 	add('STARTING_EDITOR', 'Starting editor', 'Запускаем редактор')
 	add('STARTING_GAME', 'Starting game', 'Запускаем игру')
 	add('REGISTRY_DOESNT_CONTAIN_GAMEPATH', 'Registry key doesn\'t contain path to game', 'Ключ реестра не содержит пути к игре')
+	add('LUAC_SYNTAX_ERROR', 'Luac detected a syntax error:', 'Luac нашла синтаксическую ошибку:')
+	add('LUAC_NOT_FOUND', 'Luac not found.', 'Luac не найдена.')
+	add('SKIPPING_SYNTAX_CHECK', 'Skipping Lua syntax check.', 'Продолжаем без проверки синтаксиса.')
 	--add(key, en, ru)
 end
 
@@ -354,7 +357,28 @@ return function(param)
 		wctFile = io.open(exportFolder .. '\\war3map.wct.json', 'wb')
 		wctFile:write(json.encode(parseWct(war3mapWctPath))):close()
 	end
-
+	
+	-- param: syntaxCheck
+	if param.syntaxCheck then
+		-- Lua 5.1-compat: os.execute changed in 5.2
+		local exitStatus = os.execute("luac -v > nul")
+		local luacExists = exitStatus == 0 or exitStatus == true
+		
+		if luacExists then
+			local p = io.popen('luac -p "'.. war3mapLuaPath ..'" 2>&1')
+			local errorMsg = p:read("*a")
+			p:close()
+			
+			if errorMsg then
+				log(color.red .. tr'LUAC_SYNTAX_ERROR')
+				log(errorMsg .. color.reset)
+				return false
+			end
+		else
+			log(color.red .. tr'LUAC_NOT_FOUND' .." ".. tr'SKIPPING_SYNTAX_CHECK' .. color.reset)
+		end
+	end
+	
 	-- param: run
 	param.run = param.run or os.getenv('run') or nil
 	if param.run == COMMAND_START_EDITOR or param.run == COMMAND_START_GAME then
