@@ -259,7 +259,7 @@ return function(param)
 	local pathlist = {}
 	if type(param.src) == 'string' then param.src = { param.src } end
 	for i = 1, #param.src do
-		local suffix = param.src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
+		local suffix = param.src[i]:sub(-4):lower() == '.lua' and '' or '\\*.lua'
 		local path   = param.project .. '\\' .. param.src[i]
 		if not isFileExists(path) then return log(noFileError .. path .. color.reset) end
 		
