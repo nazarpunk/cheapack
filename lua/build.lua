@@ -391,6 +391,8 @@ return function(param)
 		else
 			log(noFileError .. file .. color.reset)
 		end
+	elseif param.run:lower() == "launch_nothing" or param.run == nil then
+		-- Don't do anything
 	else
 		error("Unknown run parameter='".. tostring(param.run) .."'")
 	end
