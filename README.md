@@ -7,12 +7,19 @@
 </p>
 
 # cheapack
-Собиратор карт для [Warcraft III](https://playwarcraft3.com/ru-ru/).
+🇷🇺 Собиратор карт для [Warcraft III](https://playwarcraft3.com/ru-ru/).
 
 Инструкция по настройке находится [здесь](https://xgm.guru/p/wc3/cheapack).
 
 После первой сборке **обязательно** сохраните карту в редакторе, чтоб поместить код в `war3map.lua`.
-### Структура проекта
+
+🇬🇧 A Map builder for [Warcraft III](https://playwarcraft3.com/en-us/)
+
+A user guide is not yet written in English... Have you ever wanted to learn [Russian?](https://xgm.guru/p/wc3/cheapack)
+
+After a first-time build you **must** save the map in editor for the code to be embedded in `war3map.lua`.
+
+### Структура проекта / Project Structure
 ```
 C:\Users\username\IdeaProjects\MyMapProject
 ├── map.w3x
@@ -45,15 +52,23 @@ C:\Users\username\IdeaProjects\MyMapProject
 └── build.lua
 ```
 #### `map.w3x`
-Карта сохранённая в режиме папки.
+🇷🇺 Карта сохранённая в режиме папки.
+
+🇬🇧 A map saved in folder mode.
+
 #### `src`
-Папка содержащая файлы `.lua` которые будут собранны сборщиком.
+🇷🇺 Папка содержащая файлы `.lua` которые будут собранны сборщиком.
+
+🇬🇧 Folder containing `.lua` files that'll be included during build.
+
 #### `build.lua`
-Скрипт запускающий сборку. Принимает таблицу аргументов `{}`.
+🇷🇺 Скрипт запускающий сборку. Принимает таблицу аргументов `{}`.
+
+🇬🇧 A script that launches the build process. Accepts a table with arguments `{}`.
 ```lua
 require 'build' {}
 ```
-### Параметры по умолчанию
+### Параметры по умолчанию / Default parameters
 ```lua
 require 'build' {
     game = nil,
@@ -67,15 +82,17 @@ require 'build' {
 	}
 }
 ```
-### Параметры сборки
+### Параметры сборки / Build parameters
 
 #### `game`
 ```lua
 require 'build' {
-    game = 'D:\\Games\\Warcraft III\\x86_64' 
+    game = [[D:\Games\Warcraft III\x86_64]]
 }
 ```
-Путь к игре. По умолчанию ищется в реестре.
+🇷🇺 Путь к игре. По умолчанию ищется в реестре.
+
+🇬🇧 Path to game. By default it's looked up in the registry.
 
 ``HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall\Warcraft III``
 - InstallPath
@@ -85,17 +102,21 @@ require 'build' {
 #### `project`
 ```lua
 require 'build' {
-    project = 'C:\\Users\\username\\IdeaProjects\\MyMapProject' 
+    project = "C:\\Users\\username\\IdeaProjects\\MyMapProject"
 }
 ```
-Путь к папке проекта. По умолчанию берётся папка из которой запущен `build.lua`. 
+🇷🇺 Путь к папке проекта. По умолчанию берётся папка из которой запущен `build.lua`. 
+
+🇬🇧 Path to project folder. By default it's the folder where from `build.lua` is launched.
 #### `map`
 ```lua
 require 'build' {
     map = 'map.w3x' 
 }
 ```
-Название карты. По умолчанию `map.w3x` в корне проекта.
+🇷🇺 Название карты. По умолчанию `map.w3x` в корне проекта.
+
+🇬🇧 Map name. By default it's `map.w3x` in project root.
 #### `src`
 ```lua
 require 'build' {
@@ -111,21 +132,27 @@ require 'build' {
     } 
 }
 ```
-Порядок сборки файлов. По умолчанию папка `src` в корне проекта.
+🇷🇺 Порядок сборки файлов. По умолчанию вся папка `src` в корне проекта.
 
+🇬🇧 Build order of files. By default the entire `src` folder in project root.
 #### `run`
 ```lua
 require 'build' {
-    run = 'game' -- после сборки запустит карту в игре
+    -- 🇷🇺 после сборки запустит карту в игре
+    -- 🇬🇧 will run game after building
+    run = 'game' 
 }
 ```
 ```lua
 require 'build' {
-    run = 'editor' -- после сборки откроет карту в редакторе
+    -- 🇷🇺 после сборки откроет карту в редакторе
+    -- 🇬🇧 will run editor after building
+    run = 'editor'
 }
 ```
-После сборки открывает карту в редакторе `editor` или в игре `game`. По умолчанию не делает ничего.
+🇷🇺 После сборки открывает карту в редакторе `editor` или в игре `game`. По умолчанию не делает ничего.
 
+🇬🇧 After building, it'll launch the map in `editor` or in the `game`. By default it doesn't do anything.
 
 #### `options`
 ```lua
@@ -136,14 +163,16 @@ require 'build' {
 	}
 }
 ```
-Таблица содержит настройки программы сборки. Можно переключить язык или выключить цвета в консоли.
+🇷🇺 Таблица содержит настройки программы сборки. Можно переключить язык или выключить цвета в консоли.
+
+🇬🇧 This table contains the build settings. You can switch the language or turn off colors in terminal.
 
 - `language` = "en"/"ru"
 - `consoleColor` = true/false
 
-### Примечания
-- Устанавливайте файлам `.lua` режим переноса строки `CRLF`. 
+### Примечания / Notes
+- 🇷🇺 Устанавливайте файлам `.lua` режим переноса строки `CRLF`. 
 
-
+- 🇬🇧 You must set line-endings for `.lua` files to `CRLF` mode.
 
 
