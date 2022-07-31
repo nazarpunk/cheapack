@@ -5,6 +5,9 @@ local editorExe     = 'World Editor.exe'
 local gameExe       = 'Warcraft III.exe'
 local color         = { black = '\27[30m', red = '\27[31m', green = '\27[32m', yellow = '\27[33m', blue = '\27[34m', magenta = '\27[35m', cyan = '\27[36m', white = '\27[37m', reset = '\27[0m' }
 
+local COMMAND_START_GAME = 'game'
+local COMMAND_START_EDITOR = 'editor'
+
 -- Translation table
 -- can be called with a text key like
 -- local text = tr"ERROR_MSG"
@@ -77,8 +80,32 @@ local function isFileExists(file)
 	return ok
 end
 
+-- returns file list of files in directory
+-- if an error occurs, returns false plus an error message
+-- if outTable was provided, updates that table with entries and returns it
+local function folderFileList(pathFolder, outTable)
+	local outTable = outTable or {}
+	-- /s = display files of folder and all subfolders
+	-- /b = bare
+	-- /o:gn = sort: directories first, sort by name
+	-- in case of error, last line is ~= "ok" and first line is an error msg
+	-- Note: for some reason, dir doesn't set %errorlevel%
+	local dirCmd = [[dir "]] .. pathFolder .. [[" /s /b /o:gn 2>&1 && echo ok|| echo bad]]
+	local dirErrorIndex = #outTable + 1 -- first line
+	for item in io.popen(dirCmd):lines() do
+		table.insert(outTable, item)
+	end
+	
+	local exitCode = table.remove(outTable)
+	if exitCode == "ok" then
+		return outTable
+	else
+		return false, assert(outTable[dirErrorIndex])
+	end
+end
+
 local function fileGetContent(path, mode)
-	local file    = assert(io.open(path, mode))
+	local file, err    = io.open(path, mode)
 	local content = file:read '*a'
 	file:close()
 	return content
@@ -196,10 +223,10 @@ return function(param)
 	end
 	
 	-- check process
-	if isProcessRun(editorExe) then
+	if param.run == COMMAND_START_EDITOR and isProcessRun(editorExe) then
 		return log(color.red .. tr'ERROR_EDITOR_OPEN' .. '\n' .. color.yellow .. editorExe .. color.reset)
 	end
-	if isProcessRun(gameExe) then
+	if param.run == COMMAND_START_GAME and isProcessRun(gameExe) then
 		return log(color.red .. tr'ERROR_GAME_OPEN' .. '\n' .. color.yellow .. gameExe .. color.reset)
 	end
 
@@ -232,13 +259,23 @@ return function(param)
 	local pathlist = {}
 	if type(param.src) == 'string' then param.src = { param.src } end
 	for i = 1, #param.src do
-		local suffix = param.src[i]:match "[^.]+$" == 'lua' and '' or '\\*.lua'
-		local path   = param.project .. '\\' .. param.src[i]
+		local suffix = param.src[i]:sub(-4):lower() == '.lua' and '' or '\\*.lua'
+		local path   = ((param.project .. '\\' .. param.src[i]):gsub("[\\/]+$", ""))
 		if not isFileExists(path) then return log(noFileError .. path .. color.reset) end
-		for dir in io.popen([[dir "]] .. path .. suffix .. [[" /s /b /o:gn]]):lines() do
-			table.insert(pathlist, dir)
+		
+		local dirPath = path .. suffix
+		-- add files from directory to pathlist
+		local ok, err = folderFileList(dirPath, pathlist)
+		
+		if not ok then
+			log(string.format(
+				"%sdir exited with error: '%s' for '%s'%s",
+				color.red, err, dirPath, color.reset
+			))
+			os.exit(2)
 		end
 	end
+	
 	local code                 = customCodeTag
 	local pathlistDublicate    = {}
 	local pathlistDublicateLen = 0
@@ -320,7 +357,7 @@ return function(param)
 
 	-- param: run
 	param.run = param.run or os.getenv('run') or nil
-	if param.run == 'editor' or param.run == 'game' then
+	if param.run == COMMAND_START_EDITOR or param.run == COMMAND_START_GAME then
 
 		-- param: game
 		if param.game == nil then
@@ -340,10 +377,10 @@ return function(param)
 		end
 
 		local file
-		if param.run == 'editor' then
+		if param.run == COMMAND_START_EDITOR then
 			file = param.game .. '\\' .. editorExe
 			log(color.cyan .. tr'STARTING_EDITOR' .. color.reset)
-		elseif param.run == 'game' then
+		elseif param.run == COMMAND_START_GAME then
 			file = param.game .. '\\' .. gameExe
 			log(color.cyan .. tr'STARTING_GAME' .. color.reset)
 		end
@@ -354,5 +391,7 @@ return function(param)
 		else
 			log(noFileError .. file .. color.reset)
 		end
+	else
+		error("Unknown run parameter='".. tostring(param.run) .."'")
 	end
 end
