@@ -369,7 +369,7 @@ return function(param)
 			local errorMsg = p:read("*a")
 			p:close()
 			
-			if errorMsg then
+			if #errorMsg > 0 then
 				log(color.red .. tr'LUAC_SYNTAX_ERROR')
 				log(errorMsg .. color.reset)
 				return false
