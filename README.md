@@ -187,4 +187,6 @@ require 'build' {
 
 - 🇬🇧 You must set line-endings for `.lua` files to `CRLF` mode.
 
+## Support
 
+<a href="https://www.buymeacoffee.com/nazarpunk"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=nazarpunk&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
